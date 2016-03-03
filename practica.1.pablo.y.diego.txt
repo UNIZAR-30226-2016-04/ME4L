@@ -1,0 +1,5 @@
+1-cuando quitas el codigo readln al ejecutar el programa la ventana desaparece sin saber el resultado del problema.
+2-al quitar el 8:2 nos sale el resultado en notacion cientifica 
+3-se produce un error 2
+4-consigue los valores 4 3 2 1. como siempre empieza en 1 y sumas 1 y al llegar al 5 vuelve al uno entra
+en un bucle del 1 al 4
