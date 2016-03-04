@@ -1,0 +1,154 @@
+-Aceites y materias grasas
+    Aceite de soja
+    Aceite de maíz
+    Aceite de oliva
+-Productos lácteos
+    Nata o crema de leche
+    Yogur
+    Leche
+    Helado
+    Queso
+-Legumbres
+    Alubias
+    Garbanzos
+    Lentejas
+    Soja
+-Setas y verduras
+    Setas
+    Hongos
+    Coles
+    Pimientas
+    Patata
+    Raíces y tubérculos
+    Lechugas
+    Acelga
+    Alcachofa
+    Batata
+    Berenjena
+    Berro
+    Brócoli
+    Brecol
+    Calabacín
+    Calabaza
+    Cardo
+    Cebolla
+    Cebolleta
+    Coles de Bruselas
+    Coliflor
+    Endivia
+    Tomate
+    Zanahoria
+    Escarola
+    Espárrago
+    Espinaca
+    Guisante
+    Habas
+    Hinojo
+    Judías
+    Maíz
+    Palmito
+    Pepino
+    Pimiento
+    Puerro
+    Remolacha
+-Frutas
+    Albaricoque
+    Aguacate
+    Cereza
+    Mango
+    Melocotones
+    Nectarina
+    Ciruela
+    Fruta del bosque
+    Frutos secos
+    Membrillo
+    Peras
+    Manzanas
+    Uvas
+    Fruta seca
+    Frambuesa
+    Fresa
+    Granada
+    Higos
+    Kiwi
+    Limón
+    Mandarina
+    Melón
+    Naranja
+    Piña
+    Plátano
+    Pomelo
+    Sandía
+-Pescado
+    Atún
+    Anchoa
+    Bacalao
+    Bonito
+    Boquerón
+    Caballa
+    Chicharro
+    Corvina
+    Dorada
+    Lenguado
+    Lubina
+    Merluza
+    Mero
+    Palometa
+    Pejerrey
+    Rape
+    Rodaballo
+    Salmón
+    Sardina
+    Trucha
+-Marisco
+    Camarón
+    Cigala
+    Gamba
+    Langostino
+    Percebe
+    Almeja
+    Calamar
+    Mejillón
+    Ostra
+    Pulpo
+    Sepia
+    Vieira
+-Carnes
+    Cordero
+    Ovejas
+    Ternera
+    Buey
+    Caballo
+    Cabra
+    Cerdo
+    Vaca
+-aves de corral
+    Avestruz
+    Paloma
+    Perdiz
+    Patos
+    Pavos
+    Ocas
+    Gallinas
+    Pollo
+    capones
+    huevos
+-Caza
+    Bison
+    Conejo
+    Liebre
+    Oso
+    Ciervo
+    Jabalí
+-aves de caza
+    Patos
+    Faisanes
+    Ocas salvajes
+-Otros
+    Ancas de rana
+    Caracoles
+    Cereales
+    Harinas
+    Panes
+    Arroz
+    Pasta
