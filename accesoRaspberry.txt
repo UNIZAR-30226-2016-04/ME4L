@@ -1,0 +1,5 @@
+Para acceder via ssh (contraseña raspberry)
+
+	ssh pi@81.32.239.119 -p 8000
+
+
