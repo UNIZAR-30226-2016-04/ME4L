@@ -36,7 +36,7 @@ CREATE TABLE componente (
 	esPrincipal int(1),
 	peso int(4) not null,
 	Foreign Key(idReceta) REFERENCES receta (id) ON DELETE CASCADE,
-	Foreign Key(ingrediente) REFERENCES Nombre (ingrediente) ON DELETE CASCADE,
+	Foreign Key(ingrediente) REFERENCES ingrediente (Nombre) ON DELETE CASCADE,
 	Primary Key (idReceta, ingrediente)
 );
 
