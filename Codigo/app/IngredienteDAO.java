@@ -1,8 +1,10 @@
 package app;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class IngredienteDAO {
 	
@@ -16,10 +18,24 @@ public class IngredienteDAO {
 		try {
 			Statement s = conexion.createStatement();
 			s.execute(
-					"INSERT INTO `ingrediente` (`nombre`,`tipo`) VALUES ('" + ingrediente.getNombre() + "','" + ingrediente.getTipo() + "');");
+					"INSERT INTO `ingrediente` VALUES ('" + ingrediente.getNombre() + "','" + ingrediente.getTipo() + "');");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<String> obtenerIngredientes() {
+		try {
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM ingrediente");
+			ArrayList<String> ingredientes = new ArrayList<String>();
+			while (rs.next()) {
+				ingredientes.add(rs.getString("nombre"));				
+			}
+			rs.close();
+			return ingredientes; 
+		} catch (SQLException ex) {
+			return null;
+		} 
 	}
 }

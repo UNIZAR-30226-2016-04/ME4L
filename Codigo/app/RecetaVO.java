@@ -1,5 +1,7 @@
 package app;
 
+import java.util.ArrayList;
+
 public class RecetaVO {
 
 	private String id;
@@ -7,16 +9,21 @@ public class RecetaVO {
 	private String descripcion;
 	private String plato;
 	private String numPersonas;
+	private ArrayList<String> ingredientes;
+	private ArrayList<String> pesoIngredientes;
 	
 	public RecetaVO () {
 		
 	}
 	
-	public RecetaVO (String nombre, String descripcion, String plato, String numPersonas) {
+	public RecetaVO (String nombre, String descripcion, String plato, String numPersonas,
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.plato = plato;
 		this.numPersonas = numPersonas;
+		this.ingredientes = ingredientes;
+		this.pesoIngredientes = pesoIngredientes;
 	}
 	
 	public String getId () {
@@ -57,5 +64,13 @@ public class RecetaVO {
 	
 	public void setNumPersonas (String nuevo) {
 		this.numPersonas = nuevo;
+	}
+	
+	public ArrayList<String> getIngredientes() {
+		return this.ingredientes;
+	}
+	
+	public ArrayList<String> getPesoIngredientes() {
+		return this.pesoIngredientes;
 	}
 }

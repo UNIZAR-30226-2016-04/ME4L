@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-	private static String servidor = "jdbc:mysql://127.0.0.1:3306/webmusica";
-	private static String user = "arqSoftware";
-	private static String pass = "webmusica12345";
+	private static String servidor = "jdbc:mysql://127.0.0.1:3306/me4l";
+	private static String user = "proySoftware";
+	private static String pass = "me4l1234";
 	private static String driver = "com.mysql.jdbc.Driver";
 	private static Connection conexion;
 
