@@ -4,6 +4,7 @@ CREATE TABLE receta (
 	Descripcion text,
 	Plato varchar(10) not null,
 	numeroPersonas int(2) not null,
+	validada int(1) not null,
 	Primary Key (id)
 );
 
