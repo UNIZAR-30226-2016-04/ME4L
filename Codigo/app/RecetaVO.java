@@ -9,6 +9,7 @@ public class RecetaVO {
 	private String descripcion;
 	private String plato;
 	private String numPersonas;
+	private String validada;
 	private ArrayList<String> ingredientes;
 	private ArrayList<String> pesoIngredientes;
 	
@@ -22,6 +23,18 @@ public class RecetaVO {
 		this.descripcion = descripcion;
 		this.plato = plato;
 		this.numPersonas = numPersonas;
+		this.ingredientes = ingredientes;
+		this.pesoIngredientes = pesoIngredientes;
+	}
+	
+	public RecetaVO (String id, String nombre, String descripcion, String plato, String numPersonas,
+			String validada, ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.plato = plato;
+		this.numPersonas = numPersonas;
+		this.validada = validada;
 		this.ingredientes = ingredientes;
 		this.pesoIngredientes = pesoIngredientes;
 	}
@@ -66,11 +79,27 @@ public class RecetaVO {
 		this.numPersonas = nuevo;
 	}
 	
+	public String getValidada () {
+		return this.validada;
+	}
+	
+	public void setValidada (String nuevo) {
+		this.validada = nuevo;
+	}
+	
 	public ArrayList<String> getIngredientes() {
 		return this.ingredientes;
 	}
 	
+	public void setIngredientes (ArrayList<String> nuevo) {
+		this.ingredientes = nuevo;
+	}
+	
 	public ArrayList<String> getPesoIngredientes() {
 		return this.pesoIngredientes;
+	}
+	
+	public void setPesoIngredientes(ArrayList<String> nuevo) {
+		this.pesoIngredientes = nuevo;
 	}
 }

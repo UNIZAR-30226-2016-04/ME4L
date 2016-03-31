@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class RecetaDAO {
-private Connection conexion;
+	private Connection conexion;
 	
 	public RecetaDAO (Connection conexion) {
 		this.conexion = conexion;
 	}
 	
 	public void addReceta (RecetaVO receta) {
+		
 		try {
 			Statement s = conexion.createStatement();
 			/* Insertar en tabla receta */
@@ -44,9 +45,118 @@ private Connection conexion;
 				s.execute (
 					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
 			}
+			s.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void modificarReceta (RecetaVO receta, String idReceta) {
+		
+		try {
+			Statement s = conexion.createStatement();
+			s.execute(
+					"UPDATE receta SET Nombre='" + receta.getNombre() + "', Descripcion='" + receta.getDescripcion() 
+						+ "', Plato='" + receta.getPlato() + "', numeroPersonas='" + receta.getNumPersonas() 
+						+"' WHERE id='" + idReceta + "';");
+			s.execute(
+					"DELETE FROM componente WHERE idReceta='" + idReceta + "';");
+			ArrayList<String> ingredientes = receta.getIngredientes();
+			ArrayList<String> pesos = receta.getPesoIngredientes();
+			
+			Iterator<String> iteradorI = ingredientes.iterator();
+			Iterator<String> iteradorP = pesos.iterator();
+			String ingrediente = iteradorI.next();
+			String peso = iteradorP.next();			
+			s.execute (
+					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '1', '" + peso + "');");
+			
+			while (iteradorI.hasNext()) {
+				ingrediente = iteradorI.next();
+				peso = iteradorP.next();			
+				s.execute (
+					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "');");
+			}
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eliminarReceta (String idReceta) {
+		
+		try {
+			Statement s = conexion.createStatement();
+			s.execute(
+					"DELETE FROM receta WHERE id = '" + idReceta + "';");
+			s.execute(
+					"DELETE FROM componente WHERE idReceta = '" + idReceta + "';");
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public RecetaVO devolverReceta (String idReceta) {
+		
+		try {
+			RecetaVO receta = new RecetaVO();
+			receta.setId(idReceta);
+			
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE id='" + idReceta + "';");
+			rs.next();
+			
+			receta.setNombre(rs.getString("nombre"));
+			receta.setDescripcion(rs.getString("descripcion"));
+			receta.setPlato(rs.getString("plato"));
+			receta.setNumPersonas(rs.getString("numeroPersonas"));
+			receta.setValidada(rs.getString("validada"));
+			
+			ArrayList<String> ingredientes = new ArrayList<String>();
+			ArrayList<String> peso = new ArrayList<String>();
+			rs = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
+						
+			while(rs.next()) {
+				if (rs.getString("esPrincipal") == "1") {
+					ingredientes.add(0, rs.getString("ingrediente"));
+					peso.add(0, rs.getString("peso"));
+				}
+				else {
+					ingredientes.add(rs.getString("ingrediente"));
+					peso.add(rs.getString("peso"));
+				}
+			}
+			
+			receta.setIngredientes(ingredientes);
+			receta.setPesoIngredientes(peso);
+			
+			s.close();
+			return receta;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public boolean existeReceta (String idReceta) {
+		
+		try {
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT id FROM receta WHERE id='" + idReceta + "';");
+			boolean existe;
+			if (rs.next()) {
+				existe = true;
+			}
+			else {
+				existe = false;
+			}
+			rs.close();
+			return existe;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }
