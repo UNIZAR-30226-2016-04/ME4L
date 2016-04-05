@@ -7,7 +7,7 @@ public class insercionIngredientes{
 
 	public static void main (String [] args) {
 		try{
-			Scanner br = new Scanner(new File("/home/carlos/GIT/ME4L/mysql/ingredientes.txt"));
+			Scanner br = new Scanner(new File("/home/carlos/GIT/ME4L/mysql/poblar/ingredientes.txt"));
 			String tipo = "Otros";
 			while(br.hasNextLine()){
 				String linea = br.nextLine();
