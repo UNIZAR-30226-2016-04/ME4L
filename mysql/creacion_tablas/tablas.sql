@@ -1,3 +1,9 @@
+drop table componente;
+drop table puntuacion;
+drop table componente;
+drop table ingrediente;
+drop table receta;
+
 CREATE TABLE receta (
 	id int(4) auto_increment,
 	Nombre varchar(40) not null,
