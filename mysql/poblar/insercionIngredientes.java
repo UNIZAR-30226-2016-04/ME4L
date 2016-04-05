@@ -1,3 +1,5 @@
+package poblar;
+
 import java.util.*;
 import java.io.*;
 
@@ -13,8 +15,7 @@ public class insercionIngredientes{
 					tipo = linea.substring(1, linea.length());
 				}else{
 					linea = linea.trim();
-					System.out.println("INSERT INTO ingrediente VALUES ('" + linea + "', '" + tipo + "');");
-					
+					System.out.println("INSERT INTO ingrediente(Nombre, TipoIngrediente) VALUES (" + linea + ", " + tipo + ")");
 				}
 				
 			}
