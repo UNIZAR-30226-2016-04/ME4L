@@ -2,7 +2,7 @@
 
 if(isset($_POST['email'])) {
     // 
-    $email_to = "ctolon2295@gmail.com";
+    $email_to = "@gmail.com";
     $email_subject = "Contacto desde Web";
     function died($error) {
         // mensajes de error

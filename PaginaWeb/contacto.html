@@ -44,7 +44,17 @@
 				<div id="main-wrapper">
 					<div class="container">
 						<div id="content">
-
+							<p>Todos los campos son obligatorios: </p>
+								<form  action="html-contact-form-code/Html+%20PHP/envio.php" method="POST" enctype="multipart/form-data">
+								<input type="hidden" name="action" value="submit">
+								Tu nombre:<br>
+								<input name="name" type="text" value="" size="20"  style="width: 40%"/><br>
+								Tu email:<br>
+								<input name="email" type="text" value="" size="30" style="width: 40%"/><br>
+								Tu mensaje:<br>
+								<textarea name="message" rows="7" cols="30" style="border-color: blue; width: 40%"></textarea><br>
+								<input type="submit" value="Send email"/>
+							</form>
 							<!-- Content -->
 								<article>
 
