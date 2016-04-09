@@ -28,7 +28,7 @@ public class Operaciones {
 		
 		IngredienteVO ingrediente = new IngredienteVO(nombre, tipo);
 		ingredienteDAO.addIngrediente(ingrediente);
-		System.out.println("Ingrediente añadido correctamente.");
+		System.out.println("Ingrediente aÃ±adido correctamente.");
 	}
 	
 	public void addReceta (String nombre, String descripcion, String plato, String personas, 
@@ -36,7 +36,15 @@ public class Operaciones {
 		
 		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
 		recetaDAO.addReceta(receta);
-		System.out.println("Receta añadida correctamente.");
+		System.out.println("Receta aÃ±adida correctamente.");
+	}
+
+	public void addRecetaV (String nombre, String descripcion, String plato, String personas,
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+
+		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+		recetaDAO.addRecetaV(receta);
+		System.out.println("Receta validada aÃ±adida correctamente.");
 	}
 	
 	public void modificarReceta (String nombre, String descripcion, String plato, String personas, 
@@ -46,6 +54,16 @@ public class Operaciones {
 			RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
 			recetaDAO.modificarReceta(receta, idReceta);
 			System.out.println("Receta modificada correctamente.");
+		} else {
+			System.err.println("Error: No existe receta.");
+		}
+	}
+
+	public void validarReceta (String idReceta) {
+
+		if (recetaDAO.existeReceta(idReceta)) {
+			recetaDAO.validarReceta(idReceta);
+			System.out.println("Receta validada correctamente.");
 		} else {
 			System.err.println("Error: No existe receta.");
 		}
@@ -67,11 +85,15 @@ public class Operaciones {
 		RecetaVO receta = new RecetaVO();
 		if (recetaDAO.existeReceta(idReceta)) {
 			receta = recetaDAO.devolverReceta(idReceta);
-			System.out.println("Receta devuelta con éxito.");
+			System.out.println("Receta devuelta con ï¿½xito.");
 		} else {
 			System.err.println("Error: No existe receta.");
 		}
 		return receta;
+	}
+	
+	public ArrayList<RecetaVO> obtenerNoValidadas () {
+		return recetaDAO.obtenerNoValidadas();
 	}
 	
 	public ArrayList<String> obtenerIngredientes() {
@@ -82,12 +104,12 @@ public class Operaciones {
 	public void addPuntuacion (String idReceta, String ip, String puntos) {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
-			System.err.println("Error: Ya existe una puntuación para esa receta e IP.");
+			System.err.println("Error: Ya existe una puntuaciï¿½n para esa receta e IP.");
 		} else {
 			if (recetaDAO.existeReceta(idReceta)) {
 				PuntuacionVO puntuacion = new PuntuacionVO (idReceta, ip, puntos);
 				puntuacionDAO.addPuntuacion(puntuacion);
-				System.out.println("Puntuación añadida correctamente.");
+				System.out.println("Puntuaciï¿½n aï¿½adida correctamente.");
 			} else {
 				System.err.println("Error: No existe receta.");
 			}
@@ -98,9 +120,9 @@ public class Operaciones {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacionDAO.modificarPuntuacion(puntos);
-			System.out.println("Puntuación modificada correctamente.");
+			System.out.println("Puntuaciï¿½n modificada correctamente.");
 		} else {
-			System.err.println("Error: No existe puntuación para esa receta e IP.");
+			System.err.println("Error: No existe puntuaciï¿½n para esa receta e IP.");
 		}
 	}
 	
@@ -108,9 +130,9 @@ public class Operaciones {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacionDAO.eliminarPuntuacion(idReceta, ip);
-			System.out.println("Puntuación eliminada correctamente.");
+			System.out.println("Puntuaciï¿½n eliminada correctamente.");
 		} else {
-			System.err.println("Error: No existe puntuación para esa receta e IP.");
+			System.err.println("Error: No existe puntuaciï¿½n para esa receta e IP.");
 		}
 	}
 	
@@ -119,9 +141,9 @@ public class Operaciones {
 		PuntuacionVO puntuacion = new PuntuacionVO();
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacion = puntuacionDAO.devolverPuntuacion(idReceta, ip);
-			System.out.println("Puntuación devuelta correctamente");
+			System.out.println("Puntuaciï¿½n devuelta correctamente");
 		} else {
-			System.err.println("Error: No existe puntuación para esa receta e IP.");
+			System.err.println("Error: No existe puntuaciï¿½n para esa receta e IP.");
 		}
 		
 		return puntuacion;

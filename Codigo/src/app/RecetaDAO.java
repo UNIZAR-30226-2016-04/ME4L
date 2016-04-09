@@ -51,6 +51,44 @@ public class RecetaDAO {
 			e.printStackTrace();
 		}
 	}
+
+	public void addRecetaV (RecetaVO receta) {
+
+		try {
+			Statement s = conexion.createStatement();
+			/* Insertar en tabla receta */
+			s.execute(
+					"INSERT INTO receta VALUES (NULL,'" + receta.getNombre() + "','"
+							+ receta.getDescripcion() + "','" + receta.getPlato()
+							+ "','"+ receta.getNumPersonas() + "','1');");
+			ResultSet rs = s.executeQuery("SELECT id FROM receta WHERE nombre='" + receta.getNombre()
+					+ "' AND descripcion='" + receta.getDescripcion() + "';");
+
+			/* Insertar en tabla componente */
+			rs.next();
+			String id = rs.getString("id");
+			ArrayList<String> ingredientes = receta.getIngredientes();
+			ArrayList<String> pesos = receta.getPesoIngredientes();
+
+			Iterator<String> iteradorI = ingredientes.iterator();
+			Iterator<String> iteradorP = pesos.iterator();
+			String ingrediente = iteradorI.next();
+			String peso = iteradorP.next();
+			s.execute (
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "');");
+
+			while (iteradorI.hasNext()) {
+				ingrediente = iteradorI.next();
+				peso = iteradorP.next();
+				s.execute (
+						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
+			}
+			s.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void modificarReceta (RecetaVO receta, String idReceta) {
 		
@@ -78,6 +116,17 @@ public class RecetaDAO {
 				s.execute (
 					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "');");
 			}
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void validarReceta (String idReceta) {
+		try {
+			Statement s = conexion.createStatement();
+			s.execute(
+					"UPDATE receta SET validada='1' WHERE id='" + idReceta + "';");
 			s.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,4 +208,49 @@ public class RecetaDAO {
 			return false;
 		}
 	}
+	
+	public ArrayList<RecetaVO> obtenerNoValidadas () {
+		try {
+			ArrayList<RecetaVO> recetas = new ArrayList<RecetaVO>();
+			RecetaVO receta = new RecetaVO();
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE validada='0';");
+			
+			while (rs.next()) {
+				String idReceta = rs.getString("id");
+				receta = devolverReceta(idReceta);
+				recetas.add(receta);
+				/*receta.setId(idReceta);
+				receta.setNombre(rs.getString("nombre"));
+				receta.setDescripcion(rs.getString("descripcion"));
+				receta.setPlato(rs.getString("plato"));
+				receta.setNumPersonas(rs.getString("numeroPersonas"));
+				receta.setValidada("0");
+
+				ArrayList<String> ingredientes = new ArrayList<String>();
+				ArrayList<String> peso = new ArrayList<String>();
+				ResultSet rs2 = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
+
+				while(rs2.next()) {
+					if (rs2.getString("esPrincipal") == "1") {
+						ingredientes.add(0, rs2.getString("ingrediente"));
+						peso.add(0, rs2.getString("peso"));
+					}
+					else {
+						ingredientes.add(rs2.getString("ingrediente"));
+						peso.add(rs2.getString("peso"));
+					}
+				}
+
+				receta.setIngredientes(ingredientes);
+				receta.setPesoIngredientes(peso);*/
+			}
+			s.close();
+			return recetas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
