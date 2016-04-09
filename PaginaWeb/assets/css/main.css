@@ -430,9 +430,10 @@
 	.\-5u {
 		margin-left: 41.66667%;
 	}
-
+/* Modificado por Carlos, para que lo de abajo este bien distribuido */
 	.\-4u {
-		margin-left: 33.33333%;
+		margin-left: 5.33333%;
+		margin-right: 5.33%;
 	}
 
 	.\-3u {
@@ -1324,7 +1325,7 @@
 		background-size: 100% 30em, auto;
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #696969;
+		color: rgba(10, 10, 10, 0.71);
 		font-weight: 300;
 		line-height: 2.25em;
 	}
