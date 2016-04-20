@@ -59,9 +59,9 @@ public class Aplicacion extends JFrame {
 	ArrayList<RecetaVO> recetasModificar = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> recetasParaValidar = new ArrayList<RecetaVO>();
 	ArrayList<String> ingredientesAplicacion = new ArrayList<String>();
-	ArrayList<Integer> indexIngredientes_PR = new ArrayList<Integer>();
-	ArrayList<Integer> indexIngredientes_A = new ArrayList<Integer>();
-	ArrayList<Integer> indexIngredientes_MR = new ArrayList<Integer>();
+	ArrayList<String> indexIngredientes_PR = new ArrayList<String>();
+	ArrayList<String> indexIngredientes_A = new ArrayList<String>();
+	ArrayList<String> indexIngredientes_MR = new ArrayList<String>();
 	private JTextField textFieldBusqueda_MR;
 	// Objeto de operaciones
 	private Operaciones o = new Operaciones();
@@ -624,6 +624,8 @@ public class Aplicacion extends JFrame {
 				if (listaIngredientes_PR.getSelectedItem() != null) {
 					listaIngredientes_PR.remove(listaIngredientes_PR
 							.getSelectedIndex());
+					indexIngredientes_PR.remove(listaIngredientes_PR.getSelectedItem().toString().substring(0,listaIngredientes_PR.getSelectedItem().toString()
+							.indexOf('-') - 1));
 				}
 			}
 		});
@@ -642,7 +644,7 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_PR
-							.contains(comboBoxIngrediente_PR.getSelectedIndex())) {
+							.contains(comboBoxIngrediente_PR.getSelectedItem())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -651,8 +653,7 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_PR.getText());
-						indexIngredientes_PR.add(comboBoxIngrediente_PR
-								.getSelectedIndex());
+						indexIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem().toString());
 					}
 				}
 			}
@@ -713,6 +714,8 @@ public class Aplicacion extends JFrame {
 						comboBoxTipo_PR.setSelectedIndex(0);
 						textFieldCantidad_PR.setText("");
 						listaIngredientes_PR.removeAll();
+						ingredientes.clear();
+						pesoIngredientes.clear();
 					}
 
 				} else {
@@ -1000,6 +1003,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				if (listaIngredientes_A.getSelectedItem() != null) {
+					indexIngredientes_A.remove(listaIngredientes_A.getSelectedItem().toString().substring(0,listaIngredientes_A.getSelectedItem().toString()
+							.indexOf('-') - 1));
 					listaIngredientes_A.remove(listaIngredientes_A
 							.getSelectedIndex());
 				}
@@ -1020,7 +1025,7 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_A
-							.contains(comboBoxIngrediente_A.getSelectedIndex())) {
+							.contains(comboBoxIngrediente_A.getSelectedItem())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -1029,8 +1034,7 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_A.getText());
-						indexIngredientes_A.add(comboBoxIngrediente_A
-								.getSelectedIndex());
+						indexIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem().toString());
 					}
 				}
 			}
@@ -1090,6 +1094,8 @@ public class Aplicacion extends JFrame {
 						comboBoxTipo_A.setSelectedIndex(0);
 						textFieldCantidad_A.setText("");
 						listaIngredientes_A.removeAll();
+						ingredientes_A.clear();
+						pesoIngredientes_A.clear();
 					}
 
 				} else {
@@ -1116,7 +1122,7 @@ public class Aplicacion extends JFrame {
 
 		// Lista de recetas buscadas
 		final List listaBuscada_MR = new List();
-		listaBuscada_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		listaBuscada_MR.setFont(new Font("Calibri", Font.BOLD, 20));
 		listaBuscada_MR.setBounds(12, 72, 596, 336);
 		panelModificar.add(listaBuscada_MR);
 
@@ -1133,7 +1139,7 @@ public class Aplicacion extends JFrame {
 		}
 		panelModificar.add(botonBuscar_MR);
 
-		// Accion del boton de borrar ingrediente
+		// Accion del boton de buscar recetas para modificar
 		botonBuscar_MR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1443,6 +1449,8 @@ public class Aplicacion extends JFrame {
 				if (listaIngredientes_MR.getSelectedItem() != null) {
 					listaIngredientes_MR.remove(listaIngredientes_MR
 							.getSelectedIndex());
+					indexIngredientes_MR.remove(listaIngredientes_MR.getSelectedItem().toString().substring(0,listaIngredientes_MR.getSelectedItem().toString()
+							.indexOf('-') - 1));
 				}
 			}
 		});
@@ -1461,7 +1469,7 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_MR
-							.contains(comboBoxIngrediente_MR.getSelectedIndex())) {
+							.contains(comboBoxIngrediente_MR.getSelectedItem())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -1470,8 +1478,7 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_MR.getText());
-						indexIngredientes_MR.add(comboBoxIngrediente_MR
-								.getSelectedIndex());
+						indexIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem().toString());
 					}
 				}
 			}
@@ -1526,18 +1533,28 @@ public class Aplicacion extends JFrame {
 								comboBoxNumPersonas_MR.getSelectedItem()
 										.toString(), ingredientes,
 								pesoIngredientes, recetaSeleccionada_MR.getId());
+						
+						// Recargamos las recetas buscadas para modificar
+						listaBuscada_MR.removeAll();
+						recetasModificar = o.obtenerValidadas();
+						for (RecetaVO receta : recetasModificar) {
+							listaBuscada_MR.add(receta.getNombre());
+						}
 
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"Los cambios en la receta han sido guardados.");
-						textFieldNombre_PR.setText("");
-						comboBoxNumPersonas_PR.setSelectedIndex(0);
-						textAreaDescripcion_PR.setText("");
-						comboBoxIngPrinc_PR.setSelectedIndex(0);
-						textFieldCantidadPrinc_PR.setText("");
-						comboBoxIngrediente_PR.setSelectedIndex(0);
-						comboBoxTipo_PR.setSelectedIndex(0);
-						textFieldCantidad_PR.setText("");
-						listaIngredientes_PR.removeAll();
+						recetaSeleccionada_MR = null;
+						
+						// Ponemos en blanco todos los campos
+						textFieldNombre_MR.setText("");
+						comboBoxNumPersonas_MR.setSelectedIndex(0);
+						textAreaDescripcion_MR.setText("");
+						comboBoxIngPrinc_MR.setSelectedIndex(0);
+						textFieldCantidadPrinc_MR.setText("");
+						comboBoxIngrediente_MR.setSelectedIndex(0);
+						comboBoxTipo_MR.setSelectedIndex(0);
+						textFieldCantidad_MR.setText("");
+						listaIngredientes_MR.removeAll();
 						cardMenu.show(pantallaMenu, "panelModificar");
 					}
 
@@ -1567,15 +1584,15 @@ public class Aplicacion extends JFrame {
 		botonVolver_MR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				textFieldNombre_PR.setText("");
-				comboBoxNumPersonas_PR.setSelectedIndex(0);
-				textAreaDescripcion_PR.setText("");
-				comboBoxIngPrinc_PR.setSelectedIndex(0);
-				textFieldCantidadPrinc_PR.setText("");
-				comboBoxIngrediente_PR.setSelectedIndex(0);
-				comboBoxTipo_PR.setSelectedIndex(0);
-				textFieldCantidad_PR.setText("");
-				listaIngredientes_PR.removeAll();
+				textFieldNombre_MR.setText("");
+				comboBoxNumPersonas_MR.setSelectedIndex(0);
+				textAreaDescripcion_MR.setText("");
+				comboBoxIngPrinc_MR.setSelectedIndex(0);
+				textFieldCantidadPrinc_MR.setText("");
+				comboBoxIngrediente_MR.setSelectedIndex(0);
+				comboBoxTipo_MR.setSelectedIndex(0);
+				textFieldCantidad_MR.setText("");
+				listaIngredientes_MR.removeAll();
 				cardMenu.show(pantallaMenu, "panelModificar");
 				recetaSeleccionada_MR = null;
 			}
@@ -1629,8 +1646,7 @@ public class Aplicacion extends JFrame {
 
 		// Lista de recetas pendientes de ser validadas
 		final List listaRecetasPendientesValidar_VR = new List();
-		listaRecetasPendientesValidar_VR.setFont(new Font("Calibri", Font.BOLD,
-				15));
+		listaRecetasPendientesValidar_VR.setFont(new Font("Calibri", Font.BOLD,20));
 		listaRecetasPendientesValidar_VR.setBounds(12, 49, 385, 359);
 		panelValidar.add(listaRecetasPendientesValidar_VR);
 

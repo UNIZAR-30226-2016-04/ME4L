@@ -168,7 +168,7 @@ public class RecetaDAO {
 			rs = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
 						
 			while(rs.next()) {
-				if (rs.getString("esPrincipal") == "1") {
+				if (rs.getString("esPrincipal").equals("1")) {
 					ingredientes.add(0, rs.getString("ingrediente"));
 					peso.add(0, rs.getString("peso"));
 				}
