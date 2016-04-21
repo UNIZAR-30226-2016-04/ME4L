@@ -21,11 +21,11 @@ CREATE TABLE ingrediente (
 );
 
 CREATE TABLE comentarios (
+	idComentario int(4) AUTO_INCREMENT,
 	idReceta int(4),
-	idComentario int(4) ,
 	comentario varchar(140) not null,
 	Foreign Key(idReceta) REFERENCES receta (id) ON DELETE CASCADE,
-	Primary Key (idReceta, idComentario)
+	Primary Key (idComentario)
 );
 
 CREATE TABLE puntuacion (
