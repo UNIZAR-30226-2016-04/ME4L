@@ -20,7 +20,6 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -55,7 +54,7 @@ public class Aplicacion extends JFrame {
 	private JTextField textFieldCantidad_PR;
 	private JTextField textFieldCantidad_MR;
 	private RecetaVO recetaSeleccionada_MR = new RecetaVO();
-	// Array/cachï¿½ que guarda las recetas que el usuario tiene abiertas
+	// Array/caché que guarda las recetas que el usuario tiene abiertas
 	ArrayList<RecetaVO> recetasAbiertas = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> recetasModificar = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> recetasParaValidar = new ArrayList<RecetaVO>();
@@ -66,24 +65,6 @@ public class Aplicacion extends JFrame {
 	private JTextField textFieldBusqueda_MR;
 	// Objeto de operaciones
 	private Operaciones o = new Operaciones();
-	
-	final String algo="/images/";
-	
-	final String adsearch = algo + "adsearch.png";
-	final String close = algo + "close.png";
-	final String fondo = algo + "fondoApp.jpg";
-	final String help = algo + "help.png";
-	final String iconoApp = algo + "IconoAppRecortado.png";
-	final String one = algo + "one.png";
-	final String plus = algo + "plus.png";
-	final String refresh = algo + "refresh.png";
-	final String ret = algo + "return.png";
-	final String search = algo + "search.png";
-	final String signin = algo + "signIn.png";
-	final String three = algo + "three.png";
-	final String two = algo + "two.png";
-	final String write = algo + "write.png";
-	
 
 	/**
 	 * Launch the application.
@@ -114,7 +95,7 @@ public class Aplicacion extends JFrame {
 		botonAyuda.setBackground(new Color(245, 245, 245));
 	}
 
-	// Metodo que comprueba si la contraseï¿½a es correcta
+	// Metodo que comprueba si la contraseña es correcta
 	private static boolean isPasswordCorrect(char[] input) {
 		boolean isCorrect = true;
 		char[] correctPassword = { 'f', 'a', 't', 'o', 'l', 'a', 'n', 'd' };
@@ -136,7 +117,6 @@ public class Aplicacion extends JFrame {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Aplicacion() {
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1148, 656);
 		contentPane = new JPanel();
@@ -147,6 +127,23 @@ public class Aplicacion extends JFrame {
 
 		// Controlador de cambio de pantallas
 		final CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+
+		// Creamos las imagenes
+		Image imagenClose = new ImageIcon("images/close.png").getImage();
+		Image imagenAdSearch = new ImageIcon("images/adsearch.png").getImage();
+		Image imagenFondoApp = new ImageIcon("images/fondoApp.jpg").getImage();
+		Image imagenHelp = new ImageIcon("images/help.png").getImage();
+		Image imagenIcono = new ImageIcon("images/IconoAppRecortado.png")
+				.getImage();
+		Image imagenOne = new ImageIcon("images/one.png").getImage();
+		Image imagenPlus = new ImageIcon("images/plus.png").getImage();
+		Image imagenRefresh = new ImageIcon("images/refresh.png").getImage();
+		Image imagenReturn = new ImageIcon("images/return.png").getImage();
+		Image imagenSearch = new ImageIcon("images/search.png").getImage();
+		Image imagenSignIn = new ImageIcon("images/signIn.png").getImage();
+		Image imagenThree = new ImageIcon("images/three.png").getImage();
+		Image imagenTwo = new ImageIcon("images/two.png").getImage();
+		Image imagenWrite = new ImageIcon("images/write.png").getImage();
 
 		/**
 		 * COMIENZO DE LA PANTALLA DE INICIO
@@ -164,9 +161,7 @@ public class Aplicacion extends JFrame {
 
 		// Icono de la Aplicacion
 		JLabel IconoApp1 = new JLabel("");
-		Image img1 = new ImageIcon(this.getClass().getResource(
-				iconoApp)).getImage();
-		IconoApp1.setIcon(new ImageIcon(img1.getScaledInstance(319, 288,
+		IconoApp1.setIcon(new ImageIcon(imagenIcono.getScaledInstance(319, 288,
 				Image.SCALE_DEFAULT)));
 		IconoApp1.setBounds(372, 13, 319, 288);
 		inicio.add(IconoApp1);
@@ -176,12 +171,8 @@ public class Aplicacion extends JFrame {
 		botonEntrar1.setBackground(new Color(250, 250, 250));
 		botonEntrar1.setFont(new Font("Calibri", Font.BOLD, 48));
 		botonEntrar1.setBounds(372, 472, 319, 69);
-		try {
-			Image img2 = ImageIO.read(getClass().getResource(signin));
-			botonEntrar1.setIcon(new ImageIcon(img2.getScaledInstance(60, 60,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonEntrar1.setIcon(new ImageIcon(imagenSignIn.getScaledInstance(60,
+				60, Image.SCALE_DEFAULT)));
 		inicio.add(botonEntrar1);
 
 		// Accion del boton de Entrar
@@ -247,10 +238,8 @@ public class Aplicacion extends JFrame {
 
 		// Fondo de la pantalla
 		JLabel fondoApp1 = new JLabel();
-		Image img3 = new ImageIcon(this.getClass().getResource(fondo))
-				.getImage();
-		fondoApp1.setIcon(new ImageIcon(img3.getScaledInstance(1132, 611,
-				Image.SCALE_DEFAULT)));
+		fondoApp1.setIcon(new ImageIcon(imagenFondoApp.getScaledInstance(1132,
+				611, Image.SCALE_DEFAULT)));
 		fondoApp1.setBounds(0, 0, 1132, 611);
 		inicio.add(fondoApp1);
 
@@ -268,8 +257,6 @@ public class Aplicacion extends JFrame {
 
 		// Icono de la aplicacion
 		JLabel IconoApp3 = new JLabel("");
-		Image img7 = new ImageIcon(this.getClass().getResource(
-				iconoApp)).getImage();
 
 		// Panel de Administrador
 		final JPanel barraAdmin = new JPanel();
@@ -312,8 +299,8 @@ public class Aplicacion extends JFrame {
 		menuAdmin.setBounds(0, 0, 261, 30);
 		estadoIdentificado.add(menuAdmin);
 
-		// Pestaï¿½a Menu Administrador
-		JMenu botonAdmin = new JMenu("Menï¿½ Administrador");
+		// Pestaña Menu Administrador
+		JMenu botonAdmin = new JMenu("Menú Administrador");
 		botonAdmin.setHorizontalAlignment(SwingConstants.TRAILING);
 		botonAdmin.setFont(new Font("Calibri", Font.BOLD, 16));
 		botonAdmin.setBounds(0, 0, 261, 30);
@@ -323,8 +310,8 @@ public class Aplicacion extends JFrame {
 		JMenuItem botonValidar = new JMenuItem("Validar Receta");
 		botonAdmin.add(botonValidar);
 
-		// Boton aï¿½adir receta
-		JMenuItem botonAnyadir = new JMenuItem("Aï¿½adir Receta");
+		// Boton añadir receta
+		JMenuItem botonAnyadir = new JMenuItem("Añadir Receta");
 		botonAdmin.add(botonAnyadir);
 
 		// Boton modificar receta
@@ -523,9 +510,9 @@ public class Aplicacion extends JFrame {
 
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
-		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 22));
 		botonEnviarPropuesta_PR.setBackground(new Color(173, 255, 47));
-		botonEnviarPropuesta_PR.setBounds(85, 338, 281, 60);
+		botonEnviarPropuesta_PR.setBounds(0, 338, 272, 60);
 		panelProponer.add(botonEnviarPropuesta_PR);
 
 		// LLenado del comboBox
@@ -570,8 +557,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_PR.setBounds(780, 160, 66, 23);
 		panelProponer.add(labelGramos2_PR);
 
-		// Boton aï¿½adir ingrediente
-		JButton botonAnyadirIngrediente_PR = new JButton("Aï¿½adir Ingrediente");
+		// Boton añadir ingrediente
+		JButton botonAnyadirIngrediente_PR = new JButton("Añadir Ingrediente");
 		botonAnyadirIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_PR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_PR.setBounds(465, 375, 180, 33);
@@ -584,7 +571,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_PR.setBounds(667, 375, 180, 33);
 		panelProponer.add(botonBorrarIngrediente_PR);
 
-		// Lista con los ingredientes aï¿½adidos
+		// Lista con los ingredientes añadidos
 		final List listaIngredientes_PR = new List();
 		listaIngredientes_PR.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_PR.setMultipleMode(false);
@@ -637,20 +624,49 @@ public class Aplicacion extends JFrame {
 		label.setBounds(442, 77, 19, 16);
 		panelProponer.add(label);
 
+		// Boton de cancelar receta
+		JButton botonCancelarReceta_PR = new JButton("Cancelar");
+		botonCancelarReceta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonCancelarReceta_PR.setBackground(new Color(245, 245, 245));
+		botonCancelarReceta_PR.setBounds(284, 338, 155, 60);
+		panelProponer.add(botonCancelarReceta_PR);
+
+		// Accion del boton de cancelar receta
+
+		botonCancelarReceta_PR.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				textFieldNombre_PR.setText("");
+				comboBoxNumPersonas_PR.setSelectedIndex(0);
+				textAreaDescripcion_PR.setText("");
+				comboBoxIngPrinc_PR.setSelectedIndex(0);
+				textFieldCantidadPrinc_PR.setText("");
+				comboBoxIngrediente_PR.setSelectedIndex(0);
+				comboBoxTipo_PR.setSelectedIndex(0);
+				textFieldCantidad_PR.setText("");
+				listaIngredientes_PR.removeAll();
+			}
+		});
+
 		// Accion del boton de borrar ingrediente
 		botonBorrarIngrediente_PR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				if (listaIngredientes_PR.getSelectedItem() != null) {
+					indexIngredientes_PR.remove(listaIngredientes_PR
+							.getSelectedItem()
+							.toString()
+							.substring(
+									0,
+									listaIngredientes_PR.getSelectedItem()
+											.toString().indexOf('-') - 1));
 					listaIngredientes_PR.remove(listaIngredientes_PR
 							.getSelectedIndex());
-					indexIngredientes_PR.remove(listaIngredientes_PR.getSelectedItem().toString().substring(0,listaIngredientes_PR.getSelectedItem().toString()
-							.indexOf('-') - 1));
 				}
 			}
 		});
 
-		// Accion del boton de aï¿½adir ingrediente
+		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_PR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -664,7 +680,8 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_PR
-							.contains(comboBoxIngrediente_PR.getSelectedItem())) {
+							.contains(comboBoxIngrediente_PR.getSelectedItem()
+									.toString())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -673,7 +690,9 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_PR.getText());
-						indexIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem().toString());
+						indexIngredientes_PR.add(comboBoxIngrediente_PR
+								.getSelectedItem().toString());
+
 					}
 				}
 			}
@@ -759,7 +778,7 @@ public class Aplicacion extends JFrame {
 		pantallaMenu.add(panelAyuda, "panelAyud");
 		panelAyuda.setLayout(null);
 
-		// Panel Aï¿½adir Receta
+		// Panel Añadir Receta
 		JPanel panelAnyadir = new JPanel();
 		panelAnyadir.setOpaque(false);
 		pantallaMenu.add(panelAnyadir, "panelAnyadir");
@@ -951,8 +970,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_A.setBounds(780, 160, 66, 23);
 		panelAnyadir.add(labelGramos2_A);
 
-		// Boton aï¿½adir ingrediente
-		JButton botonAnyadirIngrediente_A = new JButton("Aï¿½adir Ingrediente");
+		// Boton añadir ingrediente
+		JButton botonAnyadirIngrediente_A = new JButton("Añadir Ingrediente");
 		botonAnyadirIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_A.setBounds(465, 375, 180, 33);
@@ -965,7 +984,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_A.setBounds(667, 375, 180, 33);
 		panelAnyadir.add(botonBorrarIngrediente_A);
 
-		// Lista con los ingredientes aï¿½adidos
+		// Lista con los ingredientes añadidos
 		final List listaIngredientes_A = new List();
 		listaIngredientes_A.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_A.setMultipleMode(false);
@@ -1023,15 +1042,20 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				if (listaIngredientes_A.getSelectedItem() != null) {
-					indexIngredientes_A.remove(listaIngredientes_A.getSelectedItem().toString().substring(0,listaIngredientes_A.getSelectedItem().toString()
-							.indexOf('-') - 1));
+					indexIngredientes_A.remove(listaIngredientes_A
+							.getSelectedItem()
+							.toString()
+							.substring(
+									0,
+									listaIngredientes_A.getSelectedItem()
+											.toString().indexOf('-') - 1));
 					listaIngredientes_A.remove(listaIngredientes_A
 							.getSelectedIndex());
 				}
 			}
 		});
 
-		// Accion del boton de aï¿½adir ingrediente
+		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_A.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1045,7 +1069,8 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_A
-							.contains(comboBoxIngrediente_A.getSelectedItem())) {
+							.contains(comboBoxIngrediente_A.getSelectedItem()
+									.toString())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -1054,13 +1079,14 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_A.getText());
-						indexIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem().toString());
+						indexIngredientes_A.add(comboBoxIngrediente_A
+								.getSelectedItem().toString());
 					}
 				}
 			}
 		});
 
-		// Accion del boton de aï¿½adir receta
+		// Accion del boton de añadir receta
 		botonEnviarPropuesta_A.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1104,7 +1130,7 @@ public class Aplicacion extends JFrame {
 								pesoIngredientes_A);
 
 						JOptionPane.showMessageDialog(menuPrincipal,
-								"La receta ha sido aï¿½adida.");
+								"La receta ha sido añadida.");
 						textFieldNombre_A.setText("");
 						comboBoxNumPersonas_A.setSelectedIndex(0);
 						textAreaDescripcion_A.setText("");
@@ -1151,12 +1177,8 @@ public class Aplicacion extends JFrame {
 		botonBuscar_MR.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonBuscar_MR.setBackground(new Color(245, 245, 245));
 		botonBuscar_MR.setBounds(625, 15, 46, 34);
-		try {
-			Image img16 = ImageIO.read(getClass().getResource(search));
-			botonBuscar_MR.setIcon(new ImageIcon(img16.getScaledInstance(40,
-					40, Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonBuscar_MR.setIcon(new ImageIcon(imagenSearch.getScaledInstance(40,
+				40, Image.SCALE_DEFAULT)));
 		panelModificar.add(botonBuscar_MR);
 
 		// Accion del boton de buscar recetas para modificar
@@ -1395,8 +1417,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_MR.setBounds(780, 160, 66, 23);
 		panelModificarReceta.add(labelGramos2_MR);
 
-		// Boton aï¿½adir ingrediente
-		JButton botonAnyadirIngrediente_MR = new JButton("Aï¿½adir Ingrediente");
+		// Boton añadir ingrediente
+		JButton botonAnyadirIngrediente_MR = new JButton("Añadir Ingrediente");
 		botonAnyadirIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_MR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_MR.setBounds(465, 375, 180, 33);
@@ -1409,7 +1431,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_MR.setBounds(667, 375, 180, 33);
 		panelModificarReceta.add(botonBorrarIngrediente_MR);
 
-		// Lista con los ingredientes aï¿½adidos
+		// Lista con los ingredientes añadidos
 		final List listaIngredientes_MR = new List();
 		listaIngredientes_MR.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_MR.setMultipleMode(false);
@@ -1467,15 +1489,20 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				if (listaIngredientes_MR.getSelectedItem() != null) {
+					indexIngredientes_MR.remove(listaIngredientes_MR
+							.getSelectedItem()
+							.toString()
+							.substring(
+									0,
+									listaIngredientes_MR.getSelectedItem()
+											.toString().indexOf('-') - 1));
 					listaIngredientes_MR.remove(listaIngredientes_MR
 							.getSelectedIndex());
-					indexIngredientes_MR.remove(listaIngredientes_MR.getSelectedItem().toString().substring(0,listaIngredientes_MR.getSelectedItem().toString()
-							.indexOf('-') - 1));
 				}
 			}
 		});
-		
-		// Accion del boton de aï¿½adir ingrediente
+
+		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_MR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1489,7 +1516,8 @@ public class Aplicacion extends JFrame {
 										menuPrincipal,
 										"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
 					} else if (indexIngredientes_MR
-							.contains(comboBoxIngrediente_MR.getSelectedItem())) {
+							.contains(comboBoxIngrediente_MR.getSelectedItem()
+									.toString())) {
 						JOptionPane
 								.showMessageDialog(menuPrincipal,
 										"El ingrediente ya esta en la lista de ingredientes.");
@@ -1498,7 +1526,8 @@ public class Aplicacion extends JFrame {
 								.getSelectedItem()
 								+ " - "
 								+ textFieldCantidad_MR.getText());
-						indexIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem().toString());
+						indexIngredientes_MR.add(comboBoxIngrediente_MR
+								.getSelectedItem().toString());
 					}
 				}
 			}
@@ -1553,7 +1582,7 @@ public class Aplicacion extends JFrame {
 								comboBoxNumPersonas_MR.getSelectedItem()
 										.toString(), ingredientes,
 								pesoIngredientes, recetaSeleccionada_MR.getId());
-						
+
 						// Recargamos las recetas buscadas para modificar
 						listaBuscada_MR.removeAll();
 						recetasModificar = o.obtenerValidadas();
@@ -1564,7 +1593,7 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"Los cambios en la receta han sido guardados.");
 						recetaSeleccionada_MR = null;
-						
+
 						// Ponemos en blanco todos los campos
 						textFieldNombre_MR.setText("");
 						comboBoxNumPersonas_MR.setSelectedIndex(0);
@@ -1593,12 +1622,8 @@ public class Aplicacion extends JFrame {
 		botonVolver_MR.setBackground(new Color(245, 245, 245));
 		botonVolver_MR.setBounds(227, 338, 215, 60);
 		panelModificarReceta.add(botonVolver_MR);
-		try {
-			Image img15 = ImageIO.read(getClass().getResource(ret));
-			botonVolver_MR.setIcon(new ImageIcon(img15.getScaledInstance(20,
-					20, Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonVolver_MR.setIcon(new ImageIcon(imagenReturn.getScaledInstance(20,
+				20, Image.SCALE_DEFAULT)));
 
 		// Accion del boton de VOLVER DE MODIFICAR RECETA
 		botonVolver_MR.addActionListener(new ActionListener() {
@@ -1642,10 +1667,13 @@ public class Aplicacion extends JFrame {
 					for (int i = 1; i < recetaSeleccionada_MR.getIngredientes()
 							.size(); i++) {
 						listaIngredientes_MR.add(recetaSeleccionada_MR
-								.getIngredientes().get(i) + " - " + recetaSeleccionada_MR
-								.getPesoIngredientes().get(i));
+								.getIngredientes().get(i)
+								+ " - "
+								+ recetaSeleccionada_MR.getPesoIngredientes()
+										.get(i));
 					}
-					comboBoxTipo_MR.setSelectedItem(recetaSeleccionada_MR.getPlato());
+					comboBoxTipo_MR.setSelectedItem(recetaSeleccionada_MR
+							.getPlato());
 				}
 			}
 		});
@@ -1666,7 +1694,8 @@ public class Aplicacion extends JFrame {
 
 		// Lista de recetas pendientes de ser validadas
 		final List listaRecetasPendientesValidar_VR = new List();
-		listaRecetasPendientesValidar_VR.setFont(new Font("Calibri", Font.BOLD,20));
+		listaRecetasPendientesValidar_VR.setFont(new Font("Calibri", Font.BOLD,
+				20));
 		listaRecetasPendientesValidar_VR.setBounds(12, 49, 385, 359);
 		panelValidar.add(listaRecetasPendientesValidar_VR);
 
@@ -1702,7 +1731,7 @@ public class Aplicacion extends JFrame {
 					listaRecetasPendientesValidar_VR.remove(index);
 					recetasParaValidar.remove(index);
 					JOptionPane.showMessageDialog(menuPrincipal,
-							"La receta ha sido aï¿½adida.");
+							"La receta ha sido añadida.");
 				}
 			}
 		});
@@ -1737,12 +1766,8 @@ public class Aplicacion extends JFrame {
 		botonActualizar_VR.setBackground(new Color(245, 245, 245));
 		botonActualizar_VR.setBounds(446, 48, 281, 60);
 		panelValidar.add(botonActualizar_VR);
-		try {
-			Image img14 = ImageIO.read(getClass().getResource(refresh));
-			botonActualizar_VR.setIcon(new ImageIcon(img14.getScaledInstance(
-					25, 25, Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonActualizar_VR.setIcon(new ImageIcon(imagenRefresh
+				.getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 
 		// Accion del boton de actualizar para validar
 		botonActualizar_VR.addActionListener(new ActionListener() {
@@ -1758,12 +1783,12 @@ public class Aplicacion extends JFrame {
 		});
 
 		// Indicador textual del menu
-		final JLabel labelMenu = new JLabel("MENï¿½ PRINCIPAL");
+		final JLabel labelMenu = new JLabel("MENÚ PRINCIPAL");
 		labelMenu.setForeground(new Color(255, 153, 0));
 		labelMenu.setFont(new Font("Bauhaus 93", Font.BOLD, 80));
 		labelMenu.setBounds(262, 12, 858, 162);
 		menuPrincipal.add(labelMenu);
-		IconoApp3.setIcon(new ImageIcon(img7.getScaledInstance(200, 169,
+		IconoApp3.setIcon(new ImageIcon(imagenIcono.getScaledInstance(200, 169,
 				Image.SCALE_DEFAULT)));
 		IconoApp3.setBounds(30, 5, 200, 169);
 		menuPrincipal.add(IconoApp3);
@@ -1790,19 +1815,16 @@ public class Aplicacion extends JFrame {
 		botonAvanzada.setBackground(new Color(245, 245, 245));
 		botonAvanzada.setBounds(12, 185, 235, 60);
 		botonAvanzada.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img8 = ImageIO.read(getClass().getResource(adsearch));
-			botonAvanzada.setIcon(new ImageIcon(img8.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonAvanzada.setIcon(new ImageIcon(imagenAdSearch.getScaledInstance(
+				25, 25, Image.SCALE_DEFAULT)));
+
 		menuPrincipal.add(botonAvanzada);
 
 		// Accion del boton de Busqueda Avanzada
 		botonAvanzada.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("Bï¿½SQUEDA AVANZADA");
+				labelMenu.setText("BÚSQUEDA AVANZADA");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1816,12 +1838,9 @@ public class Aplicacion extends JFrame {
 		botonPrimeros.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonPrimeros.setBounds(12, 245, 235, 60);
 		botonPrimeros.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img9 = ImageIO.read(getClass().getResource(one));
-			botonPrimeros.setIcon(new ImageIcon(img9.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonPrimeros.setIcon(new ImageIcon(imagenOne.getScaledInstance(25, 25,
+				Image.SCALE_DEFAULT)));
+
 		menuPrincipal.add(botonPrimeros);
 
 		// Accion del boton de Primeros
@@ -1842,12 +1861,9 @@ public class Aplicacion extends JFrame {
 		botonPostres.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonPostres.setBounds(12, 365, 235, 60);
 		botonPostres.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img10 = ImageIO.read(getClass().getResource(three));
-			botonPostres.setIcon(new ImageIcon(img10.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonPostres.setIcon(new ImageIcon(imagenThree.getScaledInstance(25,
+				25, Image.SCALE_DEFAULT)));
+
 		menuPrincipal.add(botonPostres);
 
 		// Accion del boton de Postres
@@ -1868,12 +1884,8 @@ public class Aplicacion extends JFrame {
 		botonSegundos.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonSegundos.setBounds(12, 305, 235, 60);
 		botonSegundos.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img11 = ImageIO.read(getClass().getResource(two));
-			botonSegundos.setIcon(new ImageIcon(img11.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonSegundos.setIcon(new ImageIcon(imagenTwo.getScaledInstance(25, 25,
+				Image.SCALE_DEFAULT)));
 		menuPrincipal.add(botonSegundos);
 
 		// Accion del boton de Segundos
@@ -1894,19 +1906,16 @@ public class Aplicacion extends JFrame {
 		botonDestacados.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonDestacados.setBounds(12, 485, 235, 60);
 		botonDestacados.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img12 = ImageIO.read(getClass().getResource(plus));
-			botonDestacados.setIcon(new ImageIcon(img12.getScaledInstance(25,
-					25, Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonDestacados.setIcon(new ImageIcon(imagenPlus.getScaledInstance(25,
+				25, Image.SCALE_DEFAULT)));
+
 		menuPrincipal.add(botonDestacados);
 
 		// Accion del boton de Mas Destacados
 		botonDestacados.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("Mï¿½S DESTACADOS");
+				labelMenu.setText("MÁS DESTACADOS");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1920,12 +1929,8 @@ public class Aplicacion extends JFrame {
 		botonProponer.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonProponer.setBounds(12, 425, 235, 60);
 		botonProponer.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img13 = ImageIO.read(getClass().getResource(write));
-			botonProponer.setIcon(new ImageIcon(img13.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonProponer.setIcon(new ImageIcon(imagenWrite.getScaledInstance(25,
+				25, Image.SCALE_DEFAULT)));
 		menuPrincipal.add(botonProponer);
 
 		// Accion del boton de Proponer Receta
@@ -1946,12 +1951,8 @@ public class Aplicacion extends JFrame {
 		botonAyuda.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonAyuda.setBounds(12, 545, 235, 60);
 		botonAyuda.setHorizontalAlignment(SwingConstants.LEFT);
-		try {
-			Image img14 = ImageIO.read(getClass().getResource(help));
-			botonAyuda.setIcon(new ImageIcon(img14.getScaledInstance(25, 25,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonAyuda.setIcon(new ImageIcon(imagenHelp.getScaledInstance(25, 25,
+				Image.SCALE_DEFAULT)));
 		menuPrincipal.add(botonAyuda);
 
 		// Accion del boton de Ayuda
@@ -1971,7 +1972,7 @@ public class Aplicacion extends JFrame {
 		botonImagen.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("MENï¿½ PRINCIPAL");
+				labelMenu.setText("MENÚ PRINCIPAL");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1991,11 +1992,11 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aï¿½adir receta
+		// Accion del boton de añadir receta
 		botonAnyadir.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("Aï¿½ADIR RECETA");
+				labelMenu.setText("AÑADIR RECETA");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -2017,14 +2018,11 @@ public class Aplicacion extends JFrame {
 
 		// Fondo de la pantalla
 		JLabel fondoApp3 = new JLabel();
-		Image img6 = new ImageIcon(this.getClass().getResource(fondo))
-				.getImage();
-
-		fondoApp3.setIcon(new ImageIcon(img6.getScaledInstance(1132, 611,
-				Image.SCALE_DEFAULT)));
+		fondoApp3.setIcon(new ImageIcon(imagenFondoApp.getScaledInstance(1132,
+				611, Image.SCALE_DEFAULT)));
 		fondoApp3.setBounds(0, 0, 1132, 611);
 		menuPrincipal.add(fondoApp3);
-	
+
 		/**
 		 * FINAL DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
@@ -2038,9 +2036,7 @@ public class Aplicacion extends JFrame {
 
 		// Icono de la Aplicacion
 		JLabel IconoApp2 = new JLabel("");
-		Image img4 = new ImageIcon(this.getClass().getResource(
-				iconoApp)).getImage();
-		IconoApp2.setIcon(new ImageIcon(img4.getScaledInstance(319, 288,
+		IconoApp2.setIcon(new ImageIcon(imagenIcono.getScaledInstance(319, 288,
 				Image.SCALE_DEFAULT)));
 		IconoApp2.setBounds(372, 13, 319, 288);
 		identiAdmin.add(IconoApp2);
@@ -2121,20 +2117,20 @@ public class Aplicacion extends JFrame {
 					cardLayout.show(contentPane, "menuPrincipal");
 					cardMenu.show(pantallaMenu, "panelPrincipal");
 					cardAdmin.show(barraAdmin, "estadoIdentificado");
-					labelMenu.setText("MENï¿½ PRINCIPAL");
+					labelMenu.setText("MENÚ PRINCIPAL");
 					botonesEnBlanco(botonAvanzada, botonPrimeros,
 							botonSegundos, botonPostres, botonDestacados,
 							botonProponer, botonAyuda);
 				} else {
-					// Si la contraseï¿½a no es correcta informamos al usuario
+					// Si la contraseña no es correcta informamos al usuario
 					JOptionPane.showMessageDialog(identiAdmin,
-							"Contraseï¿½a INCORRECTA, intï¿½ntelo de nuevo.");
+							"Contraseña INCORRECTA, inténtelo de nuevo.");
 					passwordAdmin.setText("");
 				}
 			}
 		});
 
-		// Texto contraseï¿½a
+		// Texto contraseña
 		JLabel lblIntroduzcaLaContrasea = new JLabel(
 				"Introduzca la contrase\u00F1a de Administrador:");
 		lblIntroduzcaLaContrasea.setForeground(Color.BLACK);
@@ -2154,12 +2150,8 @@ public class Aplicacion extends JFrame {
 		botonVolver.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonVolver.setBounds(100, 516, 144, 51);
 		identiAdmin.add(botonVolver);
-		try {
-			Image img5 = ImageIO.read(getClass().getResource(ret));
-			botonVolver.setIcon(new ImageIcon(img5.getScaledInstance(20, 20,
-					Image.SCALE_DEFAULT)));
-		} catch (IOException ex) {
-		}
+		botonVolver.setIcon(new ImageIcon(imagenReturn.getScaledInstance(20,
+				20, Image.SCALE_DEFAULT)));
 
 		// Accion del boton de Volver
 		botonVolver.addActionListener(new ActionListener() {
@@ -2167,7 +2159,7 @@ public class Aplicacion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "menuPrincipal");
 				cardMenu.show(pantallaMenu, "panelPrincipal");
-				labelMenu.setText("MENï¿½ PRINCIPAL");
+				labelMenu.setText("MENÚ PRINCIPAL");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -2176,9 +2168,7 @@ public class Aplicacion extends JFrame {
 
 		// Fondo de la pantalla
 		JLabel fondoApp2 = new JLabel();
-		Image img5 = new ImageIcon(this.getClass().getResource(fondo))
-				.getImage();
-		fondoApp2.setIcon(new ImageIcon(img5.getScaledInstance(1132, 611,
+		fondoApp2.setIcon(new ImageIcon(imagenFondoApp.getScaledInstance(1132, 611,
 				Image.SCALE_DEFAULT)));
 		fondoApp2.setBounds(0, 0, 1132, 611);
 		identiAdmin.add(fondoApp2);

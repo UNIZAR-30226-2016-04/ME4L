@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'M4AL'
+rootProject.name = 'ME4L'
