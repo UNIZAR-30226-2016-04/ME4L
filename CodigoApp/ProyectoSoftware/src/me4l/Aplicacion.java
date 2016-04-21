@@ -1132,7 +1132,7 @@ public class Aplicacion extends JFrame {
 		botonBuscar_MR.setBackground(new Color(245, 245, 245));
 		botonBuscar_MR.setBounds(625, 15, 46, 34);
 		try {
-			Image img16 = ImageIO.read(getClass().getResource("/Search.png"));
+			Image img16 = ImageIO.read(getClass().getResource("/search.png"));
 			botonBuscar_MR.setIcon(new ImageIcon(img16.getScaledInstance(40,
 					40, Image.SCALE_DEFAULT)));
 		} catch (IOException ex) {
@@ -1454,7 +1454,7 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
+		
 		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_MR.addActionListener(new ActionListener() {
 
