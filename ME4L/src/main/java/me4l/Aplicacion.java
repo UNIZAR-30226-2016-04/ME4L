@@ -250,6 +250,7 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
+		/**
 		final JPanel menuPrincipal = new JPanel();
 		contentPane.add(menuPrincipal, "menuPrincipal");
 		menuPrincipal.setLayout(null);
@@ -2028,6 +2029,7 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DE IDENTIFICACION DE ADMINISTRADOR
 		 **/
+		/**
 		final JPanel identiAdmin = new JPanel();
 		contentPane.add(identiAdmin, "identiAdminentificacion");
 		identiAdmin.setLayout(null);
