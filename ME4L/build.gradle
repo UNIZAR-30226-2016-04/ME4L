@@ -7,5 +7,6 @@ repositories {
 }
 
 dependencies {
-    runtime fileTree(dir: 'lib', include: '*')
+    compile files('./lib/miglayout-src.zip')
+    compile files('./lib/mysql-connector-java-5.0.8-bin.jar')
 } 

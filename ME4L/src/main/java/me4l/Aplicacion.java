@@ -54,7 +54,7 @@ public class Aplicacion extends JFrame {
 	private JTextField textFieldCantidad_PR;
 	private JTextField textFieldCantidad_MR;
 	private RecetaVO recetaSeleccionada_MR = new RecetaVO();
-	// Array/cachÈ que guarda las recetas que el usuario tiene abiertas
+	// Array/cache que guarda las recetas que el usuario tiene abiertas
 	ArrayList<RecetaVO> recetasAbiertas = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> recetasModificar = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> recetasParaValidar = new ArrayList<RecetaVO>();
@@ -95,7 +95,7 @@ public class Aplicacion extends JFrame {
 		botonAyuda.setBackground(new Color(245, 245, 245));
 	}
 
-	// Metodo que comprueba si la contraseÒa es correcta
+	// Metodo que comprueba si la contrase√±a es correcta
 	private static boolean isPasswordCorrect(char[] input) {
 		boolean isCorrect = true;
 		char[] correctPassword = { 'f', 'a', 't', 'o', 'l', 'a', 'n', 'd' };
@@ -250,7 +250,6 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
-
 		final JPanel menuPrincipal = new JPanel();
 		contentPane.add(menuPrincipal, "menuPrincipal");
 		menuPrincipal.setLayout(null);
@@ -299,8 +298,8 @@ public class Aplicacion extends JFrame {
 		menuAdmin.setBounds(0, 0, 261, 30);
 		estadoIdentificado.add(menuAdmin);
 
-		// PestaÒa Menu Administrador
-		JMenu botonAdmin = new JMenu("Men˙ Administrador");
+		// Pesta√±a Menu Administrador
+		JMenu botonAdmin = new JMenu("Men√∫ Administrador");
 		botonAdmin.setHorizontalAlignment(SwingConstants.TRAILING);
 		botonAdmin.setFont(new Font("Calibri", Font.BOLD, 16));
 		botonAdmin.setBounds(0, 0, 261, 30);
@@ -310,8 +309,8 @@ public class Aplicacion extends JFrame {
 		JMenuItem botonValidar = new JMenuItem("Validar Receta");
 		botonAdmin.add(botonValidar);
 
-		// Boton aÒadir receta
-		JMenuItem botonAnyadir = new JMenuItem("AÒadir Receta");
+		// Boton a√±adir receta
+		JMenuItem botonAnyadir = new JMenuItem("A√±adir Receta");
 		botonAdmin.add(botonAnyadir);
 
 		// Boton modificar receta
@@ -557,8 +556,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_PR.setBounds(780, 160, 66, 23);
 		panelProponer.add(labelGramos2_PR);
 
-		// Boton aÒadir ingrediente
-		JButton botonAnyadirIngrediente_PR = new JButton("AÒadir Ingrediente");
+		// Boton a√±adir ingrediente
+		JButton botonAnyadirIngrediente_PR = new JButton("A√±adir Ingrediente");
 		botonAnyadirIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_PR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_PR.setBounds(465, 375, 180, 33);
@@ -571,7 +570,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_PR.setBounds(667, 375, 180, 33);
 		panelProponer.add(botonBorrarIngrediente_PR);
 
-		// Lista con los ingredientes aÒadidos
+		// Lista con los ingredientes a√±adidos
 		final List listaIngredientes_PR = new List();
 		listaIngredientes_PR.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_PR.setMultipleMode(false);
@@ -666,7 +665,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÒadir ingrediente
+		// Accion del boton de a√±adir ingrediente
 		botonAnyadirIngrediente_PR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -778,7 +777,7 @@ public class Aplicacion extends JFrame {
 		pantallaMenu.add(panelAyuda, "panelAyud");
 		panelAyuda.setLayout(null);
 
-		// Panel AÒadir Receta
+		// Panel A√±adir Receta
 		JPanel panelAnyadir = new JPanel();
 		panelAnyadir.setOpaque(false);
 		pantallaMenu.add(panelAnyadir, "panelAnyadir");
@@ -970,8 +969,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_A.setBounds(780, 160, 66, 23);
 		panelAnyadir.add(labelGramos2_A);
 
-		// Boton aÒadir ingrediente
-		JButton botonAnyadirIngrediente_A = new JButton("AÒadir Ingrediente");
+		// Boton a√±adir ingrediente
+		JButton botonAnyadirIngrediente_A = new JButton("A√±adir Ingrediente");
 		botonAnyadirIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_A.setBounds(465, 375, 180, 33);
@@ -984,7 +983,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_A.setBounds(667, 375, 180, 33);
 		panelAnyadir.add(botonBorrarIngrediente_A);
 
-		// Lista con los ingredientes aÒadidos
+		// Lista con los ingredientes a√±adidos
 		final List listaIngredientes_A = new List();
 		listaIngredientes_A.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_A.setMultipleMode(false);
@@ -1055,7 +1054,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÒadir ingrediente
+		// Accion del boton de a√±adir ingrediente
 		botonAnyadirIngrediente_A.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1086,7 +1085,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÒadir receta
+		// Accion del boton de a√±adir receta
 		botonEnviarPropuesta_A.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1130,7 +1129,7 @@ public class Aplicacion extends JFrame {
 								pesoIngredientes_A);
 
 						JOptionPane.showMessageDialog(menuPrincipal,
-								"La receta ha sido aÒadida.");
+								"La receta ha sido a√±adida.");
 						textFieldNombre_A.setText("");
 						comboBoxNumPersonas_A.setSelectedIndex(0);
 						textAreaDescripcion_A.setText("");
@@ -1417,8 +1416,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_MR.setBounds(780, 160, 66, 23);
 		panelModificarReceta.add(labelGramos2_MR);
 
-		// Boton aÒadir ingrediente
-		JButton botonAnyadirIngrediente_MR = new JButton("AÒadir Ingrediente");
+		// Boton a√±adir ingrediente
+		JButton botonAnyadirIngrediente_MR = new JButton("A√±adir Ingrediente");
 		botonAnyadirIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 18));
 		botonAnyadirIngrediente_MR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_MR.setBounds(465, 375, 180, 33);
@@ -1431,7 +1430,7 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_MR.setBounds(667, 375, 180, 33);
 		panelModificarReceta.add(botonBorrarIngrediente_MR);
 
-		// Lista con los ingredientes aÒadidos
+		// Lista con los ingredientes a√±adidos
 		final List listaIngredientes_MR = new List();
 		listaIngredientes_MR.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes_MR.setMultipleMode(false);
@@ -1502,7 +1501,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÒadir ingrediente
+		// Accion del boton de a√±adir ingrediente
 		botonAnyadirIngrediente_MR.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1731,7 +1730,7 @@ public class Aplicacion extends JFrame {
 					listaRecetasPendientesValidar_VR.remove(index);
 					recetasParaValidar.remove(index);
 					JOptionPane.showMessageDialog(menuPrincipal,
-							"La receta ha sido aÒadida.");
+							"La receta ha sido a√±adida.");
 				}
 			}
 		});
@@ -1783,7 +1782,7 @@ public class Aplicacion extends JFrame {
 		});
 
 		// Indicador textual del menu
-		final JLabel labelMenu = new JLabel("MEN⁄ PRINCIPAL");
+		final JLabel labelMenu = new JLabel("MEN√ö PRINCIPAL");
 		labelMenu.setForeground(new Color(255, 153, 0));
 		labelMenu.setFont(new Font("Bauhaus 93", Font.BOLD, 80));
 		labelMenu.setBounds(262, 12, 858, 162);
@@ -1824,7 +1823,7 @@ public class Aplicacion extends JFrame {
 		botonAvanzada.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("B⁄SQUEDA AVANZADA");
+				labelMenu.setText("B√öSQUEDA AVANZADA");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1915,7 +1914,7 @@ public class Aplicacion extends JFrame {
 		botonDestacados.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("M¡S DESTACADOS");
+				labelMenu.setText("M√ÅS DESTACADOS");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1972,7 +1971,7 @@ public class Aplicacion extends JFrame {
 		botonImagen.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("MEN⁄ PRINCIPAL");
+				labelMenu.setText("MEN√ö PRINCIPAL");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1992,11 +1991,11 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÒadir receta
+		// Accion del boton de a√±adir receta
 		botonAnyadir.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("A—ADIR RECETA");
+				labelMenu.setText("A√ëADIR RECETA");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -2029,7 +2028,6 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DE IDENTIFICACION DE ADMINISTRADOR
 		 **/
-
 		final JPanel identiAdmin = new JPanel();
 		contentPane.add(identiAdmin, "identiAdminentificacion");
 		identiAdmin.setLayout(null);
@@ -2117,20 +2115,20 @@ public class Aplicacion extends JFrame {
 					cardLayout.show(contentPane, "menuPrincipal");
 					cardMenu.show(pantallaMenu, "panelPrincipal");
 					cardAdmin.show(barraAdmin, "estadoIdentificado");
-					labelMenu.setText("MEN⁄ PRINCIPAL");
+					labelMenu.setText("MEN√ö PRINCIPAL");
 					botonesEnBlanco(botonAvanzada, botonPrimeros,
 							botonSegundos, botonPostres, botonDestacados,
 							botonProponer, botonAyuda);
 				} else {
-					// Si la contraseÒa no es correcta informamos al usuario
+					// Si la contrase√±a no es correcta informamos al usuario
 					JOptionPane.showMessageDialog(identiAdmin,
-							"ContraseÒa INCORRECTA, intÈntelo de nuevo.");
+							"Contrase√±a INCORRECTA, int√©ntelo de nuevo.");
 					passwordAdmin.setText("");
 				}
 			}
 		});
 
-		// Texto contraseÒa
+		// Texto contrase√±a
 		JLabel lblIntroduzcaLaContrasea = new JLabel(
 				"Introduzca la contrase\u00F1a de Administrador:");
 		lblIntroduzcaLaContrasea.setForeground(Color.BLACK);
@@ -2159,7 +2157,7 @@ public class Aplicacion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "menuPrincipal");
 				cardMenu.show(pantallaMenu, "panelPrincipal");
-				labelMenu.setText("MEN⁄ PRINCIPAL");
+				labelMenu.setText("MEN√ö PRINCIPAL");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
