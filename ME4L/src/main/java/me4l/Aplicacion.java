@@ -3,6 +3,7 @@ package me4l;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 
 import javax.imageio.ImageIO;
@@ -16,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -117,14 +119,23 @@ public class Aplicacion extends JFrame {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Aplicacion() {
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    Font[] fonts = ge.getAllFonts();
+
+	    for (int i = 0; i < fonts.length; i++) {
+	      System.out.print(fonts[i].getFontName() + " : ");
+	      System.out.print(fonts[i].getFamily() + " : ");
+	      System.out.print(fonts[i].getName());
+	      System.out.println();
+	    }
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
 		setBounds(100, 100, 1148, 656);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 		setResizable(false);
-
 		// Controlador de cambio de pantallas
 		final CardLayout cardLayout = (CardLayout) contentPane.getLayout();
 
@@ -152,10 +163,14 @@ public class Aplicacion extends JFrame {
 		JPanel inicio = new JPanel();
 		contentPane.add(inicio, "pantallaInicio");
 		inicio.setLayout(null);
-
 		// Nombre abreviado
 		JLabel lblMel1 = new JLabel("ME4L");
-		lblMel1.setFont(new Font("Bauhaus 93", Font.BOLD, 84));
+		Font f =new Font("Bauhaus 93", Font.BOLD, 84);
+		if(!f.getFamily().equals("Bauhaus 93")){
+			f =new Font("Dialog.italic", Font.BOLD, 60);
+		}
+		lblMel1.setFont(f);
+		
 		lblMel1.setBounds(438, 266, 211, 162);
 		inicio.add(lblMel1);
 
@@ -186,8 +201,12 @@ public class Aplicacion extends JFrame {
 		// M
 		JLabel labelTitulo1 = new JLabel("M");
 		labelTitulo1.setForeground(new Color(255, 153, 0));
+		f =new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38);
+		if(!f.getFamily().equals("Bauhaus 93")){
+			f =new Font("Dialog.italic", Font.BOLD, 35);
+		}
 		labelTitulo1
-				.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+				.setFont(f);
 		labelTitulo1.setBounds(312, 371, 37, 86);
 		inicio.add(labelTitulo1);
 
@@ -200,13 +219,14 @@ public class Aplicacion extends JFrame {
 		// E
 		JLabel lblE1 = new JLabel("E");
 		lblE1.setForeground(new Color(255, 153, 0));
+		
 		lblE1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
 		lblE1.setBounds(385, 371, 37, 86);
 		inicio.add(lblE1);
 
 		// lection
 		JLabel lblMy1 = new JLabel("lection");
-		lblMy1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblMy1.setFont(f);
 		lblMy1.setBounds(406, 371, 138, 86);
 		inicio.add(lblMy1);
 
@@ -226,13 +246,14 @@ public class Aplicacion extends JFrame {
 		// L
 		JLabel lblL1 = new JLabel("L");
 		lblL1.setForeground(new Color(255, 153, 0));
-		lblL1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		
+		lblL1.setFont(f);
 		lblL1.setBounds(642, 371, 23, 86);
 		inicio.add(lblL1);
 
 		// unch
 		JLabel lblUnch1 = new JLabel("unch");
-		lblUnch1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblUnch1.setFont(f);
 		lblUnch1.setBounds(661, 371, 100, 86);
 		inicio.add(lblUnch1);
 
@@ -250,7 +271,6 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
-		/**
 		final JPanel menuPrincipal = new JPanel();
 		contentPane.add(menuPrincipal, "menuPrincipal");
 		menuPrincipal.setLayout(null);
@@ -276,7 +296,11 @@ public class Aplicacion extends JFrame {
 		JButton botonIdentificate = new JButton(
 				"Identificate como Administrador");
 		botonIdentificate.setBackground(new Color(245, 245, 245));
-		botonIdentificate.setFont(new Font("Calibri", Font.BOLD, 16));
+		f =new Font("Calibri", Font.BOLD, 16);
+		if(!f.getFamily().equals("Calibri")){
+			f =new Font("gargi", Font.BOLD, 12);
+		}
+		botonIdentificate.setFont(f);
 		botonIdentificate.setBounds(0, 0, 261, 30);
 		estadoSinIdentificar.add(botonIdentificate);
 
@@ -369,6 +393,21 @@ public class Aplicacion extends JFrame {
 		panelProponer.setOpaque(false);
 		pantallaMenu.add(panelProponer, "panelProponer");
 		panelProponer.setLayout(null);
+		
+		f = new Font("Calibri", Font.BOLD, 18);
+		if(!f.getFamily().equals("Calibri")){
+			f = new Font ("Dialog.Italic",Font.BOLD, 14);
+		}
+		
+		Font f1 = new Font("Calibri", Font.BOLD, 15);
+		if(!f1.getFamily().equals("Calibri")){
+			f1 = new Font ("Dialog.Italic",Font.BOLD, 12);
+		}
+		
+		Font f2 = new Font("Calibri", Font.BOLD, 23);
+		if(!f2.getFamily().equals("Calibri")){
+			f2 = new Font ("Dialog.Italic",Font.BOLD, 18);
+		}
 
 		// ComboBox del numero de personas
 		final JComboBox comboBoxNumPersonas_PR = new JComboBox();
@@ -376,7 +415,7 @@ public class Aplicacion extends JFrame {
 		comboBoxNumPersonas_PR.setModel(new DefaultComboBoxModel(new String[] {
 				"-- Seleccione el n\u00FAmero de personas --", "1", "2", "4",
 				"8" }));
-		comboBoxNumPersonas_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxNumPersonas_PR.setFont(f1);
 		panelProponer.add(comboBoxNumPersonas_PR);
 		comboBoxNumPersonas_PR.setLightWeightPopupEnabled(false);
 
@@ -384,21 +423,21 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_PR = new JComboBox();
 		comboBoxIngrediente_PR.setModel(new DefaultComboBoxModel(
 				new String[] { "- Seleccione el ingrediente -" }));
-		comboBoxIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxIngrediente_PR.setFont(f1);
 		comboBoxIngrediente_PR.setBounds(631, 124, 204, 22);
 		panelProponer.add(comboBoxIngrediente_PR);
 		comboBoxIngrediente_PR.setLightWeightPopupEnabled(false);
 
 		JLabel labelAsterisco1_PR = new JLabel("*");
 		labelAsterisco1_PR.setForeground(Color.RED);
-		labelAsterisco1_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco1_PR.setFont(f);
 		labelAsterisco1_PR.setBounds(442, 15, 19, 16);
 		panelProponer.add(labelAsterisco1_PR);
 
 		// Text field del nombre de la receta
 		textFieldNombre_PR = new JTextField();
 		textFieldNombre_PR.setBounds(171, 13, 272, 22);
-		textFieldNombre_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldNombre_PR.setFont(f1);
 		textFieldNombre_PR.setToolTipText("Introduzca el nombre de la receta.");
 		panelProponer.add(textFieldNombre_PR);
 		textFieldNombre_PR.setColumns(10);
@@ -408,7 +447,7 @@ public class Aplicacion extends JFrame {
 		comboBoxIngPrinc_PR.setBounds(631, 13, 204, 22);
 		comboBoxIngPrinc_PR.setModel(new DefaultComboBoxModel(
 				new String[] { "- Seleccione el ingrediente -" }));
-		comboBoxIngPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxIngPrinc_PR.setFont(f1);
 		panelProponer.add(comboBoxIngPrinc_PR);
 		comboBoxIngPrinc_PR.setLightWeightPopupEnabled(false);
 
@@ -422,28 +461,28 @@ public class Aplicacion extends JFrame {
 		JLabel labelNombre_PR = new JLabel("Nombre de la receta:");
 		labelNombre_PR.setBounds(0, 12, 174, 23);
 		labelNombre_PR.setForeground(Color.WHITE);
-		labelNombre_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNombre_PR.setFont(f);
 		panelProponer.add(labelNombre_PR);
 
 		// Label del ingrediente principal
 		JLabel labelIngPrinc_PR = new JLabel("Ingrediente Principal:");
 		labelIngPrinc_PR.setBounds(465, 12, 174, 23);
 		labelIngPrinc_PR.setForeground(Color.WHITE);
-		labelIngPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngPrinc_PR.setFont(f);
 		panelProponer.add(labelIngPrinc_PR);
 
 		// Label del numero de personas
 		JLabel labelNumPersonas_PR = new JLabel("N\u00FAmero de personas:");
 		labelNumPersonas_PR.setBounds(0, 48, 174, 23);
 		labelNumPersonas_PR.setForeground(Color.WHITE);
-		labelNumPersonas_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNumPersonas_PR.setFont(f);
 		panelProponer.add(labelNumPersonas_PR);
 
 		// Label de la URL de la imagen
 		JLabel labelTipo_PR = new JLabel("Tipo de plato:");
 		labelTipo_PR.setBounds(0, 84, 174, 23);
 		labelTipo_PR.setForeground(Color.WHITE);
-		labelTipo_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelTipo_PR.setFont(f);
 		panelProponer.add(labelTipo_PR);
 
 		// Label descripcion de la receta
@@ -451,14 +490,14 @@ public class Aplicacion extends JFrame {
 				"Descripci\u00F3n de la receta:");
 		labelDescripcion_PR.setBounds(0, 123, 207, 23);
 		labelDescripcion_PR.setForeground(Color.WHITE);
-		labelDescripcion_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelDescripcion_PR.setFont(f);
 		panelProponer.add(labelDescripcion_PR);
 
 		// Label Otros ingredientes
 		JLabel labelIngredientes_PR = new JLabel("Otros inredientes:");
 		labelIngredientes_PR.setBounds(465, 99, 174, 23);
 		labelIngredientes_PR.setForeground(Color.WHITE);
-		labelIngredientes_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngredientes_PR.setFont(f);
 		panelProponer.add(labelIngredientes_PR);
 
 		// Separador Vertical
@@ -475,14 +514,14 @@ public class Aplicacion extends JFrame {
 		// Label cantidad del ingrediente principal
 		JLabel labelCantidadPrinc_PR = new JLabel("Cantidad:");
 		labelCantidadPrinc_PR.setForeground(Color.WHITE);
-		labelCantidadPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidadPrinc_PR.setFont(f);
 		labelCantidadPrinc_PR.setBounds(553, 48, 91, 23);
 		panelProponer.add(labelCantidadPrinc_PR);
 
 		// Label gramos
 		JLabel labelGramos_PR = new JLabel("gramos");
 		labelGramos_PR.setForeground(Color.WHITE);
-		labelGramos_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos_PR.setFont(f);
 		labelGramos_PR.setBounds(780, 48, 66, 23);
 		panelProponer.add(labelGramos_PR);
 
@@ -497,20 +536,20 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidadPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldCantidadPrinc_PR.setFont(f1);
 		textFieldCantidadPrinc_PR.setBounds(631, 48, 137, 22);
 		panelProponer.add(textFieldCantidadPrinc_PR);
 		textFieldCantidadPrinc_PR.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
 		final TextArea textAreaDescripcion_PR = new TextArea();
-		textAreaDescripcion_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textAreaDescripcion_PR.setFont(f1);
 		textAreaDescripcion_PR.setBounds(0, 152, 440, 180);
 		panelProponer.add(textAreaDescripcion_PR);
 
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
-		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 22));
+		botonEnviarPropuesta_PR.setFont(f);
 		botonEnviarPropuesta_PR.setBackground(new Color(173, 255, 47));
 		botonEnviarPropuesta_PR.setBounds(0, 338, 272, 60);
 		panelProponer.add(botonEnviarPropuesta_PR);
@@ -524,14 +563,14 @@ public class Aplicacion extends JFrame {
 		// Label ingrediente
 		JLabel labelIngrediente_PR = new JLabel("Ingrediente:");
 		labelIngrediente_PR.setForeground(Color.WHITE);
-		labelIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngrediente_PR.setFont(f);
 		labelIngrediente_PR.setBounds(535, 123, 117, 23);
 		panelProponer.add(labelIngrediente_PR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_PR = new JLabel("Cantidad:");
 		labelCantidad_PR.setForeground(Color.WHITE);
-		labelCantidad_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidad_PR.setFont(f);
 		labelCantidad_PR.setBounds(553, 160, 91, 23);
 		panelProponer.add(labelCantidad_PR);
 
@@ -545,7 +584,7 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidad_PR.setFont(new Font("Calibri", Font.BOLD, 16));
+		textFieldCantidad_PR.setFont(f1);
 		textFieldCantidad_PR.setColumns(10);
 		textFieldCantidad_PR.setBounds(631, 160, 137, 22);
 		panelProponer.add(textFieldCantidad_PR);
@@ -553,58 +592,58 @@ public class Aplicacion extends JFrame {
 		// Label gramos 2
 		JLabel labelGramos2_PR = new JLabel("gramos");
 		labelGramos2_PR.setForeground(Color.WHITE);
-		labelGramos2_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos2_PR.setFont(f);
 		labelGramos2_PR.setBounds(780, 160, 66, 23);
 		panelProponer.add(labelGramos2_PR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_PR = new JButton("Añadir Ingrediente");
-		botonAnyadirIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonAnyadirIngrediente_PR.setFont(f1);
 		botonAnyadirIngrediente_PR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_PR.setBounds(465, 375, 180, 33);
 		panelProponer.add(botonAnyadirIngrediente_PR);
 
 		// Boton borrar ingrediente
 		JButton botonBorrarIngrediente_PR = new JButton("Borrar Ingrediente");
-		botonBorrarIngrediente_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonBorrarIngrediente_PR.setFont(f1);
 		botonBorrarIngrediente_PR.setBackground(new Color(245, 245, 245));
 		botonBorrarIngrediente_PR.setBounds(667, 375, 180, 33);
 		panelProponer.add(botonBorrarIngrediente_PR);
 
 		// Lista con los ingredientes añadidos
 		final List listaIngredientes_PR = new List();
-		listaIngredientes_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		listaIngredientes_PR.setFont(f1);
 		listaIngredientes_PR.setMultipleMode(false);
 		listaIngredientes_PR.setBounds(465, 192, 383, 174);
 		panelProponer.add(listaIngredientes_PR);
 
 		JLabel labelAsterisco2_PR = new JLabel("*");
 		labelAsterisco2_PR.setForeground(Color.RED);
-		labelAsterisco2_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco2_PR.setFont(f);
 		labelAsterisco2_PR.setBounds(442, 48, 19, 16);
 		panelProponer.add(labelAsterisco2_PR);
 
 		JLabel labelAsterisco3_PR = new JLabel("*");
 		labelAsterisco3_PR.setForeground(Color.RED);
-		labelAsterisco3_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco3_PR.setFont(f);
 		labelAsterisco3_PR.setBounds(442, 141, 19, 16);
 		panelProponer.add(labelAsterisco3_PR);
 
 		JLabel labelAsterisco4_PR = new JLabel("*");
 		labelAsterisco4_PR.setForeground(Color.RED);
-		labelAsterisco4_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco4_PR.setFont(f);
 		labelAsterisco4_PR.setBounds(839, 15, 19, 16);
 		panelProponer.add(labelAsterisco4_PR);
 
 		JLabel labelAsterisco5_PR = new JLabel("*");
 		labelAsterisco5_PR.setForeground(Color.RED);
-		labelAsterisco5_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco5_PR.setFont(f);
 		labelAsterisco5_PR.setBounds(839, 50, 19, 16);
 		panelProponer.add(labelAsterisco5_PR);
 
 		JLabel labelCampoObligatorio_PR = new JLabel("* Campo obligatorio");
 		labelCampoObligatorio_PR.setForeground(Color.RED);
-		labelCampoObligatorio_PR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCampoObligatorio_PR.setFont(f);
 		labelCampoObligatorio_PR.setBounds(0, 404, 174, 16);
 		panelProponer.add(labelCampoObligatorio_PR);
 
@@ -613,20 +652,20 @@ public class Aplicacion extends JFrame {
 		comboBoxTipo_PR.setModel(new DefaultComboBoxModel(new String[] {
 				"-- Seleccione el tipo de plato --", "Primero", "Segundo",
 				"Postre" }));
-		comboBoxTipo_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxTipo_PR.setFont(f1);
 		comboBoxTipo_PR.setBounds(171, 84, 272, 22);
 		panelProponer.add(comboBoxTipo_PR);
 		comboBoxTipo_PR.setLightWeightPopupEnabled(false);
 
 		JLabel label = new JLabel("*");
 		label.setForeground(Color.RED);
-		label.setFont(new Font("Calibri", Font.BOLD, 18));
+		label.setFont(f);
 		label.setBounds(442, 77, 19, 16);
 		panelProponer.add(label);
 
 		// Boton de cancelar receta
 		JButton botonCancelarReceta_PR = new JButton("Cancelar");
-		botonCancelarReceta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonCancelarReceta_PR.setFont(f2);
 		botonCancelarReceta_PR.setBackground(new Color(245, 245, 245));
 		botonCancelarReceta_PR.setBounds(284, 338, 155, 60);
 		panelProponer.add(botonCancelarReceta_PR);
@@ -790,7 +829,7 @@ public class Aplicacion extends JFrame {
 		comboBoxNumPersonas_A.setModel(new DefaultComboBoxModel(new String[] {
 				"-- Seleccione el n\u00FAmero de personas --", "1", "2", "4",
 				"8" }));
-		comboBoxNumPersonas_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxNumPersonas_A.setFont(f1);
 		panelAnyadir.add(comboBoxNumPersonas_A);
 		comboBoxNumPersonas_A.setLightWeightPopupEnabled(false);
 
@@ -798,21 +837,21 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_A = new JComboBox();
 		comboBoxIngrediente_A.setModel(new DefaultComboBoxModel(
 				new String[] { "- Seleccione el ingrediente -" }));
-		comboBoxIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxIngrediente_A.setFont(f1);
 		comboBoxIngrediente_A.setBounds(631, 124, 204, 22);
 		panelAnyadir.add(comboBoxIngrediente_A);
 		comboBoxIngrediente_A.setLightWeightPopupEnabled(false);
 
 		JLabel labelAsterisco1_A = new JLabel("*");
 		labelAsterisco1_A.setForeground(Color.RED);
-		labelAsterisco1_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco1_A.setFont(f);
 		labelAsterisco1_A.setBounds(442, 15, 19, 16);
 		panelAnyadir.add(labelAsterisco1_A);
 
 		// Text field del nombre de la receta
 		textFieldNombre_A = new JTextField();
 		textFieldNombre_A.setBounds(171, 13, 272, 22);
-		textFieldNombre_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldNombre_A.setFont(f1);
 		textFieldNombre_A.setToolTipText("Introduzca el nombre de la receta.");
 		panelAnyadir.add(textFieldNombre_A);
 		textFieldNombre_A.setColumns(10);
@@ -822,7 +861,7 @@ public class Aplicacion extends JFrame {
 		comboBoxIngPrinc_A.setBounds(631, 13, 204, 22);
 		comboBoxIngPrinc_A.setModel(new DefaultComboBoxModel(
 				new String[] { "- Seleccione el ingrediente -" }));
-		comboBoxIngPrinc_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxIngPrinc_A.setFont(f1);
 		panelAnyadir.add(comboBoxIngPrinc_A);
 		comboBoxIngPrinc_A.setLightWeightPopupEnabled(false);
 
@@ -836,42 +875,42 @@ public class Aplicacion extends JFrame {
 		JLabel labelNombre_A = new JLabel("Nombre de la receta:");
 		labelNombre_A.setBounds(0, 12, 174, 23);
 		labelNombre_A.setForeground(Color.WHITE);
-		labelNombre_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNombre_A.setFont(f);
 		panelAnyadir.add(labelNombre_A);
 
 		// Label del ingrediente principal
 		JLabel labelIngPrinc_A = new JLabel("Ingrediente Principal:");
 		labelIngPrinc_A.setBounds(465, 12, 174, 23);
 		labelIngPrinc_A.setForeground(Color.WHITE);
-		labelIngPrinc_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngPrinc_A.setFont(f);
 		panelAnyadir.add(labelIngPrinc_A);
 
 		// Label del numero de personas
 		JLabel labelNumPersonas_A = new JLabel("N\u00FAmero de personas:");
 		labelNumPersonas_A.setBounds(0, 48, 174, 23);
 		labelNumPersonas_A.setForeground(Color.WHITE);
-		labelNumPersonas_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNumPersonas_A.setFont(f);
 		panelAnyadir.add(labelNumPersonas_A);
 
 		// Label del tipo de plato
 		JLabel labelTipo_A = new JLabel("Tipo de plato:");
 		labelTipo_A.setBounds(0, 84, 174, 23);
 		labelTipo_A.setForeground(Color.WHITE);
-		labelTipo_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelTipo_A.setFont(f);
 		panelAnyadir.add(labelTipo_A);
 
 		// Label descripcion de la receta
 		JLabel labelDescripcion_A = new JLabel("Descripci\u00F3n de la receta:");
 		labelDescripcion_A.setBounds(0, 123, 207, 23);
 		labelDescripcion_A.setForeground(Color.WHITE);
-		labelDescripcion_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelDescripcion_A.setFont(f);
 		panelAnyadir.add(labelDescripcion_A);
 
 		// Label Otros ingredientes
 		JLabel labelIngredientes_A = new JLabel("Otros inredientes:");
 		labelIngredientes_A.setBounds(465, 99, 174, 23);
 		labelIngredientes_A.setForeground(Color.WHITE);
-		labelIngredientes_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngredientes_A.setFont(f);
 		panelAnyadir.add(labelIngredientes_A);
 
 		// Separador Vertical
@@ -888,14 +927,14 @@ public class Aplicacion extends JFrame {
 		// Label cantidad del ingrediente principal
 		JLabel labelCantidadPrinc_A = new JLabel("Cantidad:");
 		labelCantidadPrinc_A.setForeground(Color.WHITE);
-		labelCantidadPrinc_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidadPrinc_A.setFont(f);
 		labelCantidadPrinc_A.setBounds(553, 48, 91, 23);
 		panelAnyadir.add(labelCantidadPrinc_A);
 
 		// Label gramos
 		JLabel labelGramos_A = new JLabel("gramos");
 		labelGramos_A.setForeground(Color.WHITE);
-		labelGramos_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos_A.setFont(f);
 		labelGramos_A.setBounds(780, 48, 66, 23);
 		panelAnyadir.add(labelGramos_A);
 
@@ -910,20 +949,20 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidadPrinc_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldCantidadPrinc_A.setFont(f1);
 		textFieldCantidadPrinc_A.setBounds(631, 48, 137, 22);
 		panelAnyadir.add(textFieldCantidadPrinc_A);
 		textFieldCantidadPrinc_A.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
 		final TextArea textAreaDescripcion_A = new TextArea();
-		textAreaDescripcion_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		textAreaDescripcion_A.setFont(f1);
 		textAreaDescripcion_A.setBounds(0, 152, 440, 180);
 		panelAnyadir.add(textAreaDescripcion_A);
 
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_A = new JButton("A\u00D1ADIR RECETA");
-		botonEnviarPropuesta_A.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonEnviarPropuesta_A.setFont(f2);
 		botonEnviarPropuesta_A.setBackground(new Color(173, 255, 47));
 		botonEnviarPropuesta_A.setBounds(85, 338, 281, 60);
 		panelAnyadir.add(botonEnviarPropuesta_A);
@@ -937,14 +976,14 @@ public class Aplicacion extends JFrame {
 		// Label ingrediente
 		JLabel labelIngrediente_A = new JLabel("Ingrediente:");
 		labelIngrediente_A.setForeground(Color.WHITE);
-		labelIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngrediente_A.setFont(f);
 		labelIngrediente_A.setBounds(535, 123, 117, 23);
 		panelAnyadir.add(labelIngrediente_A);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_A = new JLabel("Cantidad:");
 		labelCantidad_A.setForeground(Color.WHITE);
-		labelCantidad_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidad_A.setFont(f);
 		labelCantidad_A.setBounds(553, 160, 91, 23);
 		panelAnyadir.add(labelCantidad_A);
 
@@ -958,7 +997,7 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidad_A.setFont(new Font("Calibri", Font.BOLD, 16));
+		textFieldCantidad_A.setFont(f1);
 		textFieldCantidad_A.setColumns(10);
 		textFieldCantidad_A.setBounds(631, 160, 137, 22);
 		panelAnyadir.add(textFieldCantidad_A);
@@ -966,58 +1005,58 @@ public class Aplicacion extends JFrame {
 		// Label gramos 2
 		JLabel labelGramos2_A = new JLabel("gramos");
 		labelGramos2_A.setForeground(Color.WHITE);
-		labelGramos2_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos2_A.setFont(f);
 		labelGramos2_A.setBounds(780, 160, 66, 23);
 		panelAnyadir.add(labelGramos2_A);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_A = new JButton("Añadir Ingrediente");
-		botonAnyadirIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonAnyadirIngrediente_A.setFont(f1);
 		botonAnyadirIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_A.setBounds(465, 375, 180, 33);
 		panelAnyadir.add(botonAnyadirIngrediente_A);
 
 		// Boton borrar ingrediente
 		JButton botonBorrarIngrediente_A = new JButton("Borrar Ingrediente");
-		botonBorrarIngrediente_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonBorrarIngrediente_A.setFont(f1);
 		botonBorrarIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonBorrarIngrediente_A.setBounds(667, 375, 180, 33);
 		panelAnyadir.add(botonBorrarIngrediente_A);
 
 		// Lista con los ingredientes añadidos
 		final List listaIngredientes_A = new List();
-		listaIngredientes_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		listaIngredientes_A.setFont(f1);
 		listaIngredientes_A.setMultipleMode(false);
 		listaIngredientes_A.setBounds(465, 192, 383, 174);
 		panelAnyadir.add(listaIngredientes_A);
 
 		JLabel labelAsterisco2_A = new JLabel("*");
 		labelAsterisco2_A.setForeground(Color.RED);
-		labelAsterisco2_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco2_A.setFont(f);
 		labelAsterisco2_A.setBounds(442, 48, 19, 16);
 		panelAnyadir.add(labelAsterisco2_A);
 
 		JLabel labelAsterisco3_A = new JLabel("*");
 		labelAsterisco3_A.setForeground(Color.RED);
-		labelAsterisco3_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco3_A.setFont(f);
 		labelAsterisco3_A.setBounds(442, 141, 19, 16);
 		panelAnyadir.add(labelAsterisco3_A);
 
 		JLabel labelAsterisco4_A = new JLabel("*");
 		labelAsterisco4_A.setForeground(Color.RED);
-		labelAsterisco4_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco4_A.setFont(f);
 		labelAsterisco4_A.setBounds(839, 15, 19, 16);
 		panelAnyadir.add(labelAsterisco4_A);
 
 		JLabel labelAsterisco5_A = new JLabel("*");
 		labelAsterisco5_A.setForeground(Color.RED);
-		labelAsterisco5_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco5_A.setFont(f);
 		labelAsterisco5_A.setBounds(839, 50, 19, 16);
 		panelAnyadir.add(labelAsterisco5_A);
 
 		JLabel labelCampoObligatorio_A = new JLabel("* Campo obligatorio");
 		labelCampoObligatorio_A.setForeground(Color.RED);
-		labelCampoObligatorio_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCampoObligatorio_A.setFont(f);
 		labelCampoObligatorio_A.setBounds(0, 404, 174, 16);
 		panelAnyadir.add(labelCampoObligatorio_A);
 
@@ -1026,14 +1065,14 @@ public class Aplicacion extends JFrame {
 		comboBoxTipo_A.setModel(new DefaultComboBoxModel(new String[] {
 				"-- Seleccione el tipo de plato --", "Primero", "Segundo",
 				"Postre" }));
-		comboBoxTipo_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxTipo_A.setFont(f1);
 		comboBoxTipo_A.setBounds(171, 84, 272, 22);
 		panelAnyadir.add(comboBoxTipo_A);
 		comboBoxTipo_A.setLightWeightPopupEnabled(false);
 
 		JLabel labelAsterisco6_A = new JLabel("*");
 		labelAsterisco6_A.setForeground(Color.RED);
-		labelAsterisco6_A.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco6_A.setFont(f);
 		labelAsterisco6_A.setBounds(442, 77, 19, 16);
 		panelAnyadir.add(labelAsterisco6_A);
 
@@ -1161,7 +1200,7 @@ public class Aplicacion extends JFrame {
 
 		// TextField Busqueda Modificar Receta
 		textFieldBusqueda_MR = new JTextField();
-		textFieldBusqueda_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldBusqueda_MR.setFont(f1);
 		textFieldBusqueda_MR.setBounds(12, 13, 596, 36);
 		panelModificar.add(textFieldBusqueda_MR);
 		textFieldBusqueda_MR.setColumns(10);
@@ -1174,7 +1213,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Buscar Modificar Receta
 		JButton botonBuscar_MR = new JButton("");
-		botonBuscar_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonBuscar_MR.setFont(f);
 		botonBuscar_MR.setBackground(new Color(245, 245, 245));
 		botonBuscar_MR.setBounds(625, 15, 46, 34);
 		botonBuscar_MR.setIcon(new ImageIcon(imagenSearch.getScaledInstance(40,
@@ -1193,23 +1232,27 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
+		f = new Font("Calibri", Font.BOLD, 23);
+		if(!f.getFamily().equals("Calibri")){
+			f = new Font ("Dialog.Italic",Font.BOLD, 18);
+		}
 		// Boton ver receta seleccionada modificar receta
 		JButton botonVerReceta_MR = new JButton("Ver Receta");
-		botonVerReceta_MR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonVerReceta_MR.setFont(f);
 		botonVerReceta_MR.setBackground(new Color(245, 245, 245));
 		botonVerReceta_MR.setBounds(626, 72, 220, 60);
 		panelModificar.add(botonVerReceta_MR);
 
 		// Boton Modificar Receta seleccionada
 		JButton botonModificar_MR = new JButton("Modificar Receta");
-		botonModificar_MR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonModificar_MR.setFont(f);
 		botonModificar_MR.setBackground(new Color(173, 255, 47));
 		botonModificar_MR.setBounds(625, 198, 221, 60);
 		panelModificar.add(botonModificar_MR);
 
 		// Boton borrar receta seleccionada
 		JButton botonBorrar_MR = new JButton("Borrar Receta");
-		botonBorrar_MR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonBorrar_MR.setFont(f);
 		botonBorrar_MR.setBackground(new Color(255, 127, 80));
 		botonBorrar_MR.setBounds(625, 348, 221, 60);
 		panelModificar.add(botonBorrar_MR);
@@ -1285,32 +1328,47 @@ public class Aplicacion extends JFrame {
 			comboBoxIngPrinc_MR.addItem(ingredientesAplicacion.get(i));
 		}
 
+		f = new Font("Calibri", Font.BOLD, 18);
+		if(!f.getFamily().equals("Calibri")){
+			f = new Font ("Dialog.Italic",Font.BOLD, 14);
+		}
+		
+		f1 = new Font("Calibri", Font.BOLD, 15);
+		if(!f1.getFamily().equals("Calibri")){
+			f1 = new Font ("Dialog.Italic",Font.BOLD, 12);
+		}
+		
+		f2 = new Font("Calibri", Font.BOLD, 23);
+		if(!f2.getFamily().equals("Calibri")){
+			f2 = new Font ("Dialog.Italic",Font.BOLD, 18);
+		}
+		
 		// Label del nombre de la receta
 		JLabel labelNombre_MR = new JLabel("Nombre de la receta:");
 		labelNombre_MR.setBounds(0, 12, 174, 23);
 		labelNombre_MR.setForeground(Color.WHITE);
-		labelNombre_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNombre_MR.setFont(f);
 		panelModificarReceta.add(labelNombre_MR);
 
 		// Label del ingrediente principal
 		JLabel labelIngPrinc_MR = new JLabel("Ingrediente Principal:");
 		labelIngPrinc_MR.setBounds(465, 12, 174, 23);
 		labelIngPrinc_MR.setForeground(Color.WHITE);
-		labelIngPrinc_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngPrinc_MR.setFont(f);
 		panelModificarReceta.add(labelIngPrinc_MR);
 
 		// Label del numero de personas
 		JLabel labelNumPersonas_MR = new JLabel("N\u00FAmero de personas:");
 		labelNumPersonas_MR.setBounds(0, 48, 174, 23);
 		labelNumPersonas_MR.setForeground(Color.WHITE);
-		labelNumPersonas_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelNumPersonas_MR.setFont(f);
 		panelModificarReceta.add(labelNumPersonas_MR);
 
 		// Label del tipo de plato
 		JLabel labelTipo_MR = new JLabel("Tipo de plato:");
 		labelTipo_MR.setBounds(0, 84, 174, 23);
 		labelTipo_MR.setForeground(Color.WHITE);
-		labelTipo_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelTipo_MR.setFont(f);
 		panelModificarReceta.add(labelTipo_MR);
 
 		// Label descripcion de la receta
@@ -1318,14 +1376,14 @@ public class Aplicacion extends JFrame {
 				"Descripci\u00F3n de la receta:");
 		labelDescripcion_MR.setBounds(0, 123, 207, 23);
 		labelDescripcion_MR.setForeground(Color.WHITE);
-		labelDescripcion_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelDescripcion_MR.setFont(f);
 		panelModificarReceta.add(labelDescripcion_MR);
 
 		// Label Otros ingredientes
 		JLabel labelIngredientes_MR = new JLabel("Otros inredientes:");
 		labelIngredientes_MR.setBounds(465, 99, 174, 23);
 		labelIngredientes_MR.setForeground(Color.WHITE);
-		labelIngredientes_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngredientes_MR.setFont(f);
 		panelModificarReceta.add(labelIngredientes_MR);
 
 		// Separador Vertical
@@ -1342,14 +1400,14 @@ public class Aplicacion extends JFrame {
 		// Label cantidad del ingrediente principal
 		JLabel labelCantidadPrinc_MR = new JLabel("Cantidad:");
 		labelCantidadPrinc_MR.setForeground(Color.WHITE);
-		labelCantidadPrinc_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidadPrinc_MR.setFont(f);
 		labelCantidadPrinc_MR.setBounds(553, 48, 91, 23);
 		panelModificarReceta.add(labelCantidadPrinc_MR);
 
 		// Label gramos
 		JLabel labelGramos_MR = new JLabel("gramos");
 		labelGramos_MR.setForeground(Color.WHITE);
-		labelGramos_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos_MR.setFont(f);
 		labelGramos_MR.setBounds(780, 48, 66, 23);
 		panelModificarReceta.add(labelGramos_MR);
 
@@ -1364,14 +1422,14 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidadPrinc_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldCantidadPrinc_MR.setFont(f);
 		textFieldCantidadPrinc_MR.setBounds(631, 48, 137, 22);
 		panelModificarReceta.add(textFieldCantidadPrinc_MR);
 		textFieldCantidadPrinc_MR.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
 		final TextArea textAreaDescripcion_MR = new TextArea();
-		textAreaDescripcion_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		textAreaDescripcion_MR.setFont(f);
 		textAreaDescripcion_MR.setBounds(0, 152, 440, 180);
 		panelModificarReceta.add(textAreaDescripcion_MR);
 
@@ -1384,14 +1442,14 @@ public class Aplicacion extends JFrame {
 		// Label ingrediente
 		JLabel labelIngrediente_MR = new JLabel("Ingrediente:");
 		labelIngrediente_MR.setForeground(Color.WHITE);
-		labelIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelIngrediente_MR.setFont(f);
 		labelIngrediente_MR.setBounds(535, 123, 117, 23);
 		panelModificarReceta.add(labelIngrediente_MR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_MR = new JLabel("Cantidad:");
 		labelCantidad_MR.setForeground(Color.WHITE);
-		labelCantidad_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCantidad_MR.setFont(f);
 		labelCantidad_MR.setBounds(553, 160, 91, 23);
 		panelModificarReceta.add(labelCantidad_MR);
 
@@ -1405,7 +1463,7 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-		textFieldCantidad_MR.setFont(new Font("Calibri", Font.BOLD, 16));
+		textFieldCantidad_MR.setFont(f);
 		textFieldCantidad_MR.setColumns(10);
 		textFieldCantidad_MR.setBounds(631, 160, 137, 22);
 		panelModificarReceta.add(textFieldCantidad_MR);
@@ -1413,20 +1471,20 @@ public class Aplicacion extends JFrame {
 		// Label gramos 2
 		JLabel labelGramos2_MR = new JLabel("gramos");
 		labelGramos2_MR.setForeground(Color.WHITE);
-		labelGramos2_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelGramos2_MR.setFont(f);
 		labelGramos2_MR.setBounds(780, 160, 66, 23);
 		panelModificarReceta.add(labelGramos2_MR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_MR = new JButton("Añadir Ingrediente");
-		botonAnyadirIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonAnyadirIngrediente_MR.setFont(f1);
 		botonAnyadirIngrediente_MR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_MR.setBounds(465, 375, 180, 33);
 		panelModificarReceta.add(botonAnyadirIngrediente_MR);
 
 		// Boton borrar ingrediente
 		JButton botonBorrarIngrediente_MR = new JButton("Borrar Ingrediente");
-		botonBorrarIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonBorrarIngrediente_MR.setFont(f1);
 		botonBorrarIngrediente_MR.setBackground(new Color(245, 245, 245));
 		botonBorrarIngrediente_MR.setBounds(667, 375, 180, 33);
 		panelModificarReceta.add(botonBorrarIngrediente_MR);
@@ -1440,31 +1498,31 @@ public class Aplicacion extends JFrame {
 
 		JLabel labelAsterisco2_MR = new JLabel("*");
 		labelAsterisco2_MR.setForeground(Color.RED);
-		labelAsterisco2_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco2_MR.setFont(f);
 		labelAsterisco2_MR.setBounds(442, 48, 19, 16);
 		panelModificarReceta.add(labelAsterisco2_MR);
 
 		JLabel labelAsterisco3_MR = new JLabel("*");
 		labelAsterisco3_MR.setForeground(Color.RED);
-		labelAsterisco3_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco3_MR.setFont(f);
 		labelAsterisco3_MR.setBounds(442, 141, 19, 16);
 		panelModificarReceta.add(labelAsterisco3_MR);
 
 		JLabel labelAsterisco4_MR = new JLabel("*");
 		labelAsterisco4_MR.setForeground(Color.RED);
-		labelAsterisco4_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco4_MR.setFont(f);
 		labelAsterisco4_MR.setBounds(839, 15, 19, 16);
 		panelModificarReceta.add(labelAsterisco4_MR);
 
 		JLabel labelAsterisco5_MR = new JLabel("*");
 		labelAsterisco5_MR.setForeground(Color.RED);
-		labelAsterisco5_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco5_MR.setFont(f);
 		labelAsterisco5_MR.setBounds(839, 50, 19, 16);
 		panelModificarReceta.add(labelAsterisco5_MR);
 
 		JLabel labelCampoObligatorio_MR = new JLabel("* Campo obligatorio");
 		labelCampoObligatorio_MR.setForeground(Color.RED);
-		labelCampoObligatorio_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelCampoObligatorio_MR.setFont(f);
 		labelCampoObligatorio_MR.setBounds(0, 404, 174, 16);
 		panelModificarReceta.add(labelCampoObligatorio_MR);
 
@@ -1473,14 +1531,14 @@ public class Aplicacion extends JFrame {
 		comboBoxTipo_MR.setModel(new DefaultComboBoxModel(new String[] {
 				"-- Seleccione el tipo de plato --", "Primero", "Segundo",
 				"Postre" }));
-		comboBoxTipo_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxTipo_MR.setFont(f1);
 		comboBoxTipo_MR.setBounds(171, 84, 272, 22);
 		panelModificarReceta.add(comboBoxTipo_MR);
 		comboBoxTipo_MR.setLightWeightPopupEnabled(false);
 
 		JLabel labelAsterisco6_MR = new JLabel("*");
 		labelAsterisco6_MR.setForeground(Color.RED);
-		labelAsterisco6_MR.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelAsterisco6_MR.setFont(f);
 		labelAsterisco6_MR.setBounds(442, 77, 19, 16);
 		panelModificarReceta.add(labelAsterisco6_MR);
 
@@ -1535,7 +1593,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton guardar cambios realizados
 		JButton botonGuardarCambios_MR = new JButton("Guardar Cambios");
-		botonGuardarCambios_MR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonGuardarCambios_MR.setFont(f2);
 		botonGuardarCambios_MR.setBackground(new Color(173, 255, 47));
 		botonGuardarCambios_MR.setBounds(0, 338, 215, 60);
 		panelModificarReceta.add(botonGuardarCambios_MR);
@@ -1618,7 +1676,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Volver Modificar Receta
 		JButton botonVolver_MR = new JButton("Volver");
-		botonVolver_MR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonVolver_MR.setFont(f2);
 		botonVolver_MR.setBackground(new Color(245, 245, 245));
 		botonVolver_MR.setBounds(227, 338, 215, 60);
 		panelModificarReceta.add(botonVolver_MR);
@@ -1688,7 +1746,11 @@ public class Aplicacion extends JFrame {
 		JLabel labelRecetasPendientes_VR = new JLabel(
 				"Recetas pendientes de ser validadas:");
 		labelRecetasPendientes_VR.setForeground(Color.WHITE);
-		labelRecetasPendientes_VR.setFont(new Font("Calibri", Font.BOLD, 18));
+		f=new Font("Calibri", Font.BOLD, 18);
+		if(!f.getFamily().equals("Calibri")){
+			f=new Font("Dialog.Italic", Font.BOLD, 16);
+		}
+		labelRecetasPendientes_VR.setFont(f);
 		labelRecetasPendientes_VR.setBounds(12, 13, 340, 23);
 		panelValidar.add(labelRecetasPendientes_VR);
 
@@ -1707,14 +1769,14 @@ public class Aplicacion extends JFrame {
 
 		// Boton ver la receta pendiente de validar
 		JButton botonVer_VR = new JButton("Ver Receta");
-		botonVer_VR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonVer_VR.setFont(f2);
 		botonVer_VR.setBackground(new Color(245, 245, 245));
 		botonVer_VR.setBounds(446, 153, 281, 60);
 		panelValidar.add(botonVer_VR);
 
 		// Boton validar receta seleccionada
 		JButton botonValidar_VR = new JButton("Validar Receta");
-		botonValidar_VR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonValidar_VR.setFont(f2);
 		botonValidar_VR.setBackground(new Color(173, 255, 47));
 		botonValidar_VR.setBounds(446, 253, 281, 60);
 		panelValidar.add(botonValidar_VR);
@@ -1738,7 +1800,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton rechazar/eliminar receta seleccionada
 		JButton botonRechazar_VR = new JButton("Rechazar Receta");
-		botonRechazar_VR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonRechazar_VR.setFont(f2);
 		botonRechazar_VR.setBackground(new Color(255, 127, 80));
 		botonRechazar_VR.setBounds(446, 348, 281, 60);
 		panelValidar.add(botonRechazar_VR);
@@ -1762,7 +1824,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton actualizar recetas pendientes de validar
 		JButton botonActualizar_VR = new JButton("Actualizar");
-		botonActualizar_VR.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonActualizar_VR.setFont(f2);
 		botonActualizar_VR.setBackground(new Color(245, 245, 245));
 		botonActualizar_VR.setBounds(446, 48, 281, 60);
 		panelValidar.add(botonActualizar_VR);
@@ -1811,7 +1873,13 @@ public class Aplicacion extends JFrame {
 		botonImagen.setBorderPainted(false);
 
 		// Boton Busqueda Avanzada
-		botonAvanzada.setFont(new Font("Calibri", Font.BOLD, 20));
+		f=new Font("Calibri", Font.BOLD, 20);
+		if(!f.getFamily().equals("Calibri")){
+			f=new Font("Dialog.Italic", Font.BOLD, 14);
+		}
+		
+		System.out.println(f.getFamily());
+		botonAvanzada.setFont(f);
 		botonAvanzada.setBackground(new Color(245, 245, 245));
 		botonAvanzada.setBounds(12, 185, 235, 60);
 		botonAvanzada.setHorizontalAlignment(SwingConstants.LEFT);
@@ -1825,6 +1893,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("BÚSQUEDA AVANZADA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1835,7 +1908,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Primeros
 		botonPrimeros.setBackground(new Color(245, 245, 245));
-		botonPrimeros.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonPrimeros.setFont(f);
 		botonPrimeros.setBounds(12, 245, 235, 60);
 		botonPrimeros.setHorizontalAlignment(SwingConstants.LEFT);
 		botonPrimeros.setIcon(new ImageIcon(imagenOne.getScaledInstance(25, 25,
@@ -1848,6 +1921,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("PRIMEROS");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1858,7 +1936,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Postres
 		botonPostres.setBackground(new Color(245, 245, 245));
-		botonPostres.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonPostres.setFont(f);
 		botonPostres.setBounds(12, 365, 235, 60);
 		botonPostres.setHorizontalAlignment(SwingConstants.LEFT);
 		botonPostres.setIcon(new ImageIcon(imagenThree.getScaledInstance(25,
@@ -1871,6 +1949,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("POSTRES");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1881,7 +1964,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Segundos
 		botonSegundos.setBackground(new Color(245, 245, 245));
-		botonSegundos.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonSegundos.setFont(f);
 		botonSegundos.setBounds(12, 305, 235, 60);
 		botonSegundos.setHorizontalAlignment(SwingConstants.LEFT);
 		botonSegundos.setIcon(new ImageIcon(imagenTwo.getScaledInstance(25, 25,
@@ -1893,6 +1976,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("SEGUNDOS");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1903,7 +1991,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Mas Destacados
 		botonDestacados.setBackground(new Color(245, 245, 245));
-		botonDestacados.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonDestacados.setFont(f);
 		botonDestacados.setBounds(12, 485, 235, 60);
 		botonDestacados.setHorizontalAlignment(SwingConstants.LEFT);
 		botonDestacados.setIcon(new ImageIcon(imagenPlus.getScaledInstance(25,
@@ -1916,6 +2004,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("MÁS DESTACADOS");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1926,7 +2019,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Proponer
 		botonProponer.setBackground(new Color(245, 245, 245));
-		botonProponer.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonProponer.setFont(f);
 		botonProponer.setBounds(12, 425, 235, 60);
 		botonProponer.setHorizontalAlignment(SwingConstants.LEFT);
 		botonProponer.setIcon(new ImageIcon(imagenWrite.getScaledInstance(25,
@@ -1938,6 +2031,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("PROPONER RECETA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1948,7 +2046,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton Ayuda
 		botonAyuda.setBackground(new Color(245, 245, 245));
-		botonAyuda.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonAyuda.setFont(f);
 		botonAyuda.setBounds(12, 545, 235, 60);
 		botonAyuda.setHorizontalAlignment(SwingConstants.LEFT);
 		botonAyuda.setIcon(new ImageIcon(imagenHelp.getScaledInstance(25, 25,
@@ -1960,6 +2058,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("AYUDA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1973,6 +2076,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("MENÚ PRINCIPAL");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1985,6 +2093,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("VALIDAR RECETA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -1997,6 +2110,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("AÑADIR RECETA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -2009,6 +2127,11 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("MODIFICAR RECETA");
+				Font f=new Font("Calibri", Font.BOLD, 70);
+				if(!f.getFamily().equals("Calibri")){
+					f=new Font("Dialog.Italic", Font.BOLD, 65);
+				}
+				labelMenu.setFont(f);
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);
@@ -2029,7 +2152,6 @@ public class Aplicacion extends JFrame {
 		/**
 		 * COMIENZO DE LA PANTALLA DE IDENTIFICACION DE ADMINISTRADOR
 		 **/
-		/**
 		final JPanel identiAdmin = new JPanel();
 		contentPane.add(identiAdmin, "identiAdminentificacion");
 		identiAdmin.setLayout(null);
@@ -2044,59 +2166,68 @@ public class Aplicacion extends JFrame {
 		// M
 		JLabel labelTitulo2 = new JLabel("M");
 		labelTitulo2.setForeground(new Color(255, 153, 0));
+		f =new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38);
+		if(!f.getFamily().equals("Bauhaus 93")){
+			f =new Font("Dialog.italic", Font.BOLD, 35);
+		}
 		labelTitulo2
-				.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+				.setFont(f);
 		labelTitulo2.setBounds(312, 371, 37, 86);
 		identiAdmin.add(labelTitulo2);
 
 		// y
 		JLabel lblY2 = new JLabel("y");
-		lblY2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblY2.setFont(f);
 		lblY2.setBounds(344, 371, 37, 86);
 		identiAdmin.add(lblY2);
 
 		// E
 		JLabel lblE2 = new JLabel("E");
 		lblE2.setForeground(new Color(255, 153, 0));
-		lblE2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblE2.setFont(f);
 		lblE2.setBounds(385, 371, 37, 86);
 		identiAdmin.add(lblE2);
 
 		// lection
 		JLabel lblMy2 = new JLabel("lection");
-		lblMy2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblMy2.setFont(f);
 		lblMy2.setBounds(406, 371, 138, 86);
 		identiAdmin.add(lblMy2);
 
 		// F
 		JLabel lblF2 = new JLabel("F");
 		lblF2.setForeground(new Color(255, 153, 0));
-		lblF2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblF2.setFont(f);
 		lblF2.setBounds(563, 371, 37, 86);
 		identiAdmin.add(lblF2);
 
 		// or
 		JLabel lblOr2 = new JLabel("or");
-		lblOr2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblOr2.setFont(f);
 		lblOr2.setBounds(582, 371, 55, 86);
 		identiAdmin.add(lblOr2);
 
 		// L
 		JLabel lblL2 = new JLabel("L");
 		lblL2.setForeground(new Color(255, 153, 0));
-		lblL2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblL2.setFont(f);
 		lblL2.setBounds(642, 371, 23, 86);
 		identiAdmin.add(lblL2);
 
 		// unch
 		JLabel lblUnch2 = new JLabel("unch");
-		lblUnch2.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
+		lblUnch2.setFont(f);
 		lblUnch2.setBounds(661, 371, 100, 86);
 		identiAdmin.add(lblUnch2);
 
 		// Nombre corto
 		JLabel lblMel2 = new JLabel("ME4L");
-		lblMel2.setFont(new Font("Bauhaus 93", Font.BOLD, 84));
+		
+		f =new Font("Bauhaus 93", Font.BOLD, 84);
+		if(!f.getFamily().equals("Bauhaus 93")){
+			f =new Font("Dialog.italic", Font.BOLD, 60);
+		}
+		lblMel2.setFont(f);
 		lblMel2.setBounds(438, 266, 211, 162);
 		identiAdmin.add(lblMel2);
 
@@ -2118,6 +2249,11 @@ public class Aplicacion extends JFrame {
 					cardMenu.show(pantallaMenu, "panelPrincipal");
 					cardAdmin.show(barraAdmin, "estadoIdentificado");
 					labelMenu.setText("MENÚ PRINCIPAL");
+					Font f=new Font("Calibri", Font.BOLD, 70);
+					if(!f.getFamily().equals("Calibri")){
+						f=new Font("Dialog.Italic", Font.BOLD, 65);
+					}
+					labelMenu.setFont(f);
 					botonesEnBlanco(botonAvanzada, botonPrimeros,
 							botonSegundos, botonPostres, botonDestacados,
 							botonProponer, botonAyuda);
@@ -2134,7 +2270,11 @@ public class Aplicacion extends JFrame {
 		JLabel lblIntroduzcaLaContrasea = new JLabel(
 				"Introduzca la contrase\u00F1a de Administrador:");
 		lblIntroduzcaLaContrasea.setForeground(Color.BLACK);
-		lblIntroduzcaLaContrasea.setFont(new Font("Calibri", Font.BOLD, 18));
+		f =new Font("Calibri", Font.BOLD, 18);
+		if(!f.getFamily().equals("Calibri")){
+			f =new Font("Dialog.italic", Font.BOLD, 14);
+		}
+		lblIntroduzcaLaContrasea.setFont(f);
 		lblIntroduzcaLaContrasea.setBounds(370, 457, 365, 23);
 		identiAdmin.add(lblIntroduzcaLaContrasea);
 
