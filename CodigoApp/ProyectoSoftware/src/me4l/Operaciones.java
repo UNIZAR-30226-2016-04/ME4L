@@ -5,9 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Operaciones {
+
 	private IngredienteDAO ingredienteDAO;
 	private RecetaDAO recetaDAO;
 	private PuntuacionDAO puntuacionDAO;
+	private ComentarioDAO comentarioDAO;
 	
 	public Operaciones () {
 		
@@ -19,6 +21,8 @@ public class Operaciones {
 			this.ingredienteDAO = new IngredienteDAO(conexion);
 			this.recetaDAO = new RecetaDAO(conexion);
 			this.puntuacionDAO = new PuntuacionDAO(conexion);
+			this.comentarioDAO = new ComentarioDAO(conexion);
+
 		} catch (ClassNotFoundException e) {
 		} catch (SQLException e) {
 		}
@@ -93,11 +97,8 @@ public class Operaciones {
 	}
 	
 	public ArrayList<RecetaVO> obtenerNoValidadas () {
+
 		return recetaDAO.obtenerNoValidadas();
-	}
-	
-	public ArrayList<RecetaVO> obtenerValidadas () {
-		return recetaDAO.obtenerValidadas();
 	}
 	
 	public ArrayList<String> obtenerIngredientes() {
@@ -123,7 +124,7 @@ public class Operaciones {
 	public void modificarPuntuacion (String idReceta, String ip, String puntos) {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
-			puntuacionDAO.modificarPuntuacion(puntos);
+			puntuacionDAO.modificarPuntuacion(idReceta, ip, puntos);
 			System.out.println("Puntuaci�n modificada correctamente.");
 		} else {
 			System.err.println("Error: No existe puntuaci�n para esa receta e IP.");
@@ -151,5 +152,65 @@ public class Operaciones {
 		}
 		
 		return puntuacion;
+	}
+
+	public void addComentario (String idReceta, String contenido) {
+
+		if (recetaDAO.existeReceta(idReceta)) {
+			ComentarioVO comentario = new ComentarioVO (idReceta, contenido);
+			comentarioDAO.addComentario(comentario);
+			System.out.println("Comentario añadido correctamente.");
+		} else {
+			System.err.println("Error: No existe receta.");
+		}
+	}
+
+	public void modificarComentario (String idComentario, String contenido) {
+
+		if (comentarioDAO.existeComentario(idComentario)) {
+			comentarioDAO.modificarComentario(idComentario, contenido);
+			System.out.println("Comentario modificado correctamente.");
+		} else {
+			System.err.println("Error: No existe comentario.");
+		}
+	}
+
+	public void eliminarComentario (String idComentario) {
+
+		if (comentarioDAO.existeComentario(idComentario)) {
+			comentarioDAO.eliminarComentario(idComentario);
+			System.out.println("Comentario eliminado correctamente.");
+		} else {
+			System.err.println("Error: No existe comentario.");
+		}
+	}
+
+	public ComentarioVO devolverComentario (String idComentario) {
+
+		ComentarioVO comentario = new ComentarioVO();
+		if (comentarioDAO.existeComentario(idComentario)) {
+			comentario = comentarioDAO.devolverComentario(idComentario);
+			System.out.println("Comentario devuelto correctamente");
+		} else {
+			System.err.println("Error: No existe comentario.");
+		}
+
+		return comentario;
+	}
+
+	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente) {
+
+		ArrayList<RecetaVO> recetas;
+
+		if (nPersonas == null && ingrediente == null) {
+			recetas = recetaDAO.buscarPorNombre(nombre);
+		} else if ((nombre == null || nombre.equals("")) && nPersonas == null) {
+			recetas = recetaDAO.buscarPorIngrediente(ingrediente);
+		} else if ((nombre == null || nombre.equals("")) && ingrediente == null) {
+			recetas = recetaDAO.buscarPorNPersonas(nPersonas);
+		} else {
+			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente);
+		}
+		return recetas;
 	}
 }
