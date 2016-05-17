@@ -198,18 +198,20 @@ public class Operaciones {
 		return comentario;
 	}
 
-	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente) {
+	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		ArrayList<RecetaVO> recetas;
 
-		if ((nPersonas == null || nPersonas.equals("")) && (ingrediente == null || ingrediente.equals(""))) {
+		if ((nPersonas == null || nPersonas.equals("")) && ingrediente == null && plato == null) {
 			recetas = recetaDAO.buscarPorNombre(nombre);
-		} else if ((nombre == null || nombre.equals("")) && nPersonas == null) {
+		} else if ((nombre == null || nombre.equals("")) && nPersonas == null && plato == null) {
 			recetas = recetaDAO.buscarPorIngrediente(ingrediente);
-		} else if ((nombre == null || nombre.equals("")) && ingrediente == null) {
+		} else if ((nombre == null || nombre.equals("")) && ingrediente == null && plato == null) {
 			recetas = recetaDAO.buscarPorNPersonas(nPersonas);
+		} else if ((nombre == null || nombre.equals("")) && ingrediente == null && nPersonas == null) {
+			recetas = recetaDAO.buscarPorPlato(plato);
 		} else {
-			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente);
+			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente, plato);
 		}
 		return recetas;
 	}

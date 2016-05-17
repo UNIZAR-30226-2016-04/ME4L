@@ -322,7 +322,28 @@ public class RecetaDAO {
 		}
 	}
 
-	public ArrayList<RecetaVO> busquedaAvanzada (String nombre, String nPersonas, String ingrediente) {
+	public ArrayList<RecetaVO> buscarPorPlato(String plato) {
+
+		try {
+			ArrayList<RecetaVO> recetas = new ArrayList<>();
+			RecetaVO receta;
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE Plato='" + plato + "';");
+
+			while (rs.next()) {
+				String idReceta = rs.getString("id");
+				receta = devolverReceta(idReceta);
+				recetas.add(receta);
+			}
+			s.close();
+			return recetas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<RecetaVO> busquedaAvanzada (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		try {
 			ArrayList<RecetaVO> recetas = new ArrayList<>();
@@ -331,16 +352,68 @@ public class RecetaDAO {
             ResultSet rs;
 
             if (nombre == null || nombre.equals("")) {
-                rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-                        + ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
-                        nPersonas + "';");
+				if (nPersonas == null) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "';");
+				} else if (ingrediente == null) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas + "' " +
+							"AND Plato='" + plato + "';");
+				} else if (plato == null) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
+							nPersonas + "';");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
+							nPersonas + "' AND Plato='" + plato + "';");
+				}
             } else if (nPersonas == null) {
-                rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-                        + ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
-                        "UPPER(r.nombre) LIKE UPPER('%" + nombre + "%');");
-            } else {
-                rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
-                        "numeroPersonas='" + nPersonas +"';");
+				if (nombre == null || nombre.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "';");
+				} else if (ingrediente == null) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(r.nombre) LIKE UPPER('%" + nombre + "%')" +
+							" AND Plato='" + plato + "';");
+				} else if (plato == null) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%');");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND Plato='" + plato + "';");
+				}
+            } else if (plato == null) {
+				if (nombre == null || nombre.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id " +
+							"AND nPerosnas='" + nPersonas + "';");
+				} else if (ingrediente == null) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') " +
+							"AND nPerosnas='" + nPersonas + "';");
+				} else if (nPersonas == null) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%');");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND nPerosnas='" + nPersonas + "';");
+				}
+			} else {
+				if (nombre == null || nombre.equals("")) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas +"' " +
+							"AND Plato='" + plato + "';");
+				} else if (nPersonas == null) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							 "Plato='" + plato + "';");
+				} else if (plato == null) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							"numeroPersonas='" + nPersonas +"';");
+				} else {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							"numeroPersonas='" + nPersonas +"' AND Plato='" + plato + "';");
+				}
             }
 
             while (rs.next()) {
