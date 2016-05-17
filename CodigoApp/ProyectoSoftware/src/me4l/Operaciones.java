@@ -202,7 +202,7 @@ public class Operaciones {
 
 		ArrayList<RecetaVO> recetas;
 
-		if (nPersonas == null && ingrediente == null) {
+		if ((nPersonas == null || nPersonas.equals("")) && (ingrediente == null || ingrediente.equals(""))) {
 			recetas = recetaDAO.buscarPorNombre(nombre);
 		} else if ((nombre == null || nombre.equals("")) && nPersonas == null) {
 			recetas = recetaDAO.buscarPorIngrediente(ingrediente);

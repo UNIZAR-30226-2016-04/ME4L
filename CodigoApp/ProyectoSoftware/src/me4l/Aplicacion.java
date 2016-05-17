@@ -72,6 +72,7 @@ public class Aplicacion extends JFrame {
 	// Objeto de operaciones
 	private Operaciones o = new Operaciones();
 	private boolean identificado = false;
+	private JTextField textFieldBusqueda_BA;
 
 	/**
 	 * Launch the application.
@@ -199,6 +200,23 @@ public class Aplicacion extends JFrame {
 		panelAvanzada.setOpaque(false);
 		pantallaMenu.add(panelAvanzada, "panelAvanzada");
 		panelAvanzada.setLayout(null);
+		
+		textFieldBusqueda_BA = new JTextField();
+		textFieldBusqueda_BA.setFont(new Font("Calibri", Font.BOLD, 15));
+		textFieldBusqueda_BA.setColumns(10);
+		textFieldBusqueda_BA.setBounds(29, 13, 703, 36);
+		panelAvanzada.add(textFieldBusqueda_BA);
+		
+		JButton botonBuscar_BA = new JButton("Buscar");
+		botonBuscar_BA.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonBuscar_BA.setBackground(new Color(245, 245, 245));
+		botonBuscar_BA.setBounds(748, 12, 95, 37);
+		panelAvanzada.add(botonBuscar_BA);
+		
+		List listaRecetasBuscadas_BA = new List();
+		listaRecetasBuscadas_BA.setFont(new Font("Calibri", Font.BOLD, 20));
+		listaRecetasBuscadas_BA.setBounds(135, 169, 596, 289);
+		panelAvanzada.add(listaRecetasBuscadas_BA);
 
 		// Panel Primeros
 		JPanel panelPrimeros = new JPanel();
@@ -1368,11 +1386,10 @@ public class Aplicacion extends JFrame {
 		panelModificar.add(listaBuscada_MR);
 
 		// Boton Buscar Modificar Receta
-		JButton botonBuscar_MR = new JButton("");
-		botonBuscar_MR.setFont(f);
+		JButton botonBuscar_MR = new JButton("Buscar");
+		botonBuscar_MR.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonBuscar_MR.setBackground(new Color(245, 245, 245));
-		botonBuscar_MR.setBounds(626, 42, 46, 34);
-		botonBuscar_MR.setIcon(new ImageIcon(imagenSearch.getScaledInstance(40, 40, Image.SCALE_DEFAULT)));
+		botonBuscar_MR.setBounds(626, 40, 104, 36);
 		panelModificar.add(botonBuscar_MR);
 
 		// Accion del boton de buscar recetas para modificar
@@ -1380,7 +1397,7 @@ public class Aplicacion extends JFrame {
 
 			public void mouseClicked(MouseEvent arg0) {
 				listaBuscada_MR.removeAll();
-				recetasModificar = o.obtenerValidadas();
+				recetasModificar = o.busqueda(textFieldBusqueda_MR.getText(),"","");
 				for (RecetaVO receta : recetasModificar) {
 					listaBuscada_MR.add(receta.getNombre());
 				}
@@ -1763,7 +1780,6 @@ public class Aplicacion extends JFrame {
 
 						// Recargamos las recetas buscadas para modificar
 						listaBuscada_MR.removeAll();
-						recetasModificar = o.obtenerValidadas();
 						for (RecetaVO receta : recetasModificar) {
 							listaBuscada_MR.add(receta.getNombre());
 						}
