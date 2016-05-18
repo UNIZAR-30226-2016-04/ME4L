@@ -120,16 +120,9 @@ public class Aplicacion extends JFrame {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Aplicacion() {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    Font[] fonts = ge.getAllFonts();
-
-	    for (int i = 0; i < fonts.length; i++) {
-	      System.out.print(fonts[i].getFontName() + " : ");
-	      System.out.print(fonts[i].getFamily() + " : ");
-	      System.out.print(fonts[i].getName());
-	      System.out.println();
-	    }
+	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		setBounds(100, 100, 1148, 656);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -155,119 +148,8 @@ public class Aplicacion extends JFrame {
 		Image imagenThree = new ImageIcon("images/three.png").getImage();
 		Image imagenTwo = new ImageIcon("images/two.png").getImage();
 		Image imagenWrite = new ImageIcon("images/write.png").getImage();
-
-		/**
-		 * COMIENZO DE LA PANTALLA DE INICIO
-		 **/
-		// Panel de la pantalla de inicio
-		JPanel inicio = new JPanel();
-		contentPane.add(inicio, "pantallaInicio");
-		inicio.setLayout(null);
-		// Nombre abreviado
-		JLabel lblMel1 = new JLabel("ME4L");
 		Font f =new Font("Bauhaus 93", Font.BOLD, 84);
-		if(!f.getFamily().equals("Bauhaus 93")){
-			f =new Font("Dialog.italic", Font.BOLD, 60);
-		}
-		lblMel1.setFont(f);
 		
-		lblMel1.setBounds(438, 266, 211, 162);
-		inicio.add(lblMel1);
-
-		// Icono de la Aplicacion
-		JLabel IconoApp1 = new JLabel("");
-		IconoApp1.setIcon(new ImageIcon(imagenIcono.getScaledInstance(319, 288,
-				Image.SCALE_DEFAULT)));
-		IconoApp1.setBounds(372, 13, 319, 288);
-		inicio.add(IconoApp1);
-
-		// Boton Entrar
-		JButton botonEntrar1 = new JButton("Entrar");
-		botonEntrar1.setBackground(new Color(250, 250, 250));
-		botonEntrar1.setFont(new Font("Calibri", Font.BOLD, 48));
-		botonEntrar1.setBounds(372, 472, 319, 69);
-		botonEntrar1.setIcon(new ImageIcon(imagenSignIn.getScaledInstance(60,
-				60, Image.SCALE_DEFAULT)));
-		inicio.add(botonEntrar1);
-
-		// Accion del boton de Entrar
-		botonEntrar1.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(contentPane, "menuPrincipal");
-			}
-		});
-
-		// M
-		JLabel labelTitulo1 = new JLabel("M");
-		labelTitulo1.setForeground(new Color(255, 153, 0));
-		f =new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38);
-		if(!f.getFamily().equals("Bauhaus 93")){
-			f =new Font("Dialog.italic", Font.BOLD, 35);
-		}
-		labelTitulo1
-				.setFont(f);
-		labelTitulo1.setBounds(312, 371, 37, 86);
-		inicio.add(labelTitulo1);
-
-		// y
-		JLabel lblY1 = new JLabel("y");
-		lblY1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
-		lblY1.setBounds(344, 371, 37, 86);
-		inicio.add(lblY1);
-
-		// E
-		JLabel lblE1 = new JLabel("E");
-		lblE1.setForeground(new Color(255, 153, 0));
-		
-		lblE1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
-		lblE1.setBounds(385, 371, 37, 86);
-		inicio.add(lblE1);
-
-		// lection
-		JLabel lblMy1 = new JLabel("lection");
-		lblMy1.setFont(f);
-		lblMy1.setBounds(406, 371, 138, 86);
-		inicio.add(lblMy1);
-
-		// F
-		JLabel lblF1 = new JLabel("F");
-		lblF1.setForeground(new Color(255, 153, 0));
-		lblF1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
-		lblF1.setBounds(563, 371, 37, 86);
-		inicio.add(lblF1);
-
-		// or
-		JLabel lblOr1 = new JLabel("or");
-		lblOr1.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 38));
-		lblOr1.setBounds(582, 371, 55, 86);
-		inicio.add(lblOr1);
-
-		// L
-		JLabel lblL1 = new JLabel("L");
-		lblL1.setForeground(new Color(255, 153, 0));
-		
-		lblL1.setFont(f);
-		lblL1.setBounds(642, 371, 23, 86);
-		inicio.add(lblL1);
-
-		// unch
-		JLabel lblUnch1 = new JLabel("unch");
-		lblUnch1.setFont(f);
-		lblUnch1.setBounds(661, 371, 100, 86);
-		inicio.add(lblUnch1);
-
-		// Fondo de la pantalla
-		JLabel fondoApp1 = new JLabel();
-		fondoApp1.setIcon(new ImageIcon(imagenFondoApp.getScaledInstance(1132,
-				611, Image.SCALE_DEFAULT)));
-		fondoApp1.setBounds(0, 0, 1132, 611);
-		inicio.add(fondoApp1);
-
-		/**
-		 * FINAL DE LA PANTALLA DE INICIO
-		 **/
-
 		/**
 		 * COMIENZO DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
@@ -324,7 +206,7 @@ public class Aplicacion extends JFrame {
 		estadoIdentificado.add(menuAdmin);
 
 		// PestaÃ±a Menu Administrador
-		JMenu botonAdmin = new JMenu("MenÃº Administrador");
+		JMenu botonAdmin = new JMenu("Menú Administrador");
 		botonAdmin.setHorizontalAlignment(SwingConstants.TRAILING);
 		botonAdmin.setFont(new Font("Calibri", Font.BOLD, 16));
 		botonAdmin.setBounds(0, 0, 261, 30);
@@ -335,7 +217,7 @@ public class Aplicacion extends JFrame {
 		botonAdmin.add(botonValidar);
 
 		// Boton aÃ±adir receta
-		JMenuItem botonAnyadir = new JMenuItem("AÃ±adir Receta");
+		JMenuItem botonAnyadir = new JMenuItem("Añadir Receta");
 		botonAdmin.add(botonAnyadir);
 
 		// Boton modificar receta
@@ -549,7 +431,7 @@ public class Aplicacion extends JFrame {
 
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
-		botonEnviarPropuesta_PR.setFont(f);
+		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonEnviarPropuesta_PR.setBackground(new Color(173, 255, 47));
 		botonEnviarPropuesta_PR.setBounds(0, 338, 272, 60);
 		panelProponer.add(botonEnviarPropuesta_PR);
@@ -596,8 +478,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_PR.setBounds(780, 160, 66, 23);
 		panelProponer.add(labelGramos2_PR);
 
-		// Boton aÃ±adir ingrediente
-		JButton botonAnyadirIngrediente_PR = new JButton("AÃ±adir Ingrediente");
+		// Boton añadir ingrediente
+		JButton botonAnyadirIngrediente_PR = new JButton("Añadir Ingrediente");
 		botonAnyadirIngrediente_PR.setFont(f1);
 		botonAnyadirIngrediente_PR.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_PR.setBounds(465, 375, 180, 33);
@@ -886,7 +768,7 @@ public class Aplicacion extends JFrame {
 		panelAnyadir.add(labelIngPrinc_A);
 
 		// Label del numero de personas
-		JLabel labelNumPersonas_A = new JLabel("N\u00FAmero de personas:");
+		JLabel labelNumPersonas_A = new JLabel("Número de personas:");
 		labelNumPersonas_A.setBounds(0, 48, 174, 23);
 		labelNumPersonas_A.setForeground(Color.WHITE);
 		labelNumPersonas_A.setFont(f);
@@ -1009,8 +891,8 @@ public class Aplicacion extends JFrame {
 		labelGramos2_A.setBounds(780, 160, 66, 23);
 		panelAnyadir.add(labelGramos2_A);
 
-		// Boton aÃ±adir ingrediente
-		JButton botonAnyadirIngrediente_A = new JButton("AÃ±adir Ingrediente");
+		// Boton añadir ingrediente
+		JButton botonAnyadirIngrediente_A = new JButton("Añadir Ingrediente");
 		botonAnyadirIngrediente_A.setFont(f1);
 		botonAnyadirIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonAnyadirIngrediente_A.setBounds(465, 375, 180, 33);
@@ -1125,7 +1007,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÃ±adir receta
+		// Accion del boton de añadir receta
 		botonEnviarPropuesta_A.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -1793,7 +1675,7 @@ public class Aplicacion extends JFrame {
 					listaRecetasPendientesValidar_VR.remove(index);
 					recetasParaValidar.remove(index);
 					JOptionPane.showMessageDialog(menuPrincipal,
-							"La receta ha sido aÃ±adida.");
+							"La receta ha sido añadida.");
 				}
 			}
 		});
@@ -1845,7 +1727,7 @@ public class Aplicacion extends JFrame {
 		});
 
 		// Indicador textual del menu
-		final JLabel labelMenu = new JLabel("MENÃš PRINCIPAL");
+		final JLabel labelMenu = new JLabel("MENÚ PRINCIPAL");
 		labelMenu.setForeground(new Color(255, 153, 0));
 		labelMenu.setFont(new Font("Bauhaus 93", Font.BOLD, 80));
 		labelMenu.setBounds(262, 12, 858, 162);
@@ -1856,11 +1738,11 @@ public class Aplicacion extends JFrame {
 		menuPrincipal.add(IconoApp3);
 
 		// Botones
-		final JButton botonAvanzada = new JButton("B\u00FAsqueda Avanzada");
+		final JButton botonAvanzada = new JButton("Búsqueda Avanzada");
 		final JButton botonPrimeros = new JButton("Primeros");
 		final JButton botonPostres = new JButton("Postres");
 		final JButton botonSegundos = new JButton("Segundos");
-		final JButton botonDestacados = new JButton("M\u00E1s Destacados");
+		final JButton botonDestacados = new JButton("Más Destacados");
 		final JButton botonProponer = new JButton("Proponer Receta");
 		final JButton botonAyuda = new JButton("Ayuda");
 		final JButton botonImagen = new JButton("");
@@ -1878,7 +1760,6 @@ public class Aplicacion extends JFrame {
 			f=new Font("Dialog.Italic", Font.BOLD, 14);
 		}
 		
-		System.out.println(f.getFamily());
 		botonAvanzada.setFont(f);
 		botonAvanzada.setBackground(new Color(245, 245, 245));
 		botonAvanzada.setBounds(12, 185, 235, 60);
@@ -1892,9 +1773,9 @@ public class Aplicacion extends JFrame {
 		botonAvanzada.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("BÃšSQUEDA AVANZADA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				labelMenu.setText("BÚSQUEDA AVANZADA");
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -1921,8 +1802,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("PRIMEROS");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -1949,8 +1830,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("POSTRES");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -1976,8 +1857,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("SEGUNDOS");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2003,9 +1884,9 @@ public class Aplicacion extends JFrame {
 		botonDestacados.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("MÃS DESTACADOS");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				labelMenu.setText("MÁS DESTACADOS");
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2031,8 +1912,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("PROPONER RECETA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2058,8 +1939,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("AYUDA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2075,9 +1956,9 @@ public class Aplicacion extends JFrame {
 		botonImagen.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("MENÃš PRINCIPAL");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				labelMenu.setText("MENÚ PRINCIPAL");
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2093,8 +1974,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("VALIDAR RECETA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2109,9 +1990,9 @@ public class Aplicacion extends JFrame {
 		botonAnyadir.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				labelMenu.setText("AÃ‘ADIR RECETA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				labelMenu.setText("AÑADIR RECETA");
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2127,8 +2008,8 @@ public class Aplicacion extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				labelMenu.setText("MODIFICAR RECETA");
-				Font f=new Font("Calibri", Font.BOLD, 70);
-				if(!f.getFamily().equals("Calibri")){
+				Font f=new Font("Bauhaus 93", Font.BOLD, 70);
+				if(!f.getFamily().equals("Bauhaus 93")){
 					f=new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
@@ -2248,7 +2129,7 @@ public class Aplicacion extends JFrame {
 					cardLayout.show(contentPane, "menuPrincipal");
 					cardMenu.show(pantallaMenu, "panelPrincipal");
 					cardAdmin.show(barraAdmin, "estadoIdentificado");
-					labelMenu.setText("MENÃš PRINCIPAL");
+					labelMenu.setText("MENÚ PRINCIPAL");
 					Font f=new Font("Calibri", Font.BOLD, 70);
 					if(!f.getFamily().equals("Calibri")){
 						f=new Font("Dialog.Italic", Font.BOLD, 65);
@@ -2268,7 +2149,7 @@ public class Aplicacion extends JFrame {
 
 		// Texto contraseÃ±a
 		JLabel lblIntroduzcaLaContrasea = new JLabel(
-				"Introduzca la contrase\u00F1a de Administrador:");
+				"Introduzca la contraseña de Administrador:");
 		lblIntroduzcaLaContrasea.setForeground(Color.BLACK);
 		f =new Font("Calibri", Font.BOLD, 18);
 		if(!f.getFamily().equals("Calibri")){
@@ -2299,7 +2180,7 @@ public class Aplicacion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(contentPane, "menuPrincipal");
 				cardMenu.show(pantallaMenu, "panelPrincipal");
-				labelMenu.setText("MENÃš PRINCIPAL");
+				labelMenu.setText("MENÚ PRINCIPAL");
 				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos,
 						botonPostres, botonDestacados, botonProponer,
 						botonAyuda);

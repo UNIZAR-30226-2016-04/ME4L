@@ -26,7 +26,7 @@ public class PuntuacionDAO {
 		}
 	}
 	
-	public void modificarPuntuacion (String puntos) {
+	public void modificarPuntuacion (String idReceta, String ip,String puntos) {
 		
 		try {
 			Statement s = conexion.createStatement();
