@@ -202,13 +202,13 @@ public class Operaciones {
 
 		ArrayList<RecetaVO> recetas;
 
-		if ((nPersonas == null || nPersonas.equals("")) && ingrediente == null && plato == null) {
+		if ((nPersonas == null || nPersonas.equals("")) && (ingrediente == null || ingrediente.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorNombre(nombre);
-		} else if ((nombre == null || nombre.equals("")) && nPersonas == null && plato == null) {
+		} else if ((nombre == null || nombre.equals("")) && (nPersonas == null || nPersonas.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorIngrediente(ingrediente);
-		} else if ((nombre == null || nombre.equals("")) && ingrediente == null && plato == null) {
+		} else if ((nombre == null || nombre.equals("")) && (ingrediente == null || ingrediente.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorNPersonas(nPersonas);
-		} else if ((nombre == null || nombre.equals("")) && ingrediente == null && nPersonas == null) {
+		} else if ((nombre == null || nombre.equals("")) && (ingrediente == null || ingrediente.equals("")) && (nPersonas == null || nPersonas.equals(""))) {
 			recetas = recetaDAO.buscarPorPlato(plato);
 		} else {
 			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente, plato);
