@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class RecetaDAO {
 	private Connection conexion;
@@ -427,5 +428,46 @@ public class RecetaDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public ArrayList<RecetaVO> menuDelDia () {
+
+		Random random = new Random();;
+		ArrayList<RecetaVO> recetas = new ArrayList<>();
+
+		ArrayList<RecetaVO> aux = buscarPorPlato("Primero");
+		int indice = random.nextInt(aux.size() - 1);
+		RecetaVO receta = aux.get(indice);
+		ArrayList<String> ingredientes = receta.getIngredientes();
+		String ingredienteP = ingredientes.get(0);
+		recetas.add(receta);
+
+		aux = buscarPorPlato("Segundo");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredienteS = ingredientes.get(0);
+		while (ingredienteP.equals(ingredienteS)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredienteS = ingredientes.get(0);
+		}
+		recetas.add(receta);
+
+		aux = buscarPorPlato("Postre");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredientePo = ingredientes.get(0);
+		while (ingredientePo.equals(ingredienteS) || ingredientePo.equals(ingredienteP)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredientePo = ingredientes.get(0);
+		}
+		recetas.add(receta);
+
+		return recetas;
 	}
 }

@@ -215,4 +215,8 @@ public class Operaciones {
 		}
 		return recetas;
 	}
+
+	public ArrayList<RecetaVO> menuDelDia () {
+		return recetaDAO.menuDelDia();
+	}
 }
