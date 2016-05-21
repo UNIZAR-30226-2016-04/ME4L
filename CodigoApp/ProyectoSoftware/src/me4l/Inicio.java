@@ -25,6 +25,7 @@ public class Inicio extends JFrame {
 		frame.setVisible(true);
 		Aplicacion app = new Aplicacion();
 		frame.setVisible(false);
+		app.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
 		app.setVisible(true);	
 	}
 
