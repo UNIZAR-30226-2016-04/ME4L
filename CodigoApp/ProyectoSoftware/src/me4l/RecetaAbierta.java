@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -42,6 +43,7 @@ public class RecetaAbierta extends JFrame {
 		Image imagenFondoApp = new ImageIcon("images/fondoApp.jpg").getImage();
 		Image imagenValorar = new ImageIcon("images/valorar.png").getImage();
 		Image imagenComentarios = new ImageIcon("images/comentarios.png").getImage();
+		Image imagenReturn = new ImageIcon("images/return.png").getImage();
 
 		JPanel paneles = new JPanel();
 		paneles.setBounds(0, 75, 786, 690);
@@ -134,11 +136,15 @@ public class RecetaAbierta extends JFrame {
 		});
 		
 		// Text Area de descripcion de la receta
-		TextArea textDescripcion = new TextArea();
-		textDescripcion.setFont(new Font("Calibri", Font.BOLD, 22));
-		textDescripcion.setBounds(10, 361, 766, 269);
-		panelReceta.add(textDescripcion);
+		JTextArea textDescripcion = new JTextArea();
 		textDescripcion.setEditable(false);
+		textDescripcion.setFont(new Font("Calibri", Font.BOLD, 22));
+		textDescripcion.setLineWrap(true);
+		textDescripcion.setWrapStyleWord(true);
+		JScrollPane scrollPanel = new JScrollPane(textDescripcion, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel.setFont(new Font("Calibri", Font.BOLD, 22));
+		scrollPanel.setBounds(10, 361, 766, 269);
+		panelReceta.add(scrollPanel);
 		textDescripcion.setText(receta.getDescripcion());
 		
 		JLabel labelDescipcion = new JLabel("Tipo:");
@@ -237,25 +243,42 @@ public class RecetaAbierta extends JFrame {
 		panelComentarios.setLayout(null);
 		
 		JTextArea textAreaNuevo = new JTextArea();
-		textAreaNuevo.setBounds(12, 485, 518, 192);
-		panelComentarios.add(textAreaNuevo);
+		textAreaNuevo.setWrapStyleWord(true);
+		textAreaNuevo.setLineWrap(true);
+		JScrollPane scrollPanel_N = new JScrollPane(textAreaNuevo, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel_N.setFont(new Font("Calibri", Font.BOLD, 22));
+		scrollPanel_N.setBounds(12, 485, 518, 192);
+		panelComentarios.add(scrollPanel_N);
 		
 		JButton botonAnyadir = new JButton("A\u00F1adir Comentario");
 		botonAnyadir.setHorizontalAlignment(SwingConstants.CENTER);
 		botonAnyadir.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonAnyadir.setBackground(new Color(245, 245, 245));
-		botonAnyadir.setBounds(537, 538, 241, 74);
+		botonAnyadir.setBounds(537, 485, 241, 74);
 		panelComentarios.add(botonAnyadir);
 		
 		JTextArea textAreaComentarios = new JTextArea();
-		textAreaComentarios.setBounds(12, 13, 766, 459);
-		panelComentarios.add(textAreaComentarios);
+		textAreaComentarios.setEditable(false);
+		textAreaComentarios.setWrapStyleWord(true);
+		textAreaComentarios.setLineWrap(true);
+		JScrollPane scrollPanel_C = new JScrollPane(textAreaComentarios, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel_C.setFont(new Font("Calibri", Font.BOLD, 22));
+		scrollPanel_C.setBounds(12, 13, 766, 459);
+		panelComentarios.add(scrollPanel_C);
+		
+		// Boton voler
+		JButton botonVolver = new JButton("Volver");
+		botonVolver.setFont(new Font("Calibri", Font.BOLD, 23));
+		botonVolver.setBackground(new Color(245, 245, 245));
+		botonVolver.setBounds(550, 617, 215, 60);
+		botonVolver.setIcon(new ImageIcon(imagenReturn.getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
+		panelComentarios.add(botonVolver);
 
 		// Indicador textual de RECETA
 		final JLabel labelMenu = new JLabel("RECETA");
 		labelMenu.setForeground(new Color(255, 153, 0));
 		labelMenu.setFont(new Font("Bauhaus 93", Font.BOLD, 80));
-		labelMenu.setBounds(0, -15, 389, 105);
+		labelMenu.setBounds(12, -15, 389, 105);
 		contentPane.add(labelMenu);
 
 		JLabel labelFondo = new JLabel("");
