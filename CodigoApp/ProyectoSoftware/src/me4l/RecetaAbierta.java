@@ -17,6 +17,9 @@ import java.awt.CardLayout;
 import java.awt.TextArea;
 import javax.swing.JSeparator;
 import java.awt.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
 
 public class RecetaAbierta extends JFrame {
 
@@ -114,6 +117,7 @@ public class RecetaAbierta extends JFrame {
 		botonValorar.setIcon(new ImageIcon(imagenValorar.getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
 		botonValorar.setBackground(new Color(245, 245, 245));
 
+		// Boton seccion de comentarios
 		JButton botonComentarios = new JButton("Comentarios");
 		botonComentarios.setBounds(161, 636, 178, 41);
 		panelReceta.add(botonComentarios);
@@ -121,6 +125,13 @@ public class RecetaAbierta extends JFrame {
 		botonComentarios.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonComentarios.setIcon(new ImageIcon(imagenComentarios.getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
 		botonComentarios.setBackground(new Color(245, 245, 245));
+		
+		// Accion del boton Comentarios
+		botonComentarios.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				cardPaneles.show(paneles, "panelComentarios");
+			}
+		});
 		
 		// Text Area de descripcion de la receta
 		TextArea textDescripcion = new TextArea();
@@ -182,10 +193,10 @@ public class RecetaAbierta extends JFrame {
 		seHorizontal_2.setBounds(0, 149, 379, 23);
 		panelReceta.add(seHorizontal_2);
 		
-		JLabel lblIngredientes = new JLabel("Ingredientes:");
+		JLabel lblIngredientes = new JLabel("Ingredientes (gramos):");
 		lblIngredientes.setForeground(Color.WHITE);
 		lblIngredientes.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblIngredientes.setBounds(389, 57, 154, 23);
+		lblIngredientes.setBounds(389, 57, 272, 23);
 		panelReceta.add(lblIngredientes);
 		
 		JSeparator separator = new JSeparator();
@@ -194,19 +205,51 @@ public class RecetaAbierta extends JFrame {
 		separator.setBounds(379, 48, 407, 23);
 		panelReceta.add(separator);
 		
+		// Lista de ingredientes
 		List listaIngredientes = new List();
 		listaIngredientes.setMultipleMode(false);
 		listaIngredientes.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes.setBounds(391, 88, 383, 218);
-		panelReceta.add(listaIngredientes);
 		for (int i = 1; i < receta.getIngredientes().size(); i++) {
-			listaIngredientes.add(receta.getIngredientes().get(i)+" - "+ receta.getPesoIngredientes().get(i));
-		}
+			if(receta.getPesoIngredientes().get(i).equals("0")){
+				listaIngredientes.add(receta.getIngredientes().get(i)+" - "+ "_");
 
+			}else{
+				listaIngredientes.add(receta.getIngredientes().get(i)+" - "+ receta.getPesoIngredientes().get(i));
+
+			}
+			
+			
+		}
+		panelReceta.add(listaIngredientes);
+		
+		// Boton de reportar la receta
+		JButton botonReportar = new JButton("Reportar Receta");
+		botonReportar.setHorizontalAlignment(SwingConstants.CENTER);
+		botonReportar.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonReportar.setBackground(new Color(255, 127, 80));
+		botonReportar.setBounds(584, 636, 190, 41);
+		panelReceta.add(botonReportar);
+		
 		JPanel panelComentarios = new JPanel();
 		paneles.add(panelComentarios, "panelComentarios");
 		panelComentarios.setOpaque(false);
 		panelComentarios.setLayout(null);
+		
+		JTextArea textAreaNuevo = new JTextArea();
+		textAreaNuevo.setBounds(12, 485, 518, 192);
+		panelComentarios.add(textAreaNuevo);
+		
+		JButton botonAnyadir = new JButton("A\u00F1adir Comentario");
+		botonAnyadir.setHorizontalAlignment(SwingConstants.CENTER);
+		botonAnyadir.setFont(new Font("Calibri", Font.BOLD, 20));
+		botonAnyadir.setBackground(new Color(245, 245, 245));
+		botonAnyadir.setBounds(537, 538, 241, 74);
+		panelComentarios.add(botonAnyadir);
+		
+		JTextArea textAreaComentarios = new JTextArea();
+		textAreaComentarios.setBounds(12, 13, 766, 459);
+		panelComentarios.add(textAreaComentarios);
 
 		// Indicador textual de RECETA
 		final JLabel labelMenu = new JLabel("RECETA");

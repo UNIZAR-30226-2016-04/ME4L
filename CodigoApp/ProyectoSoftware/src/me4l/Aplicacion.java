@@ -2179,7 +2179,7 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (!textFieldCantidad_A.getText().equals("")) {
+						if (textFieldCantidad_A.getText().equals("")) {
 							listaIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem() + " - " + "_");
 						} else {
 							listaIngredientes_A.add(
@@ -2645,7 +2645,7 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (!textFieldCantidad_MR.getText().equals("")) {
+						if (textFieldCantidad_MR.getText().equals("")) {
 							listaIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem() + " - " + "_");
 						} else {
 							listaIngredientes_MR.add(
