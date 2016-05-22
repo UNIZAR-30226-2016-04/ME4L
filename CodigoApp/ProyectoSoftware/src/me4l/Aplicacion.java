@@ -745,7 +745,6 @@ public class Aplicacion extends JFrame {
 				if (comboBoxIngrediente_Pr.getSelectedIndex() != 0) {
 					ingrediente = comboBoxIngrediente_Pr.getSelectedItem().toString();
 				}
-
 				ArrayList<RecetaVO> listaBuscadas_Pr = o.busqueda(textFieldPrimeros.getText(), personas, ingrediente,
 						"Primero");
 				for (RecetaVO receta : listaBuscadas_Pr) {
@@ -1585,7 +1584,7 @@ public class Aplicacion extends JFrame {
 		botonWeb.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 50));
 		botonWeb.setForeground(Color.WHITE);
 		botonWeb.setBackground(new Color(255, 153, 0));
-		botonWeb.setBounds(223, 399, 323, 100);
+		botonWeb.setBounds(212, 395, 360, 100);
 		panelAyuda.add(botonWeb);
 
 		// Indicador textual del menu

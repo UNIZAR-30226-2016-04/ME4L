@@ -135,9 +135,9 @@ public class Operaciones {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacionDAO.eliminarPuntuacion(idReceta, ip);
-			System.out.println("Puntuaci�n eliminada correctamente.");
+			System.out.println("Puntuación eliminada correctamente.");
 		} else {
-			System.err.println("Error: No existe puntuaci�n para esa receta e IP.");
+			System.err.println("Error: No existe puntuación para esa receta e IP.");
 		}
 	}
 	
@@ -146,7 +146,7 @@ public class Operaciones {
 		PuntuacionVO puntuacion = new PuntuacionVO();
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacion = puntuacionDAO.devolverPuntuacion(idReceta, ip);
-			System.out.println("Puntuaci�n devuelta correctamente");
+			System.out.println("Puntuación devuelta correctamente");
 		} else {
 			System.err.println("Error: No existe puntuaci�n para esa receta e IP.");
 		}

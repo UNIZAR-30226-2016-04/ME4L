@@ -355,14 +355,14 @@ public class RecetaDAO {
             ResultSet rs;
 
             if (nombre == null || nombre.equals("")) {
-				if (nPersonas == null) {
+				if (nPersonas == null || nPersonas.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "' " +
 							"AND r.validada='1';");
-				} else if (ingrediente == null) {
+				} else if (ingrediente == null || ingrediente.equals("")) {
 					rs =  s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas + "' " +
 							"AND Plato='" + plato + "' AND validada='1';");
-				} else if (plato == null) {
+				} else if (plato == null || plato.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
 							nPersonas + "' AND r.validada='1';");
@@ -371,15 +371,15 @@ public class RecetaDAO {
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
 							nPersonas + "' AND Plato='" + plato + "' AND r.validada='1';");
 				}
-            } else if (nPersonas == null) {
+            } else if (nPersonas == null || nPersonas.equals("")) {
 				if (nombre == null || nombre.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "'" +
 							"AND r.validada='1';");
-				} else if (ingrediente == null) {
-					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(r.nombre) LIKE UPPER('%" + nombre + "%')" +
+				} else if (ingrediente == null || ingrediente.equals("")) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%')" +
 							" AND Plato='" + plato + "' AND validada='1';");
-				} else if (plato == null) {
+				} else if (plato == null || plato.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
 							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND r.validada='1';");
@@ -389,15 +389,15 @@ public class RecetaDAO {
 							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND Plato='" + plato + "' " +
 							"AND r.validada='1';");
 				}
-            } else if (plato == null) {
+            } else if (plato == null || plato.equals("")) {
 				if (nombre == null || nombre.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id " +
 							"AND nPerosnas='" + nPersonas + "' AND r.validada='1';");
-				} else if (ingrediente == null) {
-					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') " +
+				} else if (ingrediente == null || ingrediente.equals("")) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') " +
 							"AND nPerosnas='" + nPersonas + "' AND validada='1';");
-				} else if (nPersonas == null) {
+				} else if (nPersonas == null || nPersonas.equals("")) {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
 							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND r.validada='1';");
@@ -411,10 +411,10 @@ public class RecetaDAO {
 				if (nombre == null || nombre.equals("")) {
 					rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas +"' " +
 							"AND Plato='" + plato + "' AND validada='1';");
-				} else if (nPersonas == null) {
+				} else if (nPersonas == null || nPersonas.equals("")) {
 					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
 							 "Plato='" + plato + "' AND validada='1';");
-				} else if (plato == null) {
+				} else if (plato == null || plato.equals("")) {
 					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
 							"numeroPersonas='" + nPersonas +"' AND validada='1';");
 				} else {

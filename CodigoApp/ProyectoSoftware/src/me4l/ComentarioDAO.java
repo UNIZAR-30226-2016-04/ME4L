@@ -96,15 +96,11 @@ public class ComentarioDAO {
             ResultSet rs = s.executeQuery("SELECT * FROM comentarios WHERE idReceta='" + idReceta + "';");
 
             ArrayList<ComentarioVO> comentarios = new ArrayList<>();
-            ComentarioVO comentario = new ComentarioVO();
-            comentario.setIdReceta(idReceta);
-            String idComentario = "";
             String texto = "";
+            
             while (rs.next()) {
-                idComentario = rs.getString("idComentario");
                 texto = rs.getString("comentario");
-                comentario.setIdComentario(idComentario);
-                comentario.setContenido(texto);
+                ComentarioVO comentario = new ComentarioVO(idReceta,texto);
                 comentarios.add(comentario);
             }
             s.close();
