@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-/**
- * Created by Pablo on 21/04/2016.
- */
 public class ComentarioDAO {
 
     private Connection conexion;
@@ -88,6 +86,32 @@ public class ComentarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public ArrayList<ComentarioVO> comentariosReceta (String idReceta) {
+
+        try {
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM comentarios WHERE idReceta='" + idReceta + "';");
+
+            ArrayList<ComentarioVO> comentarios = new ArrayList<>();
+            ComentarioVO comentario = new ComentarioVO();
+            comentario.setIdReceta(idReceta);
+            String idComentario = "";
+            String texto = "";
+            while (rs.next()) {
+                idComentario = rs.getString("idComentario");
+                texto = rs.getString("comentario");
+                comentario.setIdComentario(idComentario);
+                comentario.setContenido(texto);
+                comentarios.add(comentario);
+            }
+            s.close();
+            return comentarios;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

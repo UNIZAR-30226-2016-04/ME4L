@@ -198,6 +198,15 @@ public class Operaciones {
 		return comentario;
 	}
 
+	public ArrayList<ComentarioVO> comentariosReceta (String idReceta) {
+
+		if (recetaDAO.existeReceta(idReceta)) {
+			return comentarioDAO.comentariosReceta(idReceta);
+		} else {
+			return null;
+		}
+	}
+
 	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		ArrayList<RecetaVO> recetas;
