@@ -33,6 +33,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
@@ -41,6 +42,7 @@ import java.awt.TextArea;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.List;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPopupMenu;
@@ -49,6 +51,8 @@ import java.awt.Desktop;
 
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class Aplicacion extends JFrame {
 
@@ -181,6 +185,7 @@ public class Aplicacion extends JFrame {
 		Image imagenSegundoPlato = new ImageIcon("images/iconoSegundoPlato.png").getImage();
 		Image imagenPostre = new ImageIcon("images/iconoPostre.png").getImage();
 		Image imagenEquipo = new ImageIcon("images/LogoEquipoTransparente.png").getImage();
+		Image imagenEntrante = new ImageIcon("images/entrante.png").getImage();
 
 		Font f = new Font("Bauhaus 93", Font.BOLD, 84);
 
@@ -517,30 +522,30 @@ public class Aplicacion extends JFrame {
 		}
 
 		// Panel Busqueda Avanzada
-		JPanel panelAvanzada = new JPanel();
-		panelAvanzada.setOpaque(false);
-		pantallaMenu.add(panelAvanzada, "panelAvanzada");
-		panelAvanzada.setLayout(null);
+		JPanel panelEntrantes = new JPanel();
+		panelEntrantes.setOpaque(false);
+		pantallaMenu.add(panelEntrantes, "panelEntrantes");
+		panelEntrantes.setLayout(null);
 
 		// Text field busqueda avanzada
 		textFieldBusqueda_BA = new JTextField();
 		textFieldBusqueda_BA.setFont(new Font("Calibri", Font.BOLD, 15));
 		textFieldBusqueda_BA.setColumns(10);
 		textFieldBusqueda_BA.setBounds(12, 15, 703, 36);
-		panelAvanzada.add(textFieldBusqueda_BA);
+		panelEntrantes.add(textFieldBusqueda_BA);
 
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_BA = new List();
 		listaRecetasBuscadas_BA.setFont(new Font("Calibri", Font.BOLD, 20));
 		listaRecetasBuscadas_BA.setBounds(12, 177, 556, 257);
-		panelAvanzada.add(listaRecetasBuscadas_BA);
+		panelEntrantes.add(listaRecetasBuscadas_BA);
 
 		// Label ingredientes de busqueda avanzada
 		JLabel labelIngrediente_BA = new JLabel("Ingrediente Principal:");
 		labelIngrediente_BA.setForeground(Color.WHITE);
 		labelIngrediente_BA.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelIngrediente_BA.setBounds(12, 100, 174, 23);
-		panelAvanzada.add(labelIngrediente_BA);
+		panelEntrantes.add(labelIngrediente_BA);
 
 		// ComboBox de los ingredientes de busqueda avanzada
 		JComboBox comboBoxIngrediente_BA = new JComboBox();
@@ -548,7 +553,7 @@ public class Aplicacion extends JFrame {
 		comboBoxIngrediente_BA.setLightWeightPopupEnabled(false);
 		comboBoxIngrediente_BA.setFont(new Font("Calibri", Font.BOLD, 15));
 		comboBoxIngrediente_BA.setBounds(198, 101, 204, 22);
-		panelAvanzada.add(comboBoxIngrediente_BA);
+		panelEntrantes.add(comboBoxIngrediente_BA);
 
 		// LLenado del comboBox
 		ingredientesAplicacion = o.obtenerIngredientes();
@@ -563,28 +568,28 @@ public class Aplicacion extends JFrame {
 		comboNumPersonas_BA.setLightWeightPopupEnabled(false);
 		comboNumPersonas_BA.setFont(new Font("Calibri", Font.BOLD, 15));
 		comboNumPersonas_BA.setBounds(198, 65, 272, 22);
-		panelAvanzada.add(comboNumPersonas_BA);
+		panelEntrantes.add(comboNumPersonas_BA);
 
 		// Label numero de personas
 		JLabel labelNumPersonas_BA = new JLabel("Número de personas:");
 		labelNumPersonas_BA.setForeground(Color.WHITE);
 		labelNumPersonas_BA.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelNumPersonas_BA.setBounds(12, 64, 174, 23);
-		panelAvanzada.add(labelNumPersonas_BA);
+		panelEntrantes.add(labelNumPersonas_BA);
 
 		// Label recetas
 		JLabel labelRecetas_BA = new JLabel("Recetas:");
 		labelRecetas_BA.setForeground(Color.WHITE);
 		labelRecetas_BA.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelRecetas_BA.setBounds(12, 148, 174, 23);
-		panelAvanzada.add(labelRecetas_BA);
+		panelEntrantes.add(labelRecetas_BA);
 
 		// Boton buscar
 		JButton botonBuscar_BA = new JButton("Buscar");
 		botonBuscar_BA.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonBuscar_BA.setBackground(new Color(245, 245, 245));
 		botonBuscar_BA.setBounds(727, 12, 116, 39);
-		panelAvanzada.add(botonBuscar_BA);
+		panelEntrantes.add(botonBuscar_BA);
 
 		// Accion del boton buscar
 		botonBuscar_BA.addMouseListener(new MouseAdapter() {
@@ -600,7 +605,7 @@ public class Aplicacion extends JFrame {
 				}
 
 				ArrayList<RecetaVO> listaBuscadas_BA = o.busqueda(textFieldBusqueda_BA.getText(), personas, ingrediente,
-						"");
+						"Entrante");
 				for (RecetaVO receta : listaBuscadas_BA) {
 					listaRecetasBuscadas_BA.add(receta.getNombre());
 					recetas_BA.add(receta);
@@ -613,14 +618,14 @@ public class Aplicacion extends JFrame {
 		separador_BA.setForeground(new Color(0, 0, 0));
 		separador_BA.setBackground(new Color(0, 0, 0));
 		separador_BA.setBounds(12, 136, 856, 23);
-		panelAvanzada.add(separador_BA);
+		panelEntrantes.add(separador_BA);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_BA = new JButton("Ver Receta");
 		botonVerReceta_BA.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_BA.setBackground(new Color(173, 255, 47));
 		botonVerReceta_BA.setBounds(182, 448, 220, 60);
-		panelAvanzada.add(botonVerReceta_BA);
+		panelEntrantes.add(botonVerReceta_BA);
 
 		// Accion del boton de ver receta seleccionada
 		botonVerReceta_BA.addMouseListener(new MouseAdapter() {
@@ -638,25 +643,25 @@ public class Aplicacion extends JFrame {
 		separator.setForeground(Color.BLACK);
 		separator.setBackground(Color.BLACK);
 		separator.setBounds(574, 136, 36, 385);
-		panelAvanzada.add(separator);
+		panelEntrantes.add(separator);
 
-		JLabel labelRecomendaciones_BA = new JLabel("Platos recomendados:");
+		JLabel labelRecomendaciones_BA = new JLabel("Entrantes recomendados:");
 		labelRecomendaciones_BA.setForeground(Color.WHITE);
 		labelRecomendaciones_BA.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelRecomendaciones_BA.setBounds(583, 148, 273, 23);
-		panelAvanzada.add(labelRecomendaciones_BA);
+		panelEntrantes.add(labelRecomendaciones_BA);
 
 		JLabel labelTipo_BA = new JLabel("Tipo de plato:");
 		labelTipo_BA.setForeground(Color.WHITE);
 		labelTipo_BA.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelTipo_BA.setBounds(534, 84, 116, 23);
-		panelAvanzada.add(labelTipo_BA);
+		panelEntrantes.add(labelTipo_BA);
 
-		JLabel labelTODOS = new JLabel("Todos");
+		JLabel labelTODOS = new JLabel("Entrantes");
 		labelTODOS.setFont(new Font("Calibri", Font.BOLD, 18));
 		labelTODOS.setForeground(new Color(255, 153, 0));
 		labelTODOS.setBounds(650, 84, 116, 23);
-		panelAvanzada.add(labelTODOS);
+		panelEntrantes.add(labelTODOS);
 
 		// Panel Primeros
 		JPanel panelPrimeros = new JPanel();
@@ -1237,11 +1242,15 @@ public class Aplicacion extends JFrame {
 		textFieldCantidadPrinc_PR.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
-		final TextArea textAreaDescripcion_PR = new TextArea();
+		final JTextArea textAreaDescripcion_PR = new JTextArea();
 		textAreaDescripcion_PR.setFont(f1);
-		textAreaDescripcion_PR.setBounds(0, 152, 440, 269);
-		panelProponer.add(textAreaDescripcion_PR);
-
+		textAreaDescripcion_PR.setLineWrap(true);
+		textAreaDescripcion_PR.setWrapStyleWord(true);		
+		JScrollPane scrollPanel = new JScrollPane(textAreaDescripcion_PR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel.setFont(f1);
+		scrollPanel.setBounds(0, 152, 440, 269);
+		panelProponer.add(scrollPanel);
+		
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
 		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
@@ -1345,7 +1354,7 @@ public class Aplicacion extends JFrame {
 		// ComboBox del tipo de plato
 		final JComboBox comboBoxTipo_PR = new JComboBox();
 		comboBoxTipo_PR.setModel(new DefaultComboBoxModel(
-				new String[] { "-- Seleccione el tipo de plato --", "Primero", "Segundo", "Postre" }));
+				new String[] { "-- Seleccione el tipo de plato --", "Entrante", "Primero", "Segundo", "Postre" }));
 		comboBoxTipo_PR.setFont(f1);
 		comboBoxTipo_PR.setBounds(171, 84, 272, 22);
 		panelProponer.add(comboBoxTipo_PR);
@@ -1461,6 +1470,7 @@ public class Aplicacion extends JFrame {
 						comboBoxIngrediente_PR.setSelectedIndex(0);
 						comboBoxTipo_PR.setSelectedIndex(0);
 						textFieldCantidad_PR.setText("");
+						indexIngredientes_PR.clear();
 						listaIngredientes_PR.removeAll();
 						ingredientes.clear();
 						pesoIngredientes.clear();
@@ -1589,7 +1599,7 @@ public class Aplicacion extends JFrame {
 		menuPrincipal.add(IconoApp3);
 
 		// Botones
-		final JButton botonAvanzada = new JButton("Búsqueda Avanzada");
+		final JButton botonEntrantes = new JButton("Entrantes");
 		final JButton botonPrimeros = new JButton("Primeros");
 		final JButton botonPostres = new JButton("Postres");
 		final JButton botonSegundos = new JButton("Segundos");
@@ -1615,27 +1625,27 @@ public class Aplicacion extends JFrame {
 			f = new Font("Dialog.Italic", Font.BOLD, 14);
 		}
 
-		botonAvanzada.setFont(f);
-		botonAvanzada.setBackground(new Color(245, 245, 245));
-		botonAvanzada.setBounds(12, 193, 235, 60);
-		botonAvanzada.setHorizontalAlignment(SwingConstants.LEFT);
-		botonAvanzada.setIcon(new ImageIcon(imagenAdSearch.getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
+		botonEntrantes.setFont(f);
+		botonEntrantes.setBackground(new Color(245, 245, 245));
+		botonEntrantes.setBounds(12, 193, 235, 60);
+		botonEntrantes.setHorizontalAlignment(SwingConstants.LEFT);
+		botonEntrantes.setIcon(new ImageIcon(imagenEntrante.getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
 
-		menuPrincipal.add(botonAvanzada);
+		menuPrincipal.add(botonEntrantes);
 
 		// Accion del boton de Busqueda Avanzada
-		botonAvanzada.addMouseListener(new MouseAdapter() {
+		botonEntrantes.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
-				labelMenu.setText("BÚSQUEDA AVANZADA");
+				labelMenu.setText("ENTRANTES");
 				Font f = new Font("Bauhaus 93", Font.BOLD, 70);
 				if (!f.getFamily().equals("Bauhaus 93")) {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
-				botonAvanzada.setBackground(new Color(255, 153, 0));
-				cardMenu.show(pantallaMenu, "panelAvanzada");
+				botonEntrantes.setBackground(new Color(255, 153, 0));
+				cardMenu.show(pantallaMenu, "panelEntrantes");
 			}
 		});
 
@@ -1658,7 +1668,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonPrimeros.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelPrimeros");
@@ -1684,7 +1694,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonPostres.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelPostres");
@@ -1709,7 +1719,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonSegundos.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelSegundos");
@@ -1735,7 +1745,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonDestacados.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelDestacados");
@@ -1760,7 +1770,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonProponer.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelProponer");
@@ -1833,6 +1843,19 @@ public class Aplicacion extends JFrame {
 		botonVer_VR.setBackground(new Color(245, 245, 245));
 		botonVer_VR.setBounds(486, 153, 281, 60);
 		panelValidar.add(botonVer_VR);
+
+		// Accion del boton ver receta pendiente
+		botonVer_VR.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent arg0) {
+				if (listaRecetasPendientesValidar_VR.getSelectedIndex() >= 0) {
+					RecetaAbierta ra = new RecetaAbierta(
+							recetasParaValidar.get(listaRecetasPendientesValidar_VR.getSelectedIndex()));
+					ra.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+					ra.setVisible(true);
+				}
+			}
+		});
 
 		// Boton validar receta seleccionada
 		JButton botonValidar_VR = new JButton("Validar Receta");
@@ -2035,10 +2058,15 @@ public class Aplicacion extends JFrame {
 		textFieldCantidadPrinc_A.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
-		final TextArea textAreaDescripcion_A = new TextArea();
+		final JTextArea textAreaDescripcion_A = new JTextArea();
 		textAreaDescripcion_A.setFont(f1);
+		textAreaDescripcion_A.setLineWrap(true);
+		textAreaDescripcion_A.setWrapStyleWord(true);
 		textAreaDescripcion_A.setBounds(0, 152, 440, 236);
-		panelAnyadir.add(textAreaDescripcion_A);
+		JScrollPane scrollPanel_A = new JScrollPane(textAreaDescripcion_A, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel_A.setFont(f1);
+		scrollPanel_A.setBounds(0, 152, 440, 239);
+		panelAnyadir.add(scrollPanel_A);
 
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_A = new JButton("A\u00D1ADIR RECETA");
@@ -2143,7 +2171,7 @@ public class Aplicacion extends JFrame {
 		// ComboBox del tipo de plato
 		final JComboBox comboBoxTipo_A = new JComboBox();
 		comboBoxTipo_A.setModel(new DefaultComboBoxModel(
-				new String[] { "-- Seleccione el tipo de plato --", "Primero", "Segundo", "Postre" }));
+				new String[] { "-- Seleccione el tipo de plato --", "Entrante", "Primero", "Segundo", "Postre" }));
 		comboBoxTipo_A.setFont(f1);
 		comboBoxTipo_A.setBounds(171, 84, 272, 22);
 		panelAnyadir.add(comboBoxTipo_A);
@@ -2233,6 +2261,7 @@ public class Aplicacion extends JFrame {
 						comboBoxIngrediente_A.setSelectedIndex(0);
 						comboBoxTipo_A.setSelectedIndex(0);
 						textFieldCantidad_A.setText("");
+						indexIngredientes_A.clear();
 						listaIngredientes_A.removeAll();
 						ingredientes_A.clear();
 						pesoIngredientes_A.clear();
@@ -2508,10 +2537,14 @@ public class Aplicacion extends JFrame {
 		textFieldCantidadPrinc_MR.setColumns(10);
 
 		// TextArea de la descripcion libre de la receta
-		final TextArea textAreaDescripcion_MR = new TextArea();
+		final JTextArea textAreaDescripcion_MR = new JTextArea();
 		textAreaDescripcion_MR.setFont(f);
-		textAreaDescripcion_MR.setBounds(0, 152, 440, 237);
-		panelModificarReceta.add(textAreaDescripcion_MR);
+		textAreaDescripcion_MR.setLineWrap(true);
+		textAreaDescripcion_MR.setWrapStyleWord(true);
+		JScrollPane scrollPanel_MR = new JScrollPane(textAreaDescripcion_MR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel_MR.setFont(f1);
+		scrollPanel_MR.setBounds(0, 152, 440, 269);
+		panelModificarReceta.add(scrollPanel_MR);
 
 		// LLenado del comboBox
 		ingredientesAplicacion = o.obtenerIngredientes();
@@ -2609,7 +2642,7 @@ public class Aplicacion extends JFrame {
 		// ComboBox del tipo de plato
 		final JComboBox comboBoxTipo_MR = new JComboBox();
 		comboBoxTipo_MR.setModel(new DefaultComboBoxModel(
-				new String[] { "-- Seleccione el tipo de plato --", "Primero", "Segundo", "Postre" }));
+				new String[] { "-- Seleccione el tipo de plato --", "Entrante", "Primero", "Segundo", "Postre" }));
 		comboBoxTipo_MR.setFont(f1);
 		comboBoxTipo_MR.setBounds(171, 84, 272, 22);
 		panelModificarReceta.add(comboBoxTipo_MR);
@@ -2699,6 +2732,7 @@ public class Aplicacion extends JFrame {
 								comboBoxTipo_MR.getSelectedItem().toString(),
 								comboBoxNumPersonas_MR.getSelectedItem().toString(), ingredientes, pesoIngredientes,
 								recetaSeleccionada_MR.getId());
+						indexIngredientes_MR.clear();
 
 						// Recargamos las recetas buscadas para modificar
 						listaBuscada_MR.removeAll();
@@ -2805,7 +2839,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonValidar.setBackground(new Color(255, 153, 0));
 				cardAdmin.show(panelAdminCard, "panelValidar");
@@ -2830,7 +2864,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonAnyadir.setBackground(new Color(255, 153, 0));
 				cardAdmin.show(panelAdminCard, "panelAnyadir");
@@ -2855,7 +2889,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonModificar.setBackground(new Color(255, 153, 0));
 				cardAdmin.show(panelAdminCard, "panelModificar");
@@ -2880,7 +2914,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonAyuda.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelAyuda");
@@ -2908,7 +2942,7 @@ public class Aplicacion extends JFrame {
 						f = new Font("Dialog.Italic", Font.BOLD, 65);
 					}
 					labelMenu.setFont(f);
-					botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+					botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 							botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 					botonAdministrador.setBackground(new Color(255, 153, 0));
 					cardMenu.show(pantallaMenu, "panelAdministrador");
@@ -2929,7 +2963,7 @@ public class Aplicacion extends JFrame {
 					f = new Font("Dialog.Italic", Font.BOLD, 65);
 				}
 				labelMenu.setFont(f);
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				cardMenu.show(pantallaMenu, "panelPrincipal");
 			}
@@ -3045,7 +3079,7 @@ public class Aplicacion extends JFrame {
 						f = new Font("Dialog.Italic", Font.BOLD, 65);
 					}
 					labelMenu.setFont(f);
-					botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+					botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 							botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 					identificado = true;
 					botonAdministrador.setBackground(new Color(255, 153, 0));
@@ -3094,7 +3128,7 @@ public class Aplicacion extends JFrame {
 				cardLayout.show(contentPane, "menuPrincipal");
 				cardMenu.show(pantallaMenu, "panelPrincipal");
 				labelMenu.setText("MENÚ PRINCIPAL");
-				botonesEnBlanco(botonAvanzada, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
+				botonesEnBlanco(botonEntrantes, botonPrimeros, botonSegundos, botonPostres, botonDestacados,
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 			}
 		});
