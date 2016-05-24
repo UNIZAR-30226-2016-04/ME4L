@@ -180,11 +180,12 @@ public class RecetaAbierta extends JFrame {
 		lCantidadP.setText(receta.getPesoIngredientes().get(0));
 		panelReceta.add(lCantidadP);
 
-		JLabel lblGramos = new JLabel("gramos.");
+		JLabel lblGramos = new JLabel("");
 		lblGramos.setForeground(Color.WHITE);
 		lblGramos.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblGramos.setBounds(270, 223, 86, 23);
+		lblGramos.setBounds(270, 223, 109, 23);
 		panelReceta.add(lblGramos);
+		lblGramos.setText(receta.getUnidad().get(0));
 
 		JSeparator seVertical = new JSeparator();
 		seVertical.setOrientation(SwingConstants.VERTICAL);
@@ -199,7 +200,7 @@ public class RecetaAbierta extends JFrame {
 		seHorizontal_2.setBounds(0, 149, 379, 23);
 		panelReceta.add(seHorizontal_2);
 
-		JLabel lblIngredientes = new JLabel("Ingredientes (gramos):");
+		JLabel lblIngredientes = new JLabel("Ingredientes:");
 		lblIngredientes.setForeground(Color.WHITE);
 		lblIngredientes.setFont(new Font("Calibri", Font.BOLD, 22));
 		lblIngredientes.setBounds(389, 57, 272, 23);
@@ -217,14 +218,8 @@ public class RecetaAbierta extends JFrame {
 		listaIngredientes.setFont(new Font("Calibri", Font.BOLD, 15));
 		listaIngredientes.setBounds(391, 88, 383, 218);
 		for (int i = 1; i < receta.getIngredientes().size(); i++) {
-			if (receta.getPesoIngredientes().get(i).equals("0")) {
-				listaIngredientes.add(receta.getIngredientes().get(i) + " - " + "_");
-
-			} else {
-				listaIngredientes.add(receta.getIngredientes().get(i) + " - " + receta.getPesoIngredientes().get(i));
-
-			}
-
+			listaIngredientes.add(receta.getIngredientes().get(i) + " - " + receta.getPesoIngredientes().get(i) + " - "
+					+ receta.getUnidad().get(i));
 		}
 		panelReceta.add(listaIngredientes);
 

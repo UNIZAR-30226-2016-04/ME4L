@@ -1126,7 +1126,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_PR = new JComboBox();
 		comboBoxIngrediente_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_PR.setFont(f1);
-		comboBoxIngrediente_PR.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_PR.setBounds(592, 124, 243, 22);
 		panelProponer.add(comboBoxIngrediente_PR);
 		comboBoxIngrediente_PR.setLightWeightPopupEnabled(false);
 
@@ -1178,6 +1178,14 @@ public class Aplicacion extends JFrame {
 		labelNumPersonas_PR.setFont(f);
 		panelProponer.add(labelNumPersonas_PR);
 
+		JComboBox comboBoxUnidades_PR = new JComboBox();
+		comboBoxUnidades_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_PR.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_PR.setBounds(701, 153, 134, 22);
+		panelProponer.add(comboBoxUnidades_PR);
+
 		// Label de la URL de la imagen
 		JLabel labelTipo_PR = new JLabel("Tipo de plato:");
 		labelTipo_PR.setBounds(0, 84, 174, 23);
@@ -1214,15 +1222,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_PR = new JLabel("Cantidad:");
 		labelCantidadPrinc_PR.setForeground(Color.WHITE);
 		labelCantidadPrinc_PR.setFont(f);
-		labelCantidadPrinc_PR.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_PR.setBounds(496, 47, 91, 23);
 		panelProponer.add(labelCantidadPrinc_PR);
-
-		// Label gramos
-		JLabel labelGramos_PR = new JLabel("gramos");
-		labelGramos_PR.setForeground(Color.WHITE);
-		labelGramos_PR.setFont(f);
-		labelGramos_PR.setBounds(780, 48, 66, 23);
-		panelProponer.add(labelGramos_PR);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_PR = new JTextField();
@@ -1236,7 +1237,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_PR.setFont(f1);
-		textFieldCantidadPrinc_PR.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_PR.setBounds(592, 48, 97, 22);
 		panelProponer.add(textFieldCantidadPrinc_PR);
 		textFieldCantidadPrinc_PR.setColumns(10);
 
@@ -1244,12 +1245,13 @@ public class Aplicacion extends JFrame {
 		final JTextArea textAreaDescripcion_PR = new JTextArea();
 		textAreaDescripcion_PR.setFont(f1);
 		textAreaDescripcion_PR.setLineWrap(true);
-		textAreaDescripcion_PR.setWrapStyleWord(true);		
-		JScrollPane scrollPanel = new JScrollPane(textAreaDescripcion_PR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		textAreaDescripcion_PR.setWrapStyleWord(true);
+		JScrollPane scrollPanel = new JScrollPane(textAreaDescripcion_PR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel.setFont(f1);
 		scrollPanel.setBounds(0, 152, 440, 269);
 		panelProponer.add(scrollPanel);
-		
+
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
 		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
@@ -1267,14 +1269,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_PR = new JLabel("Ingrediente:");
 		labelIngrediente_PR.setForeground(Color.WHITE);
 		labelIngrediente_PR.setFont(f);
-		labelIngrediente_PR.setBounds(535, 123, 117, 23);
+		labelIngrediente_PR.setBounds(496, 123, 117, 23);
 		panelProponer.add(labelIngrediente_PR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_PR = new JLabel("Cantidad:");
 		labelCantidad_PR.setForeground(Color.WHITE);
 		labelCantidad_PR.setFont(f);
-		labelCantidad_PR.setBounds(553, 160, 91, 23);
+		labelCantidad_PR.setBounds(496, 152, 91, 23);
 		panelProponer.add(labelCantidad_PR);
 
 		// TextField cantidad del ingrediente
@@ -1289,15 +1291,8 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_PR.setFont(f1);
 		textFieldCantidad_PR.setColumns(10);
-		textFieldCantidad_PR.setBounds(631, 160, 137, 22);
+		textFieldCantidad_PR.setBounds(592, 153, 100, 22);
 		panelProponer.add(textFieldCantidad_PR);
-
-		// Label gramos 2
-		JLabel labelGramos2_PR = new JLabel("gramos");
-		labelGramos2_PR.setForeground(Color.WHITE);
-		labelGramos2_PR.setFont(f);
-		labelGramos2_PR.setBounds(780, 160, 66, 23);
-		panelProponer.add(labelGramos2_PR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_PR = new JButton("Añadir Ingrediente");
@@ -1372,6 +1367,14 @@ public class Aplicacion extends JFrame {
 		botonCancelarReceta_PR.setBounds(288, 432, 155, 60);
 		panelProponer.add(botonCancelarReceta_PR);
 
+		JComboBox comboBoxUnidadesPrinc_PR = new JComboBox();
+		comboBoxUnidadesPrinc_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_PR.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_PR.setBounds(701, 47, 134, 22);
+		panelProponer.add(comboBoxUnidadesPrinc_PR);
+
 		// Accion del boton de cancelar receta
 
 		botonCancelarReceta_PR.addMouseListener(new MouseAdapter() {
@@ -1386,6 +1389,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_PR.setSelectedIndex(0);
 				textFieldCantidad_PR.setText("");
 				listaIngredientes_PR.removeAll();
+				comboBoxUnidades_PR.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_PR.setSelectedIndex(0);
 			}
 		});
 
@@ -1405,7 +1410,8 @@ public class Aplicacion extends JFrame {
 		botonAnyadirIngrediente_PR.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_PR.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_PR.getSelectedIndex() != 0) && !textFieldCantidad_PR.getText().equals("")
+						&& comboBoxUnidades_PR.getSelectedIndex() != 0) {
 					if (comboBoxIngPrinc_PR.getSelectedIndex() == comboBoxIngrediente_PR.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -1413,12 +1419,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_PR.getText().equals("")) {
-							listaIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_PR.add(
-									comboBoxIngrediente_PR.getSelectedItem() + " - " + textFieldCantidad_PR.getText());
-						}
+						listaIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem() + " - "
+								+ textFieldCantidad_PR.getText() + " - " + comboBoxUnidades_PR.getSelectedItem());
 						indexIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem().toString());
 					}
 				}
@@ -1431,33 +1433,37 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_PR.getText().equals("") && comboBoxNumPersonas_PR.getSelectedIndex() != 0
 						&& !textAreaDescripcion_PR.getText().equals("") && comboBoxIngPrinc_PR.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_PR.getText().equals("") && comboBoxTipo_PR.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_PR.getText().equals("")
+						&& comboBoxUnidadesPrinc_PR.getSelectedIndex() != 0
+						&& comboBoxTipo_PR.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_PR.getText().length() > 4
 							|| textFieldCantidad_PR.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes = new ArrayList<String>();
 						String[] s = listaIngredientes_PR.getItems();
 
 						ingredientes.add(comboBoxIngPrinc_PR.getSelectedItem().toString());
 						pesoIngredientes.add(textFieldCantidadPrinc_PR.getText());
+						unidadIngredientes.add(comboBoxUnidadesPrinc_PR.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(0, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes.add("0");
-							} else {
-								pesoIngredientes.add(cantidad);
-							}
+							pesoIngredientes.add(cantidad);
+							unidadIngredientes.add(unidad);
 						}
 
 						o.addReceta(textFieldNombre_PR.getText(), textAreaDescripcion_PR.getText(),
 								comboBoxTipo_PR.getSelectedItem().toString(),
-								comboBoxNumPersonas_PR.getSelectedItem().toString(), ingredientes, pesoIngredientes);
+								comboBoxNumPersonas_PR.getSelectedItem().toString(), ingredientes, pesoIngredientes,
+								unidadIngredientes);
 
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"La receta propuesta ha sido enviada correctamente.");
@@ -1941,7 +1947,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_A = new JComboBox();
 		comboBoxIngrediente_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_A.setFont(f1);
-		comboBoxIngrediente_A.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_A.setBounds(593, 124, 249, 22);
 		panelAnyadir.add(comboBoxIngrediente_A);
 		comboBoxIngrediente_A.setLightWeightPopupEnabled(false);
 
@@ -1961,7 +1967,7 @@ public class Aplicacion extends JFrame {
 
 		// ComboBox del ingrediente Principal
 		final JComboBox comboBoxIngPrinc_A = new JComboBox();
-		comboBoxIngPrinc_A.setBounds(631, 13, 204, 22);
+		comboBoxIngPrinc_A.setBounds(638, 13, 204, 22);
 		comboBoxIngPrinc_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngPrinc_A.setFont(f1);
 		panelAnyadir.add(comboBoxIngPrinc_A);
@@ -2030,15 +2036,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_A = new JLabel("Cantidad:");
 		labelCantidadPrinc_A.setForeground(Color.WHITE);
 		labelCantidadPrinc_A.setFont(f);
-		labelCantidadPrinc_A.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_A.setBounds(496, 47, 91, 23);
 		panelAnyadir.add(labelCantidadPrinc_A);
-
-		// Label gramos
-		JLabel labelGramos_A = new JLabel("gramos");
-		labelGramos_A.setForeground(Color.WHITE);
-		labelGramos_A.setFont(f);
-		labelGramos_A.setBounds(780, 48, 66, 23);
-		panelAnyadir.add(labelGramos_A);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_A = new JTextField();
@@ -2052,7 +2051,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_A.setFont(f1);
-		textFieldCantidadPrinc_A.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_A.setBounds(593, 48, 103, 22);
 		panelAnyadir.add(textFieldCantidadPrinc_A);
 		textFieldCantidadPrinc_A.setColumns(10);
 
@@ -2062,13 +2061,14 @@ public class Aplicacion extends JFrame {
 		textAreaDescripcion_A.setLineWrap(true);
 		textAreaDescripcion_A.setWrapStyleWord(true);
 		textAreaDescripcion_A.setBounds(0, 152, 440, 236);
-		JScrollPane scrollPanel_A = new JScrollPane(textAreaDescripcion_A, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPanel_A = new JScrollPane(textAreaDescripcion_A, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel_A.setFont(f1);
 		scrollPanel_A.setBounds(0, 152, 440, 239);
 		panelAnyadir.add(scrollPanel_A);
 
 		// Boton de enviar la receta propuesta
-		JButton botonEnviarPropuesta_A = new JButton("A\u00D1ADIR RECETA");
+		JButton botonEnviarPropuesta_A = new JButton("AÑADIR RECETA");
 		botonEnviarPropuesta_A.setFont(f2);
 		botonEnviarPropuesta_A.setBackground(new Color(173, 255, 47));
 		botonEnviarPropuesta_A.setBounds(0, 394, 281, 60);
@@ -2084,14 +2084,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_A = new JLabel("Ingrediente:");
 		labelIngrediente_A.setForeground(Color.WHITE);
 		labelIngrediente_A.setFont(f);
-		labelIngrediente_A.setBounds(535, 123, 117, 23);
+		labelIngrediente_A.setBounds(496, 123, 117, 23);
 		panelAnyadir.add(labelIngrediente_A);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_A = new JLabel("Cantidad:");
 		labelCantidad_A.setForeground(Color.WHITE);
 		labelCantidad_A.setFont(f);
-		labelCantidad_A.setBounds(553, 160, 91, 23);
+		labelCantidad_A.setBounds(496, 152, 91, 23);
 		panelAnyadir.add(labelCantidad_A);
 
 		// TextField cantidad del ingrediente
@@ -2106,15 +2106,8 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_A.setFont(f1);
 		textFieldCantidad_A.setColumns(10);
-		textFieldCantidad_A.setBounds(631, 160, 137, 22);
+		textFieldCantidad_A.setBounds(593, 153, 103, 22);
 		panelAnyadir.add(textFieldCantidad_A);
-
-		// Label gramos 2
-		JLabel labelGramos2_A = new JLabel("gramos");
-		labelGramos2_A.setForeground(Color.WHITE);
-		labelGramos2_A.setFont(f);
-		labelGramos2_A.setBounds(780, 160, 66, 23);
-		panelAnyadir.add(labelGramos2_A);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_A = new JButton("Añadir Ingrediente");
@@ -2129,6 +2122,22 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonBorrarIngrediente_A.setBounds(667, 421, 180, 33);
 		panelAnyadir.add(botonBorrarIngrediente_A);
+
+		JComboBox comboBoxUnidades_A = new JComboBox();
+		comboBoxUnidades_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_A.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_A.setBounds(708, 153, 134, 22);
+		panelAnyadir.add(comboBoxUnidades_A);
+
+		JComboBox comboBoxUnidadesPrinc_A = new JComboBox();
+		comboBoxUnidadesPrinc_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_A.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_A.setBounds(708, 48, 134, 22);
+		panelAnyadir.add(comboBoxUnidadesPrinc_A);
 
 		// Lista con los ingredientes aÃ±adidos
 		final List listaIngredientes_A = new List();
@@ -2152,13 +2161,13 @@ public class Aplicacion extends JFrame {
 		JLabel labelAsterisco4_A = new JLabel("*");
 		labelAsterisco4_A.setForeground(Color.RED);
 		labelAsterisco4_A.setFont(f);
-		labelAsterisco4_A.setBounds(839, 15, 19, 16);
+		labelAsterisco4_A.setBounds(849, 15, 19, 16);
 		panelAnyadir.add(labelAsterisco4_A);
 
 		JLabel labelAsterisco5_A = new JLabel("*");
 		labelAsterisco5_A.setForeground(Color.RED);
 		labelAsterisco5_A.setFont(f);
-		labelAsterisco5_A.setBounds(839, 50, 19, 16);
+		labelAsterisco5_A.setBounds(849, 50, 19, 16);
 		panelAnyadir.add(labelAsterisco5_A);
 
 		JLabel labelCampoObligatorio_A = new JLabel("* Campo obligatorio");
@@ -2198,7 +2207,8 @@ public class Aplicacion extends JFrame {
 		botonAnyadirIngrediente_A.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_A.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_A.getSelectedIndex() != 0) && !textFieldCantidad_A.getText().equals("")
+						&& comboBoxUnidades_A.getSelectedIndex() != 0) {
 					if (comboBoxIngPrinc_A.getSelectedIndex() == comboBoxIngrediente_A.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -2206,12 +2216,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_A.getText().equals("")) {
-							listaIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_A.add(
-									comboBoxIngrediente_A.getSelectedItem() + " - " + textFieldCantidad_A.getText());
-						}
+						listaIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem() + " - "
+								+ textFieldCantidad_A.getText() + " - " + comboBoxUnidades_A.getSelectedItem());
 						indexIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem().toString());
 					}
 				}
@@ -2224,32 +2230,35 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_A.getText().equals("") && comboBoxNumPersonas_A.getSelectedIndex() != 0
 						&& !textAreaDescripcion_A.getText().equals("") && comboBoxIngPrinc_A.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_A.getText().equals("") && comboBoxTipo_A.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_A.getText().equals("")
+						&& comboBoxUnidadesPrinc_A.getSelectedIndex() != 0 && comboBoxTipo_A.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_A.getText().length() > 4 || textFieldCantidad_A.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes_A = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes_A = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes_A = new ArrayList<String>();
 						String[] s = listaIngredientes_A.getItems();
 
 						ingredientes_A.add(comboBoxIngPrinc_A.getSelectedItem().toString());
 						pesoIngredientes_A.add(textFieldCantidadPrinc_A.getText());
+						unidadIngredientes_A.add(comboBoxUnidadesPrinc_A.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(0, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes_A.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes_A.add("0");
-							} else {
-								pesoIngredientes_A.add(cantidad);
-							}
+							pesoIngredientes_A.add(cantidad);
+							unidadIngredientes_A.add(unidad);
 						}
 
 						o.addRecetaV(textFieldNombre_A.getText(), textAreaDescripcion_A.getText(),
 								comboBoxTipo_A.getSelectedItem().toString(),
-								comboBoxNumPersonas_A.getSelectedItem().toString(), ingredientes_A, pesoIngredientes_A);
+								comboBoxNumPersonas_A.getSelectedItem().toString(), ingredientes_A, pesoIngredientes_A,
+								unidadIngredientes_A);
 
 						JOptionPane.showMessageDialog(menuPrincipal, "La receta ha sido añadida.");
 						textFieldNombre_A.setText("");
@@ -2295,6 +2304,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_A.setSelectedIndex(0);
 				textFieldCantidad_A.setText("");
 				listaIngredientes_A.removeAll();
+				comboBoxUnidades_A.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_A.setSelectedIndex(0);
 			}
 		});
 
@@ -2405,7 +2416,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_MR = new JComboBox();
 		comboBoxIngrediente_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 15));
-		comboBoxIngrediente_MR.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_MR.setBounds(592, 124, 243, 22);
 		panelModificarReceta.add(comboBoxIngrediente_MR);
 		comboBoxIngrediente_MR.setLightWeightPopupEnabled(false);
 
@@ -2509,15 +2520,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_MR = new JLabel("Cantidad:");
 		labelCantidadPrinc_MR.setForeground(Color.WHITE);
 		labelCantidadPrinc_MR.setFont(f);
-		labelCantidadPrinc_MR.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_MR.setBounds(496, 47, 91, 23);
 		panelModificarReceta.add(labelCantidadPrinc_MR);
-
-		// Label gramos
-		JLabel labelGramos_MR = new JLabel("gramos");
-		labelGramos_MR.setForeground(Color.WHITE);
-		labelGramos_MR.setFont(f);
-		labelGramos_MR.setBounds(780, 48, 66, 23);
-		panelModificarReceta.add(labelGramos_MR);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_MR = new JTextField();
@@ -2531,7 +2535,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_MR.setFont(f);
-		textFieldCantidadPrinc_MR.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_MR.setBounds(592, 47, 100, 22);
 		panelModificarReceta.add(textFieldCantidadPrinc_MR);
 		textFieldCantidadPrinc_MR.setColumns(10);
 
@@ -2540,9 +2544,10 @@ public class Aplicacion extends JFrame {
 		textAreaDescripcion_MR.setFont(f);
 		textAreaDescripcion_MR.setLineWrap(true);
 		textAreaDescripcion_MR.setWrapStyleWord(true);
-		JScrollPane scrollPanel_MR = new JScrollPane(textAreaDescripcion_MR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPanel_MR = new JScrollPane(textAreaDescripcion_MR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel_MR.setFont(f1);
-		scrollPanel_MR.setBounds(0, 152, 440, 269);
+		scrollPanel_MR.setBounds(0, 152, 440, 229);
 		panelModificarReceta.add(scrollPanel_MR);
 
 		// LLenado del comboBox
@@ -2555,14 +2560,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_MR = new JLabel("Ingrediente:");
 		labelIngrediente_MR.setForeground(Color.WHITE);
 		labelIngrediente_MR.setFont(f);
-		labelIngrediente_MR.setBounds(535, 123, 117, 23);
+		labelIngrediente_MR.setBounds(496, 123, 117, 23);
 		panelModificarReceta.add(labelIngrediente_MR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_MR = new JLabel("Cantidad:");
 		labelCantidad_MR.setForeground(Color.WHITE);
 		labelCantidad_MR.setFont(f);
-		labelCantidad_MR.setBounds(553, 160, 91, 23);
+		labelCantidad_MR.setBounds(496, 155, 91, 23);
 		panelModificarReceta.add(labelCantidad_MR);
 
 		// TextField cantidad del ingrediente
@@ -2577,15 +2582,24 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_MR.setFont(f);
 		textFieldCantidad_MR.setColumns(10);
-		textFieldCantidad_MR.setBounds(631, 160, 137, 22);
+		textFieldCantidad_MR.setBounds(592, 159, 100, 22);
 		panelModificarReceta.add(textFieldCantidad_MR);
 
-		// Label gramos 2
-		JLabel labelGramos2_MR = new JLabel("gramos");
-		labelGramos2_MR.setForeground(Color.WHITE);
-		labelGramos2_MR.setFont(f);
-		labelGramos2_MR.setBounds(780, 160, 66, 23);
-		panelModificarReceta.add(labelGramos2_MR);
+		JComboBox comboBoxUnidadesPrinc_MR = new JComboBox();
+		comboBoxUnidadesPrinc_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_MR.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_MR.setBounds(701, 47, 134, 22);
+		panelModificarReceta.add(comboBoxUnidadesPrinc_MR);
+
+		JComboBox comboBoxUnidades_MR = new JComboBox();
+		comboBoxUnidades_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "gramos", "kilos",
+				"litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_MR.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_MR.setBounds(701, 159, 134, 22);
+		panelModificarReceta.add(comboBoxUnidades_MR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_MR = new JButton("Añadir Ingrediente");
@@ -2665,11 +2679,12 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÃ±adir ingrediente
+		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_MR.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_MR.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_MR.getSelectedIndex() != 0 && !textFieldCantidad_PR.equals("")
+						&& comboBoxUnidades_MR.getSelectedIndex() != 0)) {
 					if (comboBoxIngPrinc_MR.getSelectedIndex() == comboBoxIngrediente_MR.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -2677,12 +2692,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_MR.getText().equals("")) {
-							listaIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_MR.add(
-									comboBoxIngrediente_MR.getSelectedItem() + " - " + textFieldCantidad_MR.getText());
-						}
+						listaIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem() + " - "
+								+ textFieldCantidad_MR.getText() + " - " + comboBoxUnidades_MR.getSelectedItem());
 						indexIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem().toString());
 					}
 				}
@@ -2702,34 +2713,36 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_MR.getText().equals("") && comboBoxNumPersonas_MR.getSelectedIndex() != 0
 						&& !textAreaDescripcion_MR.getText().equals("") && comboBoxIngPrinc_MR.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_MR.getText().equals("") && comboBoxTipo_MR.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_MR.getText().equals("")
+						&& comboBoxUnidadesPrinc_MR.getSelectedIndex() != 0
+						&& comboBoxTipo_MR.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_MR.getText().length() > 4
 							|| textFieldCantidad_MR.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes = new ArrayList<String>();
 						String[] s = listaIngredientes_MR.getItems();
 
 						ingredientes.add(comboBoxIngPrinc_MR.getSelectedItem().toString());
 						pesoIngredientes.add(textFieldCantidadPrinc_MR.getText());
+						unidadIngredientes.add(comboBoxUnidadesPrinc_MR.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(resto.indexOf('-') + 1, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes.add("0");
-							} else {
-								pesoIngredientes.add(cantidad);
-							}
-
+							pesoIngredientes.add(cantidad);
+							unidadIngredientes.add(unidad);
 						}
 
 						o.modificarReceta(textFieldNombre_MR.getText(), textAreaDescripcion_MR.getText(),
 								comboBoxTipo_MR.getSelectedItem().toString(),
-								comboBoxNumPersonas_MR.getSelectedItem().toString(), ingredientes, pesoIngredientes,
+								comboBoxNumPersonas_MR.getSelectedItem().toString(), ingredientes, pesoIngredientes,unidadIngredientes,
 								recetaSeleccionada_MR.getId());
 						indexIngredientes_MR.clear();
 
@@ -2789,6 +2802,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_MR.setSelectedIndex(0);
 				textFieldCantidad_MR.setText("");
 				listaIngredientes_MR.removeAll();
+				comboBoxUnidades_MR.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_MR.setSelectedIndex(0);
 				cardAdmin.show(panelAdminCard, "panelModificar");
 				recetaSeleccionada_MR = null;
 			}

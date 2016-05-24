@@ -36,26 +36,26 @@ public class Operaciones {
 	}
 	
 	public void addReceta (String nombre, String descripcion, String plato, String personas, 
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades) {
 		
-		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 		recetaDAO.addReceta(receta);
 		System.out.println("Receta añadida correctamente.");
 	}
 
 	public void addRecetaV (String nombre, String descripcion, String plato, String personas,
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades) {
 
-		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 		recetaDAO.addRecetaV(receta);
 		System.out.println("Receta validada añadida correctamente.");
 	}
 	
 	public void modificarReceta (String nombre, String descripcion, String plato, String personas, 
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes, String idReceta) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades, String idReceta) {
 		
 		if (recetaDAO.existeReceta(idReceta)) {
-			RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+			RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 			recetaDAO.modificarReceta(receta, idReceta);
 			System.out.println("Receta modificada correctamente.");
 		} else {

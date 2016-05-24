@@ -32,19 +32,25 @@ public class RecetaDAO {
 			String id = rs.getString("id");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
+			ArrayList<String> unidades = receta.getUnidad();
 			
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
-			String peso = iteradorP.next();			
+			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+							+ unidad + "');");
 			
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
-				peso = iteradorP.next();			
+				peso = iteradorP.next();
+				unidad = iteradorU.next();
 				s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -70,19 +76,24 @@ public class RecetaDAO {
 			String id = rs.getString("id");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
+			ArrayList<String> unidades = receta.getUnidad();
 
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
 			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+						+ unidad + "');");
 
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
 				peso = iteradorP.next();
 				s.execute (
-						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
+						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -103,19 +114,24 @@ public class RecetaDAO {
 					"DELETE FROM componente WHERE idReceta='" + idReceta + "';");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
-			
+			ArrayList<String> unidades = receta.getUnidad();
+
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
-			String peso = iteradorP.next();			
+			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '1', '" + peso + "');");
-			
+					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+						+ unidad + "');");
+
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
-				peso = iteradorP.next();			
+				peso = iteradorP.next();
 				s.execute (
-					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "');");
+						"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -167,21 +183,25 @@ public class RecetaDAO {
 			
 			ArrayList<String> ingredientes = new ArrayList<String>();
 			ArrayList<String> peso = new ArrayList<String>();
+			ArrayList<String> unidades = new ArrayList<String>();
 			rs = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
 						
 			while(rs.next()) {
 				if (rs.getString("esPrincipal").equals("1")) {
 					ingredientes.add(0, rs.getString("ingrediente"));
 					peso.add(0, rs.getString("peso"));
+					unidades.add(0, rs.getString("unidad"));
 				}
 				else {
 					ingredientes.add(rs.getString("ingrediente"));
 					peso.add(rs.getString("peso"));
+					unidades.add(rs.getString("unidad"));
 				}
 			}
 			
 			receta.setIngredientes(ingredientes);
 			receta.setPesoIngredientes(peso);
+			receta.setUnidad(unidades);
 			
 			s.close();
 			return receta;
@@ -438,22 +458,35 @@ public class RecetaDAO {
 
 	public ArrayList<RecetaVO> menuDelDia () {
 
-		Random random = new Random();;
+		Random random = new Random();
 		ArrayList<RecetaVO> recetas = new ArrayList<>();
 
-		ArrayList<RecetaVO> aux = buscarPorPlato("Primero");
+		ArrayList<RecetaVO> aux = buscarPorPlato("Entrante");
 		int indice = random.nextInt(aux.size() - 1);
 		RecetaVO receta = aux.get(indice);
 		ArrayList<String> ingredientes = receta.getIngredientes();
-		String ingredienteP = ingredientes.get(0);
+		String ingredienteE = ingredientes.get(0);
 		recetas.add(receta);
 
+		aux = buscarPorPlato("Primero");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredienteP = ingredientes.get(0);
+		while (ingredienteP.equals(ingredienteE)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredienteP = ingredientes.get(0);
+		}
+		recetas.add(receta);
+		
 		aux = buscarPorPlato("Segundo");
 		indice = random.nextInt(aux.size() - 1);
 		receta = aux.get(indice);
 		ingredientes = receta.getIngredientes();
 		String ingredienteS = ingredientes.get(0);
-		while (ingredienteP.equals(ingredienteS)) {
+		while (ingredienteS.equals(ingredienteE) || ingredienteS.equals(ingredienteP)) {
 			indice = random.nextInt(aux.size() - 1);
 			receta = aux.get(indice);
 			ingredientes = receta.getIngredientes();
@@ -466,7 +499,7 @@ public class RecetaDAO {
 		receta = aux.get(indice);
 		ingredientes = receta.getIngredientes();
 		String ingredientePo = ingredientes.get(0);
-		while (ingredientePo.equals(ingredienteS) || ingredientePo.equals(ingredienteP)) {
+		while (ingredientePo.equals(ingredienteE) || ingredientePo.equals(ingredienteP) || ingredientePo.equals(ingredienteS)) {
 			indice = random.nextInt(aux.size() - 1);
 			receta = aux.get(indice);
 			ingredientes = receta.getIngredientes();
