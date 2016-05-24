@@ -21,9 +21,11 @@ public class Inicio extends JFrame {
 	 */
 	public static void main(String[] args) {
 		Inicio frame = new Inicio();
+		frame.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
 		frame.setVisible(true);
 		Aplicacion app = new Aplicacion();
 		frame.setVisible(false);
+		app.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
 		app.setVisible(true);	
 	}
 

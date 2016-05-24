@@ -36,26 +36,26 @@ public class Operaciones {
 	}
 	
 	public void addReceta (String nombre, String descripcion, String plato, String personas, 
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades) {
 		
-		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 		recetaDAO.addReceta(receta);
 		System.out.println("Receta añadida correctamente.");
 	}
 
 	public void addRecetaV (String nombre, String descripcion, String plato, String personas,
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades) {
 
-		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+		RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 		recetaDAO.addRecetaV(receta);
 		System.out.println("Receta validada añadida correctamente.");
 	}
 	
 	public void modificarReceta (String nombre, String descripcion, String plato, String personas, 
-			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes, String idReceta) {
+			ArrayList<String> ingredientes, ArrayList<String> pesoIngredientes,ArrayList<String> unidades, String idReceta) {
 		
 		if (recetaDAO.existeReceta(idReceta)) {
-			RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes);
+			RecetaVO receta = new RecetaVO(nombre, descripcion, plato, personas, ingredientes, pesoIngredientes,unidades);
 			recetaDAO.modificarReceta(receta, idReceta);
 			System.out.println("Receta modificada correctamente.");
 		} else {
@@ -135,9 +135,9 @@ public class Operaciones {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacionDAO.eliminarPuntuacion(idReceta, ip);
-			System.out.println("Puntuaci�n eliminada correctamente.");
+			System.out.println("Puntuación eliminada correctamente.");
 		} else {
-			System.err.println("Error: No existe puntuaci�n para esa receta e IP.");
+			System.err.println("Error: No existe puntuación para esa receta e IP.");
 		}
 	}
 	
@@ -146,7 +146,7 @@ public class Operaciones {
 		PuntuacionVO puntuacion = new PuntuacionVO();
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			puntuacion = puntuacionDAO.devolverPuntuacion(idReceta, ip);
-			System.out.println("Puntuaci�n devuelta correctamente");
+			System.out.println("Puntuación devuelta correctamente");
 		} else {
 			System.err.println("Error: No existe puntuaci�n para esa receta e IP.");
 		}
@@ -198,19 +198,34 @@ public class Operaciones {
 		return comentario;
 	}
 
-	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente) {
+	public ArrayList<ComentarioVO> comentariosReceta (String idReceta) {
+
+		if (recetaDAO.existeReceta(idReceta)) {
+			return comentarioDAO.comentariosReceta(idReceta);
+		} else {
+			return null;
+		}
+	}
+
+	public ArrayList<RecetaVO> busqueda (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		ArrayList<RecetaVO> recetas;
 
-		if ((nPersonas == null || nPersonas.equals("")) && (ingrediente == null || ingrediente.equals(""))) {
+		if ((nPersonas == null || nPersonas.equals("")) && (ingrediente == null || ingrediente.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorNombre(nombre);
-		} else if ((nombre == null || nombre.equals("")) && nPersonas == null) {
+		} else if ((nombre == null || nombre.equals("")) && (nPersonas == null || nPersonas.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorIngrediente(ingrediente);
-		} else if ((nombre == null || nombre.equals("")) && ingrediente == null) {
+		} else if ((nombre == null || nombre.equals("")) && (ingrediente == null || ingrediente.equals("")) && (plato == null || plato.equals(""))) {
 			recetas = recetaDAO.buscarPorNPersonas(nPersonas);
+		} else if ((nombre == null || nombre.equals("")) && (ingrediente == null || ingrediente.equals("")) && (nPersonas == null || nPersonas.equals(""))) {
+			recetas = recetaDAO.buscarPorPlato(plato);
 		} else {
-			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente);
+			recetas = recetaDAO.busquedaAvanzada(nombre, nPersonas, ingrediente, plato);
 		}
 		return recetas;
+	}
+
+	public ArrayList<RecetaVO> menuDelDia () {
+		return recetaDAO.menuDelDia();
 	}
 }

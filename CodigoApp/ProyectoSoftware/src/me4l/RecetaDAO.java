@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 public class RecetaDAO {
 	private Connection conexion;
@@ -31,19 +32,25 @@ public class RecetaDAO {
 			String id = rs.getString("id");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
+			ArrayList<String> unidades = receta.getUnidad();
 			
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
-			String peso = iteradorP.next();			
+			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+							+ unidad + "');");
 			
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
-				peso = iteradorP.next();			
+				peso = iteradorP.next();
+				unidad = iteradorU.next();
 				s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -69,19 +76,24 @@ public class RecetaDAO {
 			String id = rs.getString("id");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
+			ArrayList<String> unidades = receta.getUnidad();
 
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
 			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "');");
+					"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+						+ unidad + "');");
 
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
 				peso = iteradorP.next();
 				s.execute (
-						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "');");
+						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -102,19 +114,24 @@ public class RecetaDAO {
 					"DELETE FROM componente WHERE idReceta='" + idReceta + "';");
 			ArrayList<String> ingredientes = receta.getIngredientes();
 			ArrayList<String> pesos = receta.getPesoIngredientes();
-			
+			ArrayList<String> unidades = receta.getUnidad();
+
 			Iterator<String> iteradorI = ingredientes.iterator();
 			Iterator<String> iteradorP = pesos.iterator();
+			Iterator<String> iteradorU = unidades.iterator();
 			String ingrediente = iteradorI.next();
-			String peso = iteradorP.next();			
+			String peso = iteradorP.next();
+			String unidad = iteradorU.next();
 			s.execute (
-					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '1', '" + peso + "');");
-			
+					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '1', '" + peso + "', '" 
+						+ unidad + "');");
+
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
-				peso = iteradorP.next();			
+				peso = iteradorP.next();
 				s.execute (
-					"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "');");
+						"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "', '"
+							+ unidad + "');");
 			}
 			s.close();
 		} catch (SQLException e) {
@@ -166,21 +183,25 @@ public class RecetaDAO {
 			
 			ArrayList<String> ingredientes = new ArrayList<String>();
 			ArrayList<String> peso = new ArrayList<String>();
+			ArrayList<String> unidades = new ArrayList<String>();
 			rs = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
 						
 			while(rs.next()) {
 				if (rs.getString("esPrincipal").equals("1")) {
 					ingredientes.add(0, rs.getString("ingrediente"));
 					peso.add(0, rs.getString("peso"));
+					unidades.add(0, rs.getString("unidad"));
 				}
 				else {
 					ingredientes.add(rs.getString("ingrediente"));
 					peso.add(rs.getString("peso"));
+					unidades.add(rs.getString("unidad"));
 				}
 			}
 			
 			receta.setIngredientes(ingredientes);
 			receta.setPesoIngredientes(peso);
+			receta.setUnidad(unidades);
 			
 			s.close();
 			return receta;
@@ -285,7 +306,8 @@ public class RecetaDAO {
 			if (nombre == null || nombre.equals("")) {
 				rs =  s.executeQuery("SELECT * FROM receta;");
 			} else {
-				rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%');");
+				rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') " +
+						"AND validada='1';");
 			}
 
 			while (rs.next()) {
@@ -307,7 +329,8 @@ public class RecetaDAO {
 			ArrayList<RecetaVO> recetas = new ArrayList<>();
 			RecetaVO receta;
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas + "';");
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas + "' " +
+					"AND validada='1';");
 
 			while (rs.next()) {
 				String idReceta = rs.getString("id");
@@ -322,7 +345,28 @@ public class RecetaDAO {
 		}
 	}
 
-	public ArrayList<RecetaVO> busquedaAvanzada (String nombre, String nPersonas, String ingrediente) {
+	public ArrayList<RecetaVO> buscarPorPlato(String plato) {
+
+		try {
+			ArrayList<RecetaVO> recetas = new ArrayList<>();
+			RecetaVO receta;
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE Plato='" + plato + "' AND validada='1';");
+
+			while (rs.next()) {
+				String idReceta = rs.getString("id");
+				receta = devolverReceta(idReceta);
+				recetas.add(receta);
+			}
+			s.close();
+			return recetas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<RecetaVO> busquedaAvanzada (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		try {
 			ArrayList<RecetaVO> recetas = new ArrayList<>();
@@ -331,16 +375,72 @@ public class RecetaDAO {
             ResultSet rs;
 
             if (nombre == null || nombre.equals("")) {
-                rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-                        + ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
-                        nPersonas + "';");
-            } else if (nPersonas == null) {
-                rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-                        + ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
-                        "UPPER(r.nombre) LIKE UPPER('%" + nombre + "%');");
-            } else {
-                rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
-                        "numeroPersonas='" + nPersonas +"';");
+				if (nPersonas == null || nPersonas.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "' " +
+							"AND r.validada='1';");
+				} else if (ingrediente == null || ingrediente.equals("")) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas + "' " +
+							"AND Plato='" + plato + "' AND validada='1';");
+				} else if (plato == null || plato.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
+							nPersonas + "' AND r.validada='1';");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND r.numeroPersonas='" +
+							nPersonas + "' AND Plato='" + plato + "' AND r.validada='1';");
+				}
+            } else if (nPersonas == null || nPersonas.equals("")) {
+				if (nombre == null || nombre.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "'" +
+							"AND r.validada='1';");
+				} else if (ingrediente == null || ingrediente.equals("")) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%')" +
+							" AND Plato='" + plato + "' AND validada='1';");
+				} else if (plato == null || plato.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND r.validada='1';");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND Plato='" + plato + "' " +
+							"AND r.validada='1';");
+				}
+            } else if (plato == null || plato.equals("")) {
+				if (nombre == null || nombre.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id " +
+							"AND nPerosnas='" + nPersonas + "' AND r.validada='1';");
+				} else if (ingrediente == null || ingrediente.equals("")) {
+					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') " +
+							"AND nPerosnas='" + nPersonas + "' AND validada='1';");
+				} else if (nPersonas == null || nPersonas.equals("")) {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND r.validada='1';");
+				} else {
+					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
+							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
+							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND nPerosnas='" + nPersonas + "' " +
+							"AND r.validada='1';");
+				}
+			} else {
+				if (nombre == null || nombre.equals("")) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas +"' " +
+							"AND Plato='" + plato + "' AND validada='1';");
+				} else if (nPersonas == null || nPersonas.equals("")) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							 "Plato='" + plato + "' AND validada='1';");
+				} else if (plato == null || plato.equals("")) {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							"numeroPersonas='" + nPersonas +"' AND validada='1';");
+				} else {
+					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+							"numeroPersonas='" + nPersonas +"' AND Plato='" + plato + "' AND validada='1';");
+				}
             }
 
             while (rs.next()) {
@@ -354,5 +454,59 @@ public class RecetaDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public ArrayList<RecetaVO> menuDelDia () {
+
+		Random random = new Random();
+		ArrayList<RecetaVO> recetas = new ArrayList<>();
+
+		ArrayList<RecetaVO> aux = buscarPorPlato("Entrante");
+		int indice = random.nextInt(aux.size() - 1);
+		RecetaVO receta = aux.get(indice);
+		ArrayList<String> ingredientes = receta.getIngredientes();
+		String ingredienteE = ingredientes.get(0);
+		recetas.add(receta);
+
+		aux = buscarPorPlato("Primero");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredienteP = ingredientes.get(0);
+		while (ingredienteP.equals(ingredienteE)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredienteP = ingredientes.get(0);
+		}
+		recetas.add(receta);
+		
+		aux = buscarPorPlato("Segundo");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredienteS = ingredientes.get(0);
+		while (ingredienteS.equals(ingredienteE) || ingredienteS.equals(ingredienteP)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredienteS = ingredientes.get(0);
+		}
+		recetas.add(receta);
+
+		aux = buscarPorPlato("Postre");
+		indice = random.nextInt(aux.size() - 1);
+		receta = aux.get(indice);
+		ingredientes = receta.getIngredientes();
+		String ingredientePo = ingredientes.get(0);
+		while (ingredientePo.equals(ingredienteE) || ingredientePo.equals(ingredienteP) || ingredientePo.equals(ingredienteS)) {
+			indice = random.nextInt(aux.size() - 1);
+			receta = aux.get(indice);
+			ingredientes = receta.getIngredientes();
+			ingredientePo = ingredientes.get(0);
+		}
+		recetas.add(receta);
+
+		return recetas;
 	}
 }
