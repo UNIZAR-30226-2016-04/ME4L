@@ -110,6 +110,11 @@ public class Operaciones {
 
 		return recetaDAO.obtenerNoValidadas();
 	}
+
+	public ArrayList<RecetaVO> obtenerValidadas () {
+
+		return recetaDAO.obtenerValidadas();
+	}
 	
 	public ArrayList<String> obtenerIngredientes() {
 		

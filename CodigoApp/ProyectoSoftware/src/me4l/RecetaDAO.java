@@ -8,13 +8,29 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * Clase que implementa un patrón de acceso a BBDD de tipo Table Data Gateway,
+ * en este caso, para la tabla de la BBDD que almacena los datos de una receta.
+ */
 public class RecetaDAO {
 	private Connection conexion;
-	
+
+	/**
+	 * Constructor de la clase RecetaDAO.
+	 *
+	 * @param conexion Objeto de tipo Connection que contiene la información necesaria
+	 *                 para realizar la conexión con la BBDD.
+	 */
 	public RecetaDAO (Connection conexion) {
 		this.conexion = conexion;
 	}
-	
+
+	/**
+	 * Función que se encarga de insertar los datos de una receta no validada en la BBDD.
+	 *
+	 * @param receta Objeto de tipo RecetaVO que contiene la información de una receta
+	 *               que se ha de almacenar en la BBDD.
+	 */
 	public void addReceta (RecetaVO receta) {
 		
 		try {
@@ -54,11 +70,16 @@ public class RecetaDAO {
 			}
 			s.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Función que se encarga de insertar los datos de una receta validada en la BBDD.
+	 *
+	 * @param receta Objeto de tipo RecetaVO que contiene la información de una receta
+	 *               que se ha de almacenar en la BBDD.
+	 */
 	public void addRecetaV (RecetaVO receta) {
 
 		try {
@@ -98,11 +119,18 @@ public class RecetaDAO {
 			}
 			s.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de modificar los datos de una receta existente en la BBDD.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser modificada.
+	 * @param receta Objeto de la clase RecetaVO con los nuevos datos de la receta que se
+	 *               deben actualizar en la BBDD.
+	 */
 	public void modificarReceta (RecetaVO receta, String idReceta) {
 		
 		try {
@@ -141,6 +169,12 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de validar una receta.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser validada.
+	 */
 	public void validarReceta (String idReceta) {
 
 		try {
@@ -153,6 +187,12 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de desvalidar una receta.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser validada.
+	 */
 	public void desvalidarReceta (String idReceta) {
 
 		try {
@@ -164,7 +204,13 @@ public class RecetaDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de eliminar una receta existente en la BBDD.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser eliminada.
+	 */
 	public void eliminarReceta (String idReceta) {
 		
 		try {
@@ -178,7 +224,15 @@ public class RecetaDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de buscar en la BBDD los datos de una receta existente.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser devuelta.
+	 * @return Objeto de tipo RecetaVO con toda la información almacenada sobre la receta
+	 *         almacenada en la BBDD con el id especificado.
+	 */
 	public RecetaVO devolverReceta (String idReceta) {
 		
 		try {
@@ -224,7 +278,16 @@ public class RecetaDAO {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de comprobar si existe una receta en la BBDD, con el id
+	 * especificado como parámetro.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que ha de ser buscada.
+	 * @return Variable booleana con valor true si el id especificado como parámetro, se
+	 *         corresponde con una receta de la BBDD; y valor false en caso contrario.
+	 */
 	public boolean existeReceta (String idReceta) {
 		
 		try {
@@ -244,7 +307,14 @@ public class RecetaDAO {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que todavía no han sido validadas.
+	 *
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas no validadas
+	 *         de la BBDD.
+	 */
 	public ArrayList<RecetaVO> obtenerNoValidadas () {
 
 		try {
@@ -265,7 +335,14 @@ public class RecetaDAO {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas.
+	 *
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD.
+	 */
 	public ArrayList<RecetaVO> obtenerValidadas () {
 
 		try {
@@ -287,6 +364,16 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas, las cuales su ingrediente principal
+	 * es el especificado como parámetro.
+	 *
+	 * @param nombre Cadena de caracteres que representa un ingrediente existente en la BBDD.
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD, las cuales su ingrediente principal es el especificado
+	 *         como parámetro.
+	 */
 	public ArrayList<RecetaVO> buscarPorIngrediente(String nombre) {
 
 		try {
@@ -309,6 +396,16 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas, las cuales nombre contiene la cadena de
+	 * carateres especificada como parámetro.
+	 *
+	 * @param nombre Cadena de caracteres que representa una keyword.
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD, las cuales contienen en su nombre el keyword pasado como
+	 *         parámetro.
+	 */
 	public ArrayList<RecetaVO> buscarPorNombre(String nombre) {
 
 		try {
@@ -337,6 +434,16 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas, las cuales su número de personas
+	 * es el especificado como parámetro.
+	 *
+	 * @param nPersonas Cadena de caracteres que representa un número de personas.
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD, las cuales su número de personas coincide con el pasado
+	 *         como parámetro.
+	 */
 	public ArrayList<RecetaVO> buscarPorNPersonas(String nPersonas) {
 
 		try {
@@ -359,6 +466,14 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas, las cuales su plato es el especificado como parámetro.
+	 *
+	 * @param plato Cadena de caracteres que representa un plato.
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD, las cuales su plato coincide con el especificado como parámetro.
+	 */
 	public ArrayList<RecetaVO> buscarPorPlato(String plato) {
 
 		try {
@@ -380,6 +495,19 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver todas las recetas existentes en
+	 * la BBDD, que ya han sido validadas, las cuales sus datos coinciden con los que
+	 * son pasados como parámetro. Si algún parámetro == null o es una cadena vacía,
+	 * realiza la búsqueda no teniendo en cuenta ese parámetro.
+	 *
+	 * @param nombre Cadena de caracteres que representa una keyword.
+	 * @param nPersonas Cadena de caracteres que representa un número de personas.
+	 * @param ingrediente Cadena de caracteres que representa un ingrediente existente en la BBDD.
+	 * @param plato Cadena de caracteres que representa un plato.
+	 * @return Lista de objetos RecetaVO que contiene todas las recetas validadas
+	 *         de la BBDD, las cuales sus datos coinciden con los pasados como parámetro.
+	 */
 	public ArrayList<RecetaVO> busquedaAvanzada (String nombre, String nPersonas, String ingrediente, String plato) {
 
 		try {
@@ -470,6 +598,13 @@ public class RecetaDAO {
 		}
 	}
 
+	/**
+	 * Función que se encarga de buscar y devolver 4 recetas aleatorias, cada una de un plato diferente,
+	 * que se encuentran en la BBDD, y ya han sido validadas.
+	 *
+	 * @return Lista de objetos RecetaVO que contiene 4 recetas validadas extraídas de la
+	 *         BBDD aleatoriamente.
+	 */
 	public ArrayList<RecetaVO> menuDelDia () {
 
 		Random random = new Random();
