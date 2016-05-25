@@ -72,6 +72,16 @@ public class Operaciones {
 			System.err.println("Error: No existe receta.");
 		}
 	}
+
+	public void desvalidarReceta (String idReceta) {
+
+		if (recetaDAO.existeReceta(idReceta)) {
+			recetaDAO.desvalidarReceta(idReceta);
+			System.out.println("Receta desvalidada correctamente.");
+		} else {
+			System.err.println("Error: No existe receta.");
+		}
+	}
 	
 	public void eliminarReceta (String idReceta) {
 		

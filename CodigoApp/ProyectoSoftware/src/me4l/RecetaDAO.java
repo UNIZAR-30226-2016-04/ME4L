@@ -152,6 +152,18 @@ public class RecetaDAO {
 			e.printStackTrace();
 		}
 	}
+
+	public void desvalidarReceta (String idReceta) {
+
+		try {
+			Statement s = conexion.createStatement();
+			s.execute(
+					"UPDATE receta SET validada='0' WHERE id='" + idReceta + "';");
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void eliminarReceta (String idReceta) {
 		
