@@ -91,6 +91,7 @@ public class RecetaDAO {
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
 				peso = iteradorP.next();
+				unidad = iteradorU.next();
 				s.execute (
 						"INSERT INTO componente VALUES ('" + id + "', '" + ingrediente + "', '0', '" + peso + "', '"
 							+ unidad + "');");
@@ -129,6 +130,7 @@ public class RecetaDAO {
 			while (iteradorI.hasNext()) {
 				ingrediente = iteradorI.next();
 				peso = iteradorP.next();
+				unidad = iteradorU.next();
 				s.execute (
 						"INSERT INTO componente VALUES ('" + idReceta + "', '" + ingrediente + "', '0', '" + peso + "', '"
 							+ unidad + "');");
