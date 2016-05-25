@@ -150,7 +150,7 @@ public class RecetaAbierta extends JFrame {
 		JLabel labelDescipcion = new JLabel("Descripción:");
 		labelDescipcion.setForeground(Color.WHITE);
 		labelDescipcion.setFont(new Font("Calibri", Font.BOLD, 22));
-		labelDescipcion.setBounds(12, 332, 57, 23);
+		labelDescipcion.setBounds(12, 332, 299, 23);
 		panelReceta.add(labelDescipcion);
 
 		JLabel labelPrincipal = new JLabel("Ingrediente pricipal: ");

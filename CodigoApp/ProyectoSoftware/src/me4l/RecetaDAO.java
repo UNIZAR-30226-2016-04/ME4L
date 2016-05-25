@@ -467,7 +467,8 @@ public class RecetaDAO {
 		ArrayList<String> ingredientes = receta.getIngredientes();
 		String ingredienteE = ingredientes.get(0);
 		recetas.add(receta);
-
+				
+		recetas.add(receta);
 		aux = buscarPorPlato("Primero");
 		indice = random.nextInt(aux.size() - 1);
 		receta = aux.get(indice);
