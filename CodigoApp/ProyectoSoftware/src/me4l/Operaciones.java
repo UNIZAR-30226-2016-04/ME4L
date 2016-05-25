@@ -121,10 +121,11 @@ public class Operaciones {
 		return ingredienteDAO.obtenerIngredientes();
 	}
 	
-	public void addPuntuacion (String idReceta, String ip, String puntos) {
+	public boolean addPuntuacion (String idReceta, String ip, String puntos) {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
 			System.err.println("Error: Ya existe una puntuaci�n para esa receta e IP.");
+			return false;
 		} else {
 			if (recetaDAO.existeReceta(idReceta)) {
 				PuntuacionVO puntuacion = new PuntuacionVO (idReceta, ip, puntos);
@@ -133,6 +134,7 @@ public class Operaciones {
 			} else {
 				System.err.println("Error: No existe receta.");
 			}
+			return true;
 		}
 	}
 	
@@ -167,6 +169,18 @@ public class Operaciones {
 		}
 		
 		return puntuacion;
+	}
+
+	public String mediaPuntuacion (String idReceta) {
+
+		String media = "";
+		if (recetaDAO.existeReceta(idReceta)) {
+			media = puntuacionDAO.mediaPuntuacion(idReceta);
+			System.out.println("Media puntuación devuelta correctamente");
+		} else {
+			System.err.println("Error: No existen la receta.");
+		}
+		return media;
 	}
 
 	public void addComentario (String idReceta, String contenido) {
@@ -242,5 +256,13 @@ public class Operaciones {
 
 	public ArrayList<RecetaVO> menuDelDia () {
 		return recetaDAO.menuDelDia();
+	}
+
+	public ArrayList<RecetaVO> recetasMasNuevas () {
+		return recetaDAO.recetasMasNuevas();
+	}
+
+	public ArrayList<RecetaVO> recetasMasVotadas () {
+		return recetaDAO.recetasMasVotadas();
 	}
 }

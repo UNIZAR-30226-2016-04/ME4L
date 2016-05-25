@@ -249,9 +249,9 @@ public class RecetaDAO {
 			receta.setNumPersonas(rs.getString("numeroPersonas"));
 			receta.setValidada(rs.getString("validada"));
 			
-			ArrayList<String> ingredientes = new ArrayList<String>();
-			ArrayList<String> peso = new ArrayList<String>();
-			ArrayList<String> unidades = new ArrayList<String>();
+			ArrayList<String> ingredientes = new ArrayList<>();
+			ArrayList<String> peso = new ArrayList<>();
+			ArrayList<String> unidades = new ArrayList<>();
 			rs = s.executeQuery("SELECT * FROM componente WHERE idReceta='" + idReceta + "';");
 						
 			while(rs.next()) {
@@ -293,13 +293,7 @@ public class RecetaDAO {
 		try {
 			Statement s = conexion.createStatement();
 			ResultSet rs = s.executeQuery("SELECT id FROM receta WHERE id='" + idReceta + "';");
-			boolean existe;
-			if (rs.next()) {
-				existe = true;
-			}
-			else {
-				existe = false;
-			}
+			boolean existe = rs.next();
 			rs.close();
 			return existe;
 		} catch (SQLException e) {
@@ -318,7 +312,7 @@ public class RecetaDAO {
 	public ArrayList<RecetaVO> obtenerNoValidadas () {
 
 		try {
-			ArrayList<RecetaVO> recetas = new ArrayList<RecetaVO>();
+			ArrayList<RecetaVO> recetas = new ArrayList<>();
 			RecetaVO receta;
 			Statement s = conexion.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE validada='0';");
@@ -534,11 +528,8 @@ public class RecetaDAO {
 							nPersonas + "' AND Plato='" + plato + "' AND r.validada='1';");
 				}
             } else if (nPersonas == null || nPersonas.equals("")) {
-				if (nombre == null || nombre.equals("")) {
-					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND Plato='" + plato + "'" +
-							"AND r.validada='1';");
-				} else if (ingrediente == null || ingrediente.equals("")) {
+
+				if (ingrediente == null || ingrediente.equals("")) {
 					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%')" +
 							" AND Plato='" + plato + "' AND validada='1';");
 				} else if (plato == null || plato.equals("")) {
@@ -552,37 +543,19 @@ public class RecetaDAO {
 							"AND r.validada='1';");
 				}
             } else if (plato == null || plato.equals("")) {
-				if (nombre == null || nombre.equals("")) {
-					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id " +
-							"AND nPerosnas='" + nPersonas + "' AND r.validada='1';");
-				} else if (ingrediente == null || ingrediente.equals("")) {
+
+				if (ingrediente == null || ingrediente.equals("")) {
 					rs =  s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') " +
 							"AND nPerosnas='" + nPersonas + "' AND validada='1';");
-				} else if (nPersonas == null || nPersonas.equals("")) {
-					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
-							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
-							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND r.validada='1';");
-				} else {
+				}  else {
 					rs =  s.executeQuery("SELECT r.* FROM receta r, componente c WHERE c.ingrediente='"
 							+ ingrediente + "' AND c.esPrincipal='1' AND c.idReceta=r.id AND " +
 							"UPPER(r.nombre) LIKE UPPER('%" + nombre + "%') AND nPerosnas='" + nPersonas + "' " +
 							"AND r.validada='1';");
 				}
 			} else {
-				if (nombre == null || nombre.equals("")) {
-					rs = s.executeQuery("SELECT * FROM receta WHERE numeroPersonas='" + nPersonas +"' " +
-							"AND Plato='" + plato + "' AND validada='1';");
-				} else if (nPersonas == null || nPersonas.equals("")) {
-					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
-							 "Plato='" + plato + "' AND validada='1';");
-				} else if (plato == null || plato.equals("")) {
-					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
-							"numeroPersonas='" + nPersonas +"' AND validada='1';");
-				} else {
-					rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
-							"numeroPersonas='" + nPersonas +"' AND Plato='" + plato + "' AND validada='1';");
-				}
+				rs = s.executeQuery("SELECT * FROM receta WHERE UPPER(nombre) LIKE UPPER('%" + nombre + "%') AND " +
+						"numeroPersonas='" + nPersonas +"' AND Plato='" + plato + "' AND validada='1';");
             }
 
             while (rs.next()) {
@@ -658,5 +631,88 @@ public class RecetaDAO {
 		recetas.add(receta);
 
 		return recetas;
+	}
+
+	/**
+	 * Función que se encarga de buscar y devolver las últimas 3 recetas añadidas, a la
+	 * BBDD, y ya han sido validadas.
+	 *
+	 * @return Lista de objetos RecetaVO que contiene 3 recetas validadas extraídas de la
+	 *         BBDD.
+	 */
+	public ArrayList<RecetaVO> recetasMasNuevas () {
+
+		try {
+			ArrayList<RecetaVO> recetas = new ArrayList<>();
+			RecetaVO receta;
+
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE validada='1';");
+
+			rs.last();
+			for (int i = 0; i < 3; i++) {
+				receta = devolverReceta(rs.getString("id"));
+				recetas.add(receta);
+				rs.previous();
+			}
+			s.close();
+			return recetas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Función que se encarga de buscar y devolver las 3 recetas con mayor media de puntuación
+	 * de la BBDD, y ya han sido validadas.
+	 *
+	 * @return Lista de objetos RecetaVO que contiene 3 recetas validadas extraídas de la
+	 *         BBDD.
+	 */
+	public ArrayList<RecetaVO> recetasMasVotadas () {
+
+		try {
+			PuntuacionDAO puntuacionDAO = new PuntuacionDAO(this.conexion);
+			ArrayList<RecetaVO> recetas = new ArrayList<>();
+
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM receta WHERE validada='1';");
+
+			double [][] array = new double[3][2];
+			while (rs.next()) {
+				String idReceta =  rs.getString("id");
+				double media = Double.parseDouble(puntuacionDAO.mediaPuntuacion(idReceta));
+
+				if (media > array [0][1]) {
+					if (media > array [1][1]) {
+						if (media > array [2][1]) {
+							array [0][0] = array [1][0];
+							array [0][1] = array [1][1];
+							array [1][0] = array [2][0];
+							array [1][1] = array [2][1];
+							array [2][0] = Double.parseDouble(idReceta);
+							array [2][1] = media;
+						} else {
+							array [0][0] = array [1][0];
+							array [0][1] = array [1][1];
+							array [1][0] = Double.parseDouble(idReceta);
+							array [1][1] = media;
+						}
+					} else {
+						array [0][0] = Double.parseDouble(idReceta);
+						array [0][1] = media;
+					}
+				}
+			}
+
+			recetas.add(devolverReceta(Double.toString(array[2][0])));
+			recetas.add(devolverReceta(Double.toString(array[1][0])));
+			recetas.add(devolverReceta(Double.toString(array[0][0])));
+			return recetas;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
