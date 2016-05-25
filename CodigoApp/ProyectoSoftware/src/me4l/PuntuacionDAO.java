@@ -148,4 +148,38 @@ public class PuntuacionDAO {
 			return false;
 		}
 	}
+
+	/**
+	 * Función que se encarga de calcular la media de todas las puntuaciones de la receta
+	 * representada por el identificador pasado como parámetro.
+	 *
+	 * @param idReceta Cadena de caracteres que identifica la receta, existente en la BBDD,
+	 *                 que junto con la ip, se quiere buscar.
+	 * @return Cadena de caracteres que representa la media de todas las puntuaciones realizadas
+	 * 		   sobre la receta. Si no existe ninguna puntuación para esa receta se devuelve -1.
+	 */
+	public String mediaPuntuacion (String idReceta) {
+
+		try {
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM puntuacion WHERE idReceta='" +	idReceta + "';");
+
+			double total = 0.0;
+			double contador = 0.0;
+			while (rs.next()) {
+				total += Double.parseDouble(rs.getString("puntos"));
+				contador++;
+			}
+			s.close();
+
+			if (contador == 0.0) {
+				return "-1";
+			} else {
+				return Double.toString(total/contador);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
