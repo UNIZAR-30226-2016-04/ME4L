@@ -487,7 +487,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_BA = new List();
 		listaRecetasBuscadas_BA.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_BA.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_BA.setBounds(12, 177, 831, 257);
 		panelEntrantes.add(listaRecetasBuscadas_BA);
 
 		// Label ingredientes de busqueda avanzada
@@ -567,14 +567,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_BA = new JSeparator();
 		separador_BA.setForeground(new Color(0, 0, 0));
 		separador_BA.setBackground(new Color(0, 0, 0));
-		separador_BA.setBounds(12, 136, 856, 23);
+		separador_BA.setBounds(12, 136, 831, 23);
 		panelEntrantes.add(separador_BA);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_BA = new JButton("Ver Receta");
 		botonVerReceta_BA.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_BA.setBackground(new Color(173, 255, 47));
-		botonVerReceta_BA.setBounds(182, 448, 220, 60);
+		botonVerReceta_BA.setBounds(315, 448, 220, 60);
 		panelEntrantes.add(botonVerReceta_BA);
 
 		// Accion del boton de ver receta seleccionada
@@ -587,19 +587,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setForeground(Color.BLACK);
-		separator.setBackground(Color.BLACK);
-		separator.setBounds(574, 136, 36, 385);
-		panelEntrantes.add(separator);
-
-		JLabel labelRecomendaciones_BA = new JLabel("Entrantes recomendados:");
-		labelRecomendaciones_BA.setForeground(Color.WHITE);
-		labelRecomendaciones_BA.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_BA.setBounds(583, 148, 273, 23);
-		panelEntrantes.add(labelRecomendaciones_BA);
 
 		JLabel labelTipo_BA = new JLabel("Tipo de plato:");
 		labelTipo_BA.setForeground(Color.WHITE);
@@ -629,7 +616,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_Pr = new List();
 		listaRecetasBuscadas_Pr.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_Pr.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_Pr.setBounds(12, 177, 831, 257);
 		panelPrimeros.add(listaRecetasBuscadas_Pr);
 
 		// Label ingredientes de busqueda avanzada
@@ -708,14 +695,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_Pr = new JSeparator();
 		separador_Pr.setForeground(new Color(0, 0, 0));
 		separador_Pr.setBackground(new Color(0, 0, 0));
-		separador_Pr.setBounds(12, 136, 856, 23);
+		separador_Pr.setBounds(12, 136, 831, 23);
 		panelPrimeros.add(separador_Pr);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_Pr = new JButton("Ver Receta");
 		botonVerReceta_Pr.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_Pr.setBackground(new Color(173, 255, 47));
-		botonVerReceta_Pr.setBounds(182, 448, 220, 60);
+		botonVerReceta_Pr.setBounds(315, 448, 220, 60);
 		panelPrimeros.add(botonVerReceta_Pr);
 
 		// Accion del boton de ver receta seleccionada
@@ -729,19 +716,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_Pr = new JSeparator();
-		separator_Pr.setOrientation(SwingConstants.VERTICAL);
-		separator_Pr.setForeground(Color.BLACK);
-		separator_Pr.setBackground(Color.BLACK);
-		separator_Pr.setBounds(574, 136, 36, 385);
-		panelPrimeros.add(separator_Pr);
-
-		JLabel labelRecomendaciones_Pr = new JLabel("Primeros recomendados:");
-		labelRecomendaciones_Pr.setForeground(Color.WHITE);
-		labelRecomendaciones_Pr.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_Pr.setBounds(583, 148, 285, 23);
-		panelPrimeros.add(labelRecomendaciones_Pr);
 
 		JLabel labelTipo_Pr = new JLabel("Tipo de plato:");
 		labelTipo_Pr.setForeground(Color.WHITE);
@@ -771,7 +745,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_S = new List();
 		listaRecetasBuscadas_S.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_S.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_S.setBounds(12, 177, 831, 257);
 		panelSegundos.add(listaRecetasBuscadas_S);
 
 		// Label ingredientes de busqueda avanzada
@@ -851,14 +825,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_S = new JSeparator();
 		separador_S.setForeground(new Color(0, 0, 0));
 		separador_S.setBackground(new Color(0, 0, 0));
-		separador_S.setBounds(12, 136, 856, 23);
+		separador_S.setBounds(12, 136, 831, 23);
 		panelSegundos.add(separador_S);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_S = new JButton("Ver Receta");
 		botonVerReceta_S.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_S.setBackground(new Color(173, 255, 47));
-		botonVerReceta_S.setBounds(182, 448, 220, 60);
+		botonVerReceta_S.setBounds(315, 448, 220, 60);
 		panelSegundos.add(botonVerReceta_S);
 
 		// Accion del boton de ver receta seleccionada
@@ -872,19 +846,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_S = new JSeparator();
-		separator_S.setOrientation(SwingConstants.VERTICAL);
-		separator_S.setForeground(Color.BLACK);
-		separator_S.setBackground(Color.BLACK);
-		separator_S.setBounds(574, 136, 36, 385);
-		panelSegundos.add(separator_S);
-
-		JLabel labelRecomendaciones_S = new JLabel("Segundos recomendados:");
-		labelRecomendaciones_S.setForeground(Color.WHITE);
-		labelRecomendaciones_S.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_S.setBounds(583, 148, 285, 23);
-		panelSegundos.add(labelRecomendaciones_S);
 
 		JLabel labelTipo_S = new JLabel("Tipo de plato:");
 		labelTipo_S.setForeground(Color.WHITE);
@@ -914,7 +875,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_Pos = new List();
 		listaRecetasBuscadas_Pos.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_Pos.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_Pos.setBounds(12, 177, 831, 257);
 		panelPostres.add(listaRecetasBuscadas_Pos);
 
 		// Label ingredientes de busqueda avanzada
@@ -994,14 +955,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_Pos = new JSeparator();
 		separador_Pos.setForeground(new Color(0, 0, 0));
 		separador_Pos.setBackground(new Color(0, 0, 0));
-		separador_Pos.setBounds(12, 136, 856, 23);
+		separador_Pos.setBounds(12, 136, 831, 23);
 		panelPostres.add(separador_Pos);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_Pos = new JButton("Ver Receta");
 		botonVerReceta_Pos.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_Pos.setBackground(new Color(173, 255, 47));
-		botonVerReceta_Pos.setBounds(182, 448, 220, 60);
+		botonVerReceta_Pos.setBounds(315, 448, 220, 60);
 		panelPostres.add(botonVerReceta_Pos);
 
 		// Accion del boton de ver receta seleccionada
@@ -1015,19 +976,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_Pos = new JSeparator();
-		separator_Pos.setOrientation(SwingConstants.VERTICAL);
-		separator_Pos.setForeground(Color.BLACK);
-		separator_Pos.setBackground(Color.BLACK);
-		separator_Pos.setBounds(574, 136, 36, 385);
-		panelPostres.add(separator_Pos);
-
-		JLabel labelRecomendaciones_Pos = new JLabel("Postres recomendados:");
-		labelRecomendaciones_Pos.setForeground(Color.WHITE);
-		labelRecomendaciones_Pos.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_Pos.setBounds(583, 148, 188, 23);
-		panelPostres.add(labelRecomendaciones_Pos);
 
 		JLabel labelTipo_Pos = new JLabel("Tipo de plato:");
 		labelTipo_Pos.setForeground(Color.WHITE);
@@ -3106,6 +3054,5 @@ public class Aplicacion extends JFrame {
 		/**
 		 * FINAL DE LA PANTALLA DE IDENTIFICACION DE ADMINISTRADOR
 		 **/
-
 	}
 }

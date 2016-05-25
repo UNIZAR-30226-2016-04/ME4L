@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -25,6 +26,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JTextArea;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class RecetaAbierta extends JFrame {
 
@@ -124,6 +128,15 @@ public class RecetaAbierta extends JFrame {
 		botonValorar.setFont(new Font("Calibri", Font.BOLD, 20));
 		botonValorar.setIcon(new ImageIcon(imagenValorar.getScaledInstance(20, 20, Image.SCALE_DEFAULT)));
 		botonValorar.setBackground(new Color(245, 245, 245));
+
+		botonValorar.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ValorarReceta vr = new ValorarReceta(receta.getId(), getBounds());
+				vr.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				vr.setVisible(true);
+
+			}
+		});
 
 		// Boton seccion de comentarios
 		JButton botonComentarios = new JButton("Comentarios");
@@ -231,6 +244,14 @@ public class RecetaAbierta extends JFrame {
 		botonReportar.setBounds(584, 636, 190, 41);
 		panelReceta.add(botonReportar);
 
+		botonReportar.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				o.desvalidarReceta(receta.getId());
+				JOptionPane.showMessageDialog(panelReceta,
+						"Gracias por ayudarnos! La receta pasa a no estar disponible hasta la revisión del administrador.");
+			}
+		});
+
 		JPanel panelComentarios = new JPanel();
 		paneles.add(panelComentarios, "panelComentarios");
 		panelComentarios.setOpaque(false);
@@ -315,6 +336,18 @@ public class RecetaAbierta extends JFrame {
 				}
 			}
 		});
+
+		JLabel labelPuntuacion = new JLabel("Puntuación:");
+		labelPuntuacion.setForeground(Color.WHITE);
+		labelPuntuacion.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPuntuacion.setBounds(552, 26, 130, 23);
+		contentPane.add(labelPuntuacion);
+
+		JLabel lPuntuacion = new JLabel((String) null);
+		lPuntuacion.setForeground(new Color(255, 153, 0));
+		lPuntuacion.setFont(new Font("Calibri", Font.BOLD, 22));
+		lPuntuacion.setBounds(682, 26, 51, 23);
+		contentPane.add(lPuntuacion);
 
 		// Indicador textual de RECETA
 		final JLabel labelMenu = new JLabel("RECETA");
