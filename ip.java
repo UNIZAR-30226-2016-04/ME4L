@@ -6,22 +6,23 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 
-public class IP {
+public class ip {
 
 	public static void main(String [] args){
-		try {
-            Enumeration<NetworkInterface> b = NetworkInterface.getNetworkInterfaces();
-            while( b.hasMoreElements()){
-                for ( InterfaceAddress f : b.nextElement().getInterfaceAddresses()){
-                    if ( f.getAddress().isSiteLocalAddress()){
-                        String ipLocal = f.getAddress().getHostAddress();
+        try{
+    		Enumeration<NetworkInterface> ifaces = NetworkInterface.getNetworkInterfaces();
+            while (ifaces.hasMoreElements()) {
+                NetworkInterface iface = ifaces.nextElement();
+                Enumeration<InetAddress> addresses = iface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress add = addresses.nextElement();
+                    if (!add.isLoopbackAddress() && add.isSiteLocalAddress()) {
+                        System.out.println(add.getHostName().toString());
                     }
                 }
             }
-		}
-        catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        }catch (SocketException e){
+            e.getMessage();
+        }
 	}
 }
