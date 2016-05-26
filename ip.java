@@ -1,27 +1,31 @@
+import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 
-public class IP {
+public class ip {
 
 	public static void main(String [] args){
-		try {
-            Enumeration<NetworkInterface> b = NetworkInterface.getNetworkInterfaces();
-            while( b.hasMoreElements()){
-                for ( InterfaceAddress f : b.nextElement().getInterfaceAddresses()){
-                    if ( f.getAddress().isSiteLocalAddress()){
-                        String ipLocal = f.getAddress().getHostAddress();
+        try{
+    		Enumeration e = NetworkInterface.getNetworkInterfaces();
+            while(e.hasMoreElements())
+            {
+                NetworkInterface n = (NetworkInterface) e.nextElement();
+                Enumeration<InetAddress> ee = n.getInetAddresses();
+                while (ee.hasMoreElements())
+                {
+                    InetAddress i = ee.nextElement();
+                    if (i  instanceof Inet4Address && !i.isLoopbackAddress()){
+                        String ip = i.toString();
+                        ip = ip.substring(1,ip.length());
+                        System.out.println(ip);
                     }
                 }
             }
-		}
-        catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        }catch (SocketException e){
+            e.getMessage();
+        }
 	}
 }

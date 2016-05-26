@@ -1,0 +1,25 @@
+String publicIP ="";
+		try {
+			URL tempURL = new URL("http://www.whatismyip.org/");
+			HttpURLConnection tempConn = (HttpURLConnection)tempURL.openConnection();
+			InputStream tempInStream = tempConn.getInputStream();
+			InputStreamReader tempIsr = new InputStreamReader(tempInStream);
+			BufferedReader tempBr = new BufferedReader(tempIsr);
+
+			for (int i = 0; i < 41; i++) {
+				tempBr.readLine();
+			}
+			String linea = tempBr.readLine();
+			int inicio = linea.indexOf("\">");
+			int fin = linea.indexOf("</span");
+			publicIP = linea.substring(inicio + 2, fin);
+
+			tempBr.close();
+			tempInStream.close();
+
+		} catch (Exception ex) {
+			publicIP = "<No es posible resolver la direccion IP>";
+		}
+
+		System.out.println("Mi IP Publica es " +publicIP);
+	}

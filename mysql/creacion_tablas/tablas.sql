@@ -25,7 +25,7 @@ CREATE TABLE comentarios (
 	idReceta int(4),
 	comentario varchar(140) not null,
 	Foreign Key(idReceta) REFERENCES receta (id) ON DELETE CASCADE,
-	Primary Key (idComentario)
+	Primary Key (idComentario, idReceta)
 );
 
 CREATE TABLE puntuacion (
@@ -41,6 +41,7 @@ CREATE TABLE componente (
 	ingrediente varchar(20),
 	esPrincipal int(1),
 	peso int(4) not null,
+	unidad varchar(20), 
 	Foreign Key(idReceta) REFERENCES receta (id) ON DELETE CASCADE,
 	Foreign Key(ingrediente) REFERENCES ingrediente (Nombre) ON DELETE CASCADE,
 	Primary Key (idReceta, ingrediente)

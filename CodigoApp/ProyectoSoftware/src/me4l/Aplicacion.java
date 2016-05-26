@@ -93,6 +93,11 @@ public class Aplicacion extends JFrame {
 	ArrayList<RecetaVO> menu_1 = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> menu_2 = new ArrayList<RecetaVO>();
 	ArrayList<RecetaVO> menu_3 = new ArrayList<RecetaVO>();
+	ArrayList<RecetaVO> menu_4 = new ArrayList<RecetaVO>();
+
+	// Pantalla mas destacados
+	ArrayList<RecetaVO> masRecientes = new ArrayList<RecetaVO>();
+	ArrayList<RecetaVO> masVotadas = new ArrayList<RecetaVO>();
 
 	// Metodo para abrir URL en el navegador del usuario
 	public static void openWebpage(URI uri) {
@@ -186,13 +191,23 @@ public class Aplicacion extends JFrame {
 		Image imagenPostre = new ImageIcon("images/iconoPostre.png").getImage();
 		Image imagenEquipo = new ImageIcon("images/LogoEquipoTransparente.png").getImage();
 		Image imagenEntrante = new ImageIcon("images/entrante.png").getImage();
+		Image imagenUno = new ImageIcon("images/uno.png").getImage();
+		Image imagenDos = new ImageIcon("images/dos.png").getImage();
+		Image imagenTres = new ImageIcon("images/tres.png").getImage();
+		Image imagenReciente = new ImageIcon("images/reciente.png").getImage();
 
 		Font f = new Font("Bauhaus 93", Font.BOLD, 84);
 
 		// Cargamos los menús propuestos
-		// menu_1 = o.menuDelDia();
-		// menu_2 = o.menuDelDia();
-		// menu_3 = o.menuDelDia();
+		menu_1 = o.menuDelDia();
+		menu_2 = o.menuDelDia();
+		menu_3 = o.menuDelDia();
+		menu_4 = o.menuDelDia();
+
+		// Cargamos los arrays de recetas
+		masRecientes = o.recetasMasNuevas();
+		masVotadas = o.recetasMasVotadas();
+
 		/**
 		 * COMIENZO DE LA PANTALLA DEL MENU PRINCIPAL
 		 **/
@@ -237,283 +252,296 @@ public class Aplicacion extends JFrame {
 		labelLinea2_MP.setBounds(12, 66, 856, 23);
 		panelMenuPrincipal.add(labelLinea2_MP);
 
+		JSeparator sep3_MP = new JSeparator();
+		sep3_MP.setForeground(Color.BLACK);
+		sep3_MP.setBackground(Color.BLACK);
+		sep3_MP.setBounds(0, 117, 868, 12);
+		panelMenuPrincipal.add(sep3_MP);
+
 		JSeparator sep1_MP = new JSeparator();
-		sep1_MP.setBackground(Color.BLACK);
 		sep1_MP.setForeground(Color.BLACK);
-		sep1_MP.setOrientation(SwingConstants.VERTICAL);
-		sep1_MP.setBounds(274, 113, 43, 408);
+		sep1_MP.setBackground(Color.BLACK);
+		sep1_MP.setBounds(0, 320, 868, 12);
 		panelMenuPrincipal.add(sep1_MP);
 
 		JSeparator sep2_MP = new JSeparator();
 		sep2_MP.setOrientation(SwingConstants.VERTICAL);
 		sep2_MP.setForeground(Color.BLACK);
 		sep2_MP.setBackground(Color.BLACK);
-		sep2_MP.setBounds(577, 113, 43, 408);
+		sep2_MP.setBounds(434, 117, 21, 404);
 		panelMenuPrincipal.add(sep2_MP);
 
-		JSeparator sep3_MP = new JSeparator();
-		sep3_MP.setForeground(Color.BLACK);
-		sep3_MP.setBackground(Color.BLACK);
-		sep3_MP.setBounds(0, 113, 868, 40);
-		panelMenuPrincipal.add(sep3_MP);
+		JSeparator sep4_MP = new JSeparator();
+		sep4_MP.setForeground(Color.BLACK);
+		sep4_MP.setBackground(Color.BLACK);
+		sep4_MP.setBounds(0, 519, 868, 12);
+		panelMenuPrincipal.add(sep4_MP);
 
-		// Boton sugerencia primer plato
-		JButton botonPrimerPlato_1 = new JButton();
-		botonPrimerPlato_1.setBackground(new Color(245, 245, 245));
-		botonPrimerPlato_1.setBounds(74, 126, 116, 93);
-		botonPrimerPlato_1.setIcon(new ImageIcon(imagenOne.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPrimerPlato_1.setOpaque(false);
-		botonPrimerPlato_1.setContentAreaFilled(false);
-		botonPrimerPlato_1.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPrimerPlato_1);
+		JLabel labelMenu1 = new JLabel("Menú 1:");
+		labelMenu1.setForeground(Color.WHITE);
+		labelMenu1.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMenu1.setBounds(10, 125, 104, 23);
+		panelMenuPrincipal.add(labelMenu1);
 
-		botonPrimerPlato_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_1.get(0).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
+		JLabel labelMenu2 = new JLabel("Menú 2:");
+		labelMenu2.setForeground(Color.WHITE);
+		labelMenu2.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMenu2.setBounds(448, 125, 104, 23);
+		panelMenuPrincipal.add(labelMenu2);
 
-		// Boton sugerencia primer plato
-		JButton botonPrimerPlato_2 = new JButton();
-		botonPrimerPlato_2.setBackground(new Color(245, 245, 245));
-		botonPrimerPlato_2.setBounds(363, 126, 116, 93);
-		botonPrimerPlato_2.setIcon(new ImageIcon(imagenOne.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPrimerPlato_2.setOpaque(false);
-		botonPrimerPlato_2.setContentAreaFilled(false);
-		botonPrimerPlato_2.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPrimerPlato_2);
+		JLabel labelMenu3 = new JLabel("Menú 3:");
+		labelMenu3.setForeground(Color.WHITE);
+		labelMenu3.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMenu3.setBounds(12, 326, 104, 23);
+		panelMenuPrincipal.add(labelMenu3);
 
-		botonPrimerPlato_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_2.get(0).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
+		JLabel labelMenu4 = new JLabel("Menú 4:");
+		labelMenu4.setForeground(Color.WHITE);
+		labelMenu4.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMenu4.setBounds(448, 326, 104, 23);
+		panelMenuPrincipal.add(labelMenu4);
 
-		// Boton sugerencia primer plato
-		JButton botonPrimerPlato_3 = new JButton();
-		botonPrimerPlato_3.setBackground(new Color(245, 245, 245));
-		botonPrimerPlato_3.setBounds(676, 126, 116, 93);
-		botonPrimerPlato_3.setIcon(new ImageIcon(imagenOne.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPrimerPlato_3.setOpaque(false);
-		botonPrimerPlato_3.setContentAreaFilled(false);
-		botonPrimerPlato_3.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPrimerPlato_3);
-
-		botonPrimerPlato_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_3.get(0).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia segundo plato
-		JButton botonSegundoPlato_1 = new JButton();
-		botonSegundoPlato_1.setBackground(new Color(245, 245, 245));
-		botonSegundoPlato_1.setBounds(74, 261, 116, 93);
-		botonSegundoPlato_1.setIcon(new ImageIcon(imagenTwo.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonSegundoPlato_1.setOpaque(false);
-		botonSegundoPlato_1.setContentAreaFilled(false);
-		botonSegundoPlato_1.setBorderPainted(false);
-		panelMenuPrincipal.add(botonSegundoPlato_1);
-
-		botonSegundoPlato_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_1.get(1).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia segundo plato
-		JButton botonSegundoPlato_2 = new JButton();
-		botonSegundoPlato_2.setBackground(new Color(245, 245, 245));
-		botonSegundoPlato_2.setBounds(363, 261, 116, 93);
-		botonSegundoPlato_2.setIcon(new ImageIcon(imagenTwo.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonSegundoPlato_2.setOpaque(false);
-		botonSegundoPlato_2.setContentAreaFilled(false);
-		botonSegundoPlato_2.setBorderPainted(false);
-		panelMenuPrincipal.add(botonSegundoPlato_2);
-
-		botonSegundoPlato_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_2.get(1).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia segundo plato
-		JButton botonSegundoPlato_3 = new JButton();
-		botonSegundoPlato_3.setBackground(new Color(245, 245, 245));
-		botonSegundoPlato_3.setBounds(676, 261, 116, 93);
-		botonSegundoPlato_3.setIcon(new ImageIcon(imagenTwo.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonSegundoPlato_3.setOpaque(false);
-		botonSegundoPlato_3.setContentAreaFilled(false);
-		botonSegundoPlato_3.setBorderPainted(false);
-		panelMenuPrincipal.add(botonSegundoPlato_3);
-
-		botonSegundoPlato_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_3.get(1).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia postre
-		JButton botonPostre_1 = new JButton();
-		botonPostre_1.setBackground(new Color(245, 245, 245));
-		botonPostre_1.setBounds(74, 403, 116, 93);
-		botonPostre_1.setIcon(new ImageIcon(imagenThree.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPostre_1.setOpaque(false);
-		botonPostre_1.setContentAreaFilled(false);
-		botonPostre_1.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPostre_1);
-
-		botonPostre_1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_1.get(2).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia postre
-		JButton botonPostre_2 = new JButton();
-		botonPostre_2.setBackground(new Color(245, 245, 245));
-		botonPostre_2.setBounds(363, 403, 116, 93);
-		botonPostre_2.setIcon(new ImageIcon(imagenThree.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPostre_2.setOpaque(false);
-		botonPostre_2.setContentAreaFilled(false);
-		botonPostre_2.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPostre_2);
-
-		botonPostre_2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_2.get(2).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		// Boton sugerencia postre
-		JButton botonPostre_3 = new JButton();
-		botonPostre_3.setBackground(new Color(245, 245, 245));
-		botonPostre_3.setBounds(676, 403, 116, 93);
-		botonPostre_3.setIcon(new ImageIcon(imagenThree.getScaledInstance(116, 93, Image.SCALE_DEFAULT)));
-		botonPostre_3.setOpaque(false);
-		botonPostre_3.setContentAreaFilled(false);
-		botonPostre_3.setBorderPainted(false);
-		panelMenuPrincipal.add(botonPostre_3);
-
-		botonPostre_3.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				if (menu_3.get(2).equals(null)) {
-					JOptionPane.showMessageDialog(menuPrincipal,
-							"Actualmente la receta releccionada no está disponible.");
-				} else {
-					// Abrir la receta correspondiente
-				}
-			}
-		});
-
-		JLabel labelPrimerPlato_1 = new JLabel();
-		labelPrimerPlato_1.setForeground(Color.WHITE);
-		labelPrimerPlato_1.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPrimerPlato_1.setBounds(0, 232, 255, 23);
-		panelMenuPrincipal.add(labelPrimerPlato_1);
-
-		JLabel labelPrimerPlato_2 = new JLabel();
-		labelPrimerPlato_2.setForeground(Color.WHITE);
-		labelPrimerPlato_2.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPrimerPlato_2.setBounds(299, 232, 255, 23);
-		panelMenuPrincipal.add(labelPrimerPlato_2);
-
-		JLabel labelPrimerPlato_3 = new JLabel();
-		labelPrimerPlato_3.setForeground(Color.WHITE);
-		labelPrimerPlato_3.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPrimerPlato_3.setBounds(601, 232, 255, 23);
-		panelMenuPrincipal.add(labelPrimerPlato_3);
-
-		JLabel labelSegundoPlato_1 = new JLabel();
-		labelSegundoPlato_1.setForeground(Color.WHITE);
-		labelSegundoPlato_1.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelSegundoPlato_1.setBounds(0, 367, 255, 23);
-		panelMenuPrincipal.add(labelSegundoPlato_1);
-
-		JLabel labelSegundoPlato_2 = new JLabel();
-		labelSegundoPlato_2.setForeground(Color.WHITE);
-		labelSegundoPlato_2.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelSegundoPlato_2.setBounds(299, 367, 255, 23);
-		panelMenuPrincipal.add(labelSegundoPlato_2);
-
-		JLabel labelSegundoPlato_3 = new JLabel();
-		labelSegundoPlato_3.setForeground(Color.WHITE);
-		labelSegundoPlato_3.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelSegundoPlato_3.setBounds(601, 367, 255, 23);
-		panelMenuPrincipal.add(labelSegundoPlato_3);
-
-		JLabel labelPostre_1 = new JLabel();
-		labelPostre_1.setForeground(Color.WHITE);
-		labelPostre_1.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPostre_1.setBounds(0, 498, 255, 23);
-		panelMenuPrincipal.add(labelPostre_1);
-
-		JLabel labelPostre_2 = new JLabel();
-		labelPostre_2.setForeground(Color.WHITE);
-		labelPostre_2.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPostre_2.setBounds(299, 498, 255, 23);
-		panelMenuPrincipal.add(labelPostre_2);
-
-		JLabel labelPostre_3 = new JLabel();
-		labelPostre_3.setForeground(Color.WHITE);
-		labelPostre_3.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelPostre_3.setBounds(601, 498, 255, 23);
-		panelMenuPrincipal.add(labelPostre_3);
-
-		if (menu_1.size() > 0 && menu_2.size() > 0 && menu_3.size() > 0) {
-			// Llenado con menus propuestos
-			labelPrimerPlato_1.setText(menu_1.get(0).getNombre().toString());
-			labelPrimerPlato_2.setText(menu_2.get(0).getNombre().toString());
-			labelPrimerPlato_3.setText(menu_3.get(0).getNombre().toString());
-
-			labelSegundoPlato_1.setText(menu_1.get(1).getNombre().toString());
-			labelSegundoPlato_2.setText(menu_2.get(1).getNombre().toString());
-			labelSegundoPlato_3.setText(menu_3.get(1).getNombre().toString());
-
-			labelPostre_1.setText(menu_1.get(2).getNombre().toString());
-			labelPostre_2.setText(menu_2.get(2).getNombre().toString());
-			labelPostre_3.setText(menu_3.get(2).getNombre().toString());
+		JLabel labelEntranteMenu1_MP = new JLabel((String) null);
+		labelEntranteMenu1_MP.setForeground(new Color(255, 153, 0));
+		labelEntranteMenu1_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelEntranteMenu1_MP.setBounds(10, 151, 410, 23);
+		if(!menu_1.get(0).equals(null)){
+			labelEntranteMenu1_MP.setText(menu_1.get(0).getNombre());
+		}else{
+			labelEntranteMenu1_MP.setText("Receta no disponible.");
 		}
+		
+		panelMenuPrincipal.add(labelEntranteMenu1_MP);
+
+		JLabel labelPrimeroMenu1_MP = new JLabel((String) null);
+		labelPrimeroMenu1_MP.setForeground(new Color(255, 153, 0));
+		labelPrimeroMenu1_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPrimeroMenu1_MP.setBounds(10, 187, 410, 23);
+		if(!menu_1.get(1).equals(null)){
+			labelPrimeroMenu1_MP.setText(menu_1.get(1).getNombre());
+		}else{
+			labelPrimeroMenu1_MP.setText("Receta no disponible.");
+		}
+		panelMenuPrincipal.add(labelPrimeroMenu1_MP);
+
+		JLabel labelSegundoMenu1_MP = new JLabel((String) null);
+		labelSegundoMenu1_MP.setForeground(new Color(255, 153, 0));
+		labelSegundoMenu1_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelSegundoMenu1_MP.setBounds(10, 225, 410, 23);
+		if(!menu_1.get(2).equals(null)){
+			labelSegundoMenu1_MP.setText(menu_1.get(2).getNombre());
+		}else{
+			labelSegundoMenu1_MP.setText("Receta no disponible.");
+		}	
+		panelMenuPrincipal.add(labelSegundoMenu1_MP);
+
+		JLabel labelPostreMenu1_MP = new JLabel((String) null);
+		labelPostreMenu1_MP.setForeground(new Color(255, 153, 0));
+		labelPostreMenu1_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPostreMenu1_MP.setBounds(10, 261, 410, 23);
+		if(!menu_1.get(3).equals(null)){
+			labelPostreMenu1_MP.setText(menu_1.get(3).getNombre());
+		}else{
+			labelPostreMenu1_MP.setText("Receta no disponible.");
+		}	
+		panelMenuPrincipal.add(labelPostreMenu1_MP);
+
+		JLabel labelPostreMenu2_MP = new JLabel((String) null);
+		labelPostreMenu2_MP.setForeground(new Color(255, 153, 0));
+		labelPostreMenu2_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPostreMenu2_MP.setBounds(448, 261, 410, 23);
+		if(menu_2.get(3)!=null){
+			labelPostreMenu2_MP.setText(menu_2.get(3).getNombre());
+		}else{
+			labelPostreMenu2_MP.setText("Receta no disponible.");
+		}	
+		panelMenuPrincipal.add(labelPostreMenu2_MP);
+
+		JLabel labelSegundoMenu2_MP = new JLabel((String) null);
+		labelSegundoMenu2_MP.setForeground(new Color(255, 153, 0));
+		labelSegundoMenu2_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelSegundoMenu2_MP.setBounds(448, 225, 410, 23);
+		if(menu_2.get(2)!=null){
+			labelSegundoMenu2_MP.setText(menu_2.get(2).getNombre());
+		}else{
+			labelSegundoMenu2_MP.setText("Receta no disponible.");
+		}
+		panelMenuPrincipal.add(labelSegundoMenu2_MP);
+
+		JLabel labelPrimeroMenu2_MP = new JLabel((String) null);
+		labelPrimeroMenu2_MP.setForeground(new Color(255, 153, 0));
+		labelPrimeroMenu2_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPrimeroMenu2_MP.setBounds(448, 187, 410, 23);
+		if(menu_2.get(1)!=null){
+			labelPrimeroMenu2_MP.setText(menu_2.get(1).getNombre());
+		}else{
+			labelPrimeroMenu2_MP.setText("Receta no disponible.");
+		}	
+		panelMenuPrincipal.add(labelPrimeroMenu2_MP);
+
+		JLabel labelEntranteMenu2_MP = new JLabel((String) null);
+		labelEntranteMenu2_MP.setForeground(new Color(255, 153, 0));
+		labelEntranteMenu2_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelEntranteMenu2_MP.setBounds(448, 151, 410, 23);
+		if(menu_2.get(0)!=null){
+			labelEntranteMenu2_MP.setText(menu_2.get(0).getNombre());
+		}else{
+			labelEntranteMenu2_MP.setText("Receta no disponible.");
+		}	
+		panelMenuPrincipal.add(labelEntranteMenu2_MP);
+
+		JLabel labelPostreMenu3_MP = new JLabel((String) null);
+		labelPostreMenu3_MP.setForeground(new Color(255, 153, 0));
+		labelPostreMenu3_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPostreMenu3_MP.setBounds(10, 460, 410, 23);
+		labelPostreMenu3_MP.setText(menu_3.get(3).getNombre());
+		panelMenuPrincipal.add(labelPostreMenu3_MP);
+
+		JLabel labelSegundoMenu3_MP = new JLabel((String) null);
+		labelSegundoMenu3_MP.setForeground(new Color(255, 153, 0));
+		labelSegundoMenu3_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelSegundoMenu3_MP.setBounds(10, 424, 410, 23);
+		labelSegundoMenu3_MP.setText(menu_3.get(2).getNombre());
+		panelMenuPrincipal.add(labelSegundoMenu3_MP);
+
+		JLabel labelPrimeroMenu3_MP = new JLabel((String) null);
+		labelPrimeroMenu3_MP.setForeground(new Color(255, 153, 0));
+		labelPrimeroMenu3_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPrimeroMenu3_MP.setBounds(10, 386, 410, 23);
+		labelPrimeroMenu3_MP.setText(menu_3.get(1).getNombre());
+		panelMenuPrincipal.add(labelPrimeroMenu3_MP);
+
+		JLabel labelEntranteMenu3_MP = new JLabel((String) null);
+		labelEntranteMenu3_MP.setForeground(new Color(255, 153, 0));
+		labelEntranteMenu3_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelEntranteMenu3_MP.setBounds(10, 350, 410, 23);
+		labelEntranteMenu3_MP.setText(menu_3.get(0).getNombre());
+		panelMenuPrincipal.add(labelEntranteMenu3_MP);
+
+		JLabel labelEntranteMenu4_MP = new JLabel((String) null);
+		labelEntranteMenu4_MP.setForeground(new Color(255, 153, 0));
+		labelEntranteMenu4_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelEntranteMenu4_MP.setBounds(448, 350, 410, 23);
+		labelEntranteMenu4_MP.setText(menu_4.get(0).getNombre());
+		panelMenuPrincipal.add(labelEntranteMenu4_MP);
+
+		JLabel labelPrimeroMenu4_MP = new JLabel((String) null);
+		labelPrimeroMenu4_MP.setForeground(new Color(255, 153, 0));
+		labelPrimeroMenu4_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPrimeroMenu4_MP.setBounds(448, 386, 410, 23);
+		labelPrimeroMenu4_MP.setText(menu_4.get(1).getNombre());
+		panelMenuPrincipal.add(labelPrimeroMenu4_MP);
+
+		JLabel labelSegundoMenu4_MP = new JLabel((String) null);
+		labelSegundoMenu4_MP.setForeground(new Color(255, 153, 0));
+		labelSegundoMenu4_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelSegundoMenu4_MP.setBounds(448, 424, 410, 23);
+		labelSegundoMenu4_MP.setText(menu_4.get(2).getNombre());
+		panelMenuPrincipal.add(labelSegundoMenu4_MP);
+
+		JLabel labelPostreMenu4_MP = new JLabel((String) null);
+		labelPostreMenu4_MP.setForeground(new Color(255, 153, 0));
+		labelPostreMenu4_MP.setFont(new Font("Calibri", Font.BOLD, 22));
+		labelPostreMenu4_MP.setBounds(448, 460, 410, 23);
+		labelPostreMenu4_MP.setText(menu_4.get(3).getNombre());
+		panelMenuPrincipal.add(labelPostreMenu4_MP);
+
+		// Boton de ver el menu1
+		JButton botonVerMenu1_MP = new JButton("Ver Menú");
+		botonVerMenu1_MP.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonVerMenu1_MP.setBackground(new Color(173, 255, 47));
+		botonVerMenu1_MP.setBounds(134, 295, 131, 23);
+		panelMenuPrincipal.add(botonVerMenu1_MP);
+
+		// Boton de ver el menu3
+		JButton botonVerMenu3_MP = new JButton("Ver Menú");
+		botonVerMenu3_MP.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonVerMenu3_MP.setBackground(new Color(173, 255, 47));
+		botonVerMenu3_MP.setBounds(134, 493, 131, 23);
+		panelMenuPrincipal.add(botonVerMenu3_MP);
+
+		// Boton de ver el menu2
+		JButton botonVerMenu2_MP = new JButton("Ver Menú");
+		botonVerMenu2_MP.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonVerMenu2_MP.setBackground(new Color(173, 255, 47));
+		botonVerMenu2_MP.setBounds(596, 295, 131, 23);
+		panelMenuPrincipal.add(botonVerMenu2_MP);
+
+		// Boton de ver el menu4
+		JButton botonVerMenu4_MP = new JButton("Ver Menú");
+		botonVerMenu4_MP.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonVerMenu4_MP.setBackground(new Color(173, 255, 47));
+		botonVerMenu4_MP.setBounds(596, 493, 131, 23);
+		panelMenuPrincipal.add(botonVerMenu4_MP);
+
+		// Acciones de los botones
+		botonVerMenu1_MP.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta rmp_entrante = new RecetaAbierta(menu_1.get(0));
+				rmp_entrante.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_entrante.setVisible(true);
+				RecetaAbierta rmp_primero = new RecetaAbierta(menu_1.get(1));
+				rmp_primero.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_primero.setVisible(true);
+				RecetaAbierta rmp_segundo = new RecetaAbierta(menu_1.get(2));
+				rmp_segundo.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_segundo.setVisible(true);
+				RecetaAbierta rmp_postre = new RecetaAbierta(menu_1.get(3));
+				rmp_postre.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_postre.setVisible(true);
+			}
+		});
+
+		botonVerMenu2_MP.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta rmp_entrante = new RecetaAbierta(menu_2.get(0));
+				rmp_entrante.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_entrante.setVisible(true);
+				RecetaAbierta rmp_primero = new RecetaAbierta(menu_2.get(1));
+				rmp_primero.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_primero.setVisible(true);
+				RecetaAbierta rmp_segundo = new RecetaAbierta(menu_2.get(2));
+				rmp_segundo.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_segundo.setVisible(true);
+				RecetaAbierta rmp_postre = new RecetaAbierta(menu_2.get(3));
+				rmp_postre.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_postre.setVisible(true);
+			}
+		});
+
+		botonVerMenu3_MP.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta rmp_entrante = new RecetaAbierta(menu_3.get(0));
+				rmp_entrante.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_entrante.setVisible(true);
+				RecetaAbierta rmp_primero = new RecetaAbierta(menu_3.get(1));
+				rmp_primero.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_primero.setVisible(true);
+				RecetaAbierta rmp_segundo = new RecetaAbierta(menu_3.get(2));
+				rmp_segundo.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_segundo.setVisible(true);
+				RecetaAbierta rmp_postre = new RecetaAbierta(menu_3.get(3));
+				rmp_postre.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_postre.setVisible(true);
+			}
+		});
+
+		botonVerMenu4_MP.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta rmp_entrante = new RecetaAbierta(menu_4.get(0));
+				rmp_entrante.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_entrante.setVisible(true);
+				RecetaAbierta rmp_primero = new RecetaAbierta(menu_4.get(1));
+				rmp_primero.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_primero.setVisible(true);
+				RecetaAbierta rmp_segundo = new RecetaAbierta(menu_4.get(2));
+				rmp_segundo.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_segundo.setVisible(true);
+				RecetaAbierta rmp_postre = new RecetaAbierta(menu_4.get(3));
+				rmp_postre.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				rmp_postre.setVisible(true);
+			}
+		});
 
 		// TextArea menu principal
 		f = new Font("Calibri", Font.BOLD, 16);
@@ -537,7 +565,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_BA = new List();
 		listaRecetasBuscadas_BA.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_BA.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_BA.setBounds(12, 177, 831, 257);
 		panelEntrantes.add(listaRecetasBuscadas_BA);
 
 		// Label ingredientes de busqueda avanzada
@@ -617,14 +645,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_BA = new JSeparator();
 		separador_BA.setForeground(new Color(0, 0, 0));
 		separador_BA.setBackground(new Color(0, 0, 0));
-		separador_BA.setBounds(12, 136, 856, 23);
+		separador_BA.setBounds(12, 136, 831, 23);
 		panelEntrantes.add(separador_BA);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_BA = new JButton("Ver Receta");
 		botonVerReceta_BA.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_BA.setBackground(new Color(173, 255, 47));
-		botonVerReceta_BA.setBounds(182, 448, 220, 60);
+		botonVerReceta_BA.setBounds(315, 448, 220, 60);
 		panelEntrantes.add(botonVerReceta_BA);
 
 		// Accion del boton de ver receta seleccionada
@@ -637,19 +665,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setForeground(Color.BLACK);
-		separator.setBackground(Color.BLACK);
-		separator.setBounds(574, 136, 36, 385);
-		panelEntrantes.add(separator);
-
-		JLabel labelRecomendaciones_BA = new JLabel("Entrantes recomendados:");
-		labelRecomendaciones_BA.setForeground(Color.WHITE);
-		labelRecomendaciones_BA.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_BA.setBounds(583, 148, 273, 23);
-		panelEntrantes.add(labelRecomendaciones_BA);
 
 		JLabel labelTipo_BA = new JLabel("Tipo de plato:");
 		labelTipo_BA.setForeground(Color.WHITE);
@@ -679,7 +694,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_Pr = new List();
 		listaRecetasBuscadas_Pr.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_Pr.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_Pr.setBounds(12, 177, 831, 257);
 		panelPrimeros.add(listaRecetasBuscadas_Pr);
 
 		// Label ingredientes de busqueda avanzada
@@ -745,7 +760,6 @@ public class Aplicacion extends JFrame {
 				if (comboBoxIngrediente_Pr.getSelectedIndex() != 0) {
 					ingrediente = comboBoxIngrediente_Pr.getSelectedItem().toString();
 				}
-
 				ArrayList<RecetaVO> listaBuscadas_Pr = o.busqueda(textFieldPrimeros.getText(), personas, ingrediente,
 						"Primero");
 				for (RecetaVO receta : listaBuscadas_Pr) {
@@ -759,14 +773,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_Pr = new JSeparator();
 		separador_Pr.setForeground(new Color(0, 0, 0));
 		separador_Pr.setBackground(new Color(0, 0, 0));
-		separador_Pr.setBounds(12, 136, 856, 23);
+		separador_Pr.setBounds(12, 136, 831, 23);
 		panelPrimeros.add(separador_Pr);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_Pr = new JButton("Ver Receta");
 		botonVerReceta_Pr.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_Pr.setBackground(new Color(173, 255, 47));
-		botonVerReceta_Pr.setBounds(182, 448, 220, 60);
+		botonVerReceta_Pr.setBounds(315, 448, 220, 60);
 		panelPrimeros.add(botonVerReceta_Pr);
 
 		// Accion del boton de ver receta seleccionada
@@ -780,19 +794,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_Pr = new JSeparator();
-		separator_Pr.setOrientation(SwingConstants.VERTICAL);
-		separator_Pr.setForeground(Color.BLACK);
-		separator_Pr.setBackground(Color.BLACK);
-		separator_Pr.setBounds(574, 136, 36, 385);
-		panelPrimeros.add(separator_Pr);
-
-		JLabel labelRecomendaciones_Pr = new JLabel("Primeros recomendados:");
-		labelRecomendaciones_Pr.setForeground(Color.WHITE);
-		labelRecomendaciones_Pr.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_Pr.setBounds(583, 148, 285, 23);
-		panelPrimeros.add(labelRecomendaciones_Pr);
 
 		JLabel labelTipo_Pr = new JLabel("Tipo de plato:");
 		labelTipo_Pr.setForeground(Color.WHITE);
@@ -822,7 +823,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_S = new List();
 		listaRecetasBuscadas_S.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_S.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_S.setBounds(12, 177, 831, 257);
 		panelSegundos.add(listaRecetasBuscadas_S);
 
 		// Label ingredientes de busqueda avanzada
@@ -902,14 +903,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_S = new JSeparator();
 		separador_S.setForeground(new Color(0, 0, 0));
 		separador_S.setBackground(new Color(0, 0, 0));
-		separador_S.setBounds(12, 136, 856, 23);
+		separador_S.setBounds(12, 136, 831, 23);
 		panelSegundos.add(separador_S);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_S = new JButton("Ver Receta");
 		botonVerReceta_S.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_S.setBackground(new Color(173, 255, 47));
-		botonVerReceta_S.setBounds(182, 448, 220, 60);
+		botonVerReceta_S.setBounds(315, 448, 220, 60);
 		panelSegundos.add(botonVerReceta_S);
 
 		// Accion del boton de ver receta seleccionada
@@ -923,19 +924,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_S = new JSeparator();
-		separator_S.setOrientation(SwingConstants.VERTICAL);
-		separator_S.setForeground(Color.BLACK);
-		separator_S.setBackground(Color.BLACK);
-		separator_S.setBounds(574, 136, 36, 385);
-		panelSegundos.add(separator_S);
-
-		JLabel labelRecomendaciones_S = new JLabel("Segundos recomendados:");
-		labelRecomendaciones_S.setForeground(Color.WHITE);
-		labelRecomendaciones_S.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_S.setBounds(583, 148, 285, 23);
-		panelSegundos.add(labelRecomendaciones_S);
 
 		JLabel labelTipo_S = new JLabel("Tipo de plato:");
 		labelTipo_S.setForeground(Color.WHITE);
@@ -965,7 +953,7 @@ public class Aplicacion extends JFrame {
 		// Lista de recetas buscadas
 		List listaRecetasBuscadas_Pos = new List();
 		listaRecetasBuscadas_Pos.setFont(new Font("Calibri", Font.BOLD, 20));
-		listaRecetasBuscadas_Pos.setBounds(12, 177, 556, 257);
+		listaRecetasBuscadas_Pos.setBounds(12, 177, 831, 257);
 		panelPostres.add(listaRecetasBuscadas_Pos);
 
 		// Label ingredientes de busqueda avanzada
@@ -1045,14 +1033,14 @@ public class Aplicacion extends JFrame {
 		JSeparator separador_Pos = new JSeparator();
 		separador_Pos.setForeground(new Color(0, 0, 0));
 		separador_Pos.setBackground(new Color(0, 0, 0));
-		separador_Pos.setBounds(12, 136, 856, 23);
+		separador_Pos.setBounds(12, 136, 831, 23);
 		panelPostres.add(separador_Pos);
 
 		// Boton ver receta seleccionada
 		JButton botonVerReceta_Pos = new JButton("Ver Receta");
 		botonVerReceta_Pos.setFont(new Font("Calibri", Font.BOLD, 23));
 		botonVerReceta_Pos.setBackground(new Color(173, 255, 47));
-		botonVerReceta_Pos.setBounds(182, 448, 220, 60);
+		botonVerReceta_Pos.setBounds(315, 448, 220, 60);
 		panelPostres.add(botonVerReceta_Pos);
 
 		// Accion del boton de ver receta seleccionada
@@ -1066,19 +1054,6 @@ public class Aplicacion extends JFrame {
 				}
 			}
 		});
-
-		JSeparator separator_Pos = new JSeparator();
-		separator_Pos.setOrientation(SwingConstants.VERTICAL);
-		separator_Pos.setForeground(Color.BLACK);
-		separator_Pos.setBackground(Color.BLACK);
-		separator_Pos.setBounds(574, 136, 36, 385);
-		panelPostres.add(separator_Pos);
-
-		JLabel labelRecomendaciones_Pos = new JLabel("Postres recomendados:");
-		labelRecomendaciones_Pos.setForeground(Color.WHITE);
-		labelRecomendaciones_Pos.setFont(new Font("Calibri", Font.BOLD, 18));
-		labelRecomendaciones_Pos.setBounds(583, 148, 188, 23);
-		panelPostres.add(labelRecomendaciones_Pos);
 
 		JLabel labelTipo_Pos = new JLabel("Tipo de plato:");
 		labelTipo_Pos.setForeground(Color.WHITE);
@@ -1127,7 +1102,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_PR = new JComboBox();
 		comboBoxIngrediente_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_PR.setFont(f1);
-		comboBoxIngrediente_PR.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_PR.setBounds(592, 124, 243, 22);
 		panelProponer.add(comboBoxIngrediente_PR);
 		comboBoxIngrediente_PR.setLightWeightPopupEnabled(false);
 
@@ -1179,6 +1154,14 @@ public class Aplicacion extends JFrame {
 		labelNumPersonas_PR.setFont(f);
 		panelProponer.add(labelNumPersonas_PR);
 
+		JComboBox comboBoxUnidades_PR = new JComboBox();
+		comboBoxUnidades_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades", "gramos",
+				"kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_PR.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_PR.setBounds(701, 153, 134, 22);
+		panelProponer.add(comboBoxUnidades_PR);
+
 		// Label de la URL de la imagen
 		JLabel labelTipo_PR = new JLabel("Tipo de plato:");
 		labelTipo_PR.setBounds(0, 84, 174, 23);
@@ -1215,15 +1198,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_PR = new JLabel("Cantidad:");
 		labelCantidadPrinc_PR.setForeground(Color.WHITE);
 		labelCantidadPrinc_PR.setFont(f);
-		labelCantidadPrinc_PR.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_PR.setBounds(496, 47, 91, 23);
 		panelProponer.add(labelCantidadPrinc_PR);
-
-		// Label gramos
-		JLabel labelGramos_PR = new JLabel("gramos");
-		labelGramos_PR.setForeground(Color.WHITE);
-		labelGramos_PR.setFont(f);
-		labelGramos_PR.setBounds(780, 48, 66, 23);
-		panelProponer.add(labelGramos_PR);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_PR = new JTextField();
@@ -1237,7 +1213,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_PR.setFont(f1);
-		textFieldCantidadPrinc_PR.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_PR.setBounds(592, 48, 97, 22);
 		panelProponer.add(textFieldCantidadPrinc_PR);
 		textFieldCantidadPrinc_PR.setColumns(10);
 
@@ -1245,12 +1221,13 @@ public class Aplicacion extends JFrame {
 		final JTextArea textAreaDescripcion_PR = new JTextArea();
 		textAreaDescripcion_PR.setFont(f1);
 		textAreaDescripcion_PR.setLineWrap(true);
-		textAreaDescripcion_PR.setWrapStyleWord(true);		
-		JScrollPane scrollPanel = new JScrollPane(textAreaDescripcion_PR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		textAreaDescripcion_PR.setWrapStyleWord(true);
+		JScrollPane scrollPanel = new JScrollPane(textAreaDescripcion_PR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel.setFont(f1);
 		scrollPanel.setBounds(0, 152, 440, 269);
 		panelProponer.add(scrollPanel);
-		
+
 		// Boton de enviar la receta propuesta
 		JButton botonEnviarPropuesta_PR = new JButton("Enviar Receta Propuesta");
 		botonEnviarPropuesta_PR.setFont(new Font("Calibri", Font.BOLD, 23));
@@ -1268,14 +1245,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_PR = new JLabel("Ingrediente:");
 		labelIngrediente_PR.setForeground(Color.WHITE);
 		labelIngrediente_PR.setFont(f);
-		labelIngrediente_PR.setBounds(535, 123, 117, 23);
+		labelIngrediente_PR.setBounds(496, 123, 117, 23);
 		panelProponer.add(labelIngrediente_PR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_PR = new JLabel("Cantidad:");
 		labelCantidad_PR.setForeground(Color.WHITE);
 		labelCantidad_PR.setFont(f);
-		labelCantidad_PR.setBounds(553, 160, 91, 23);
+		labelCantidad_PR.setBounds(496, 152, 91, 23);
 		panelProponer.add(labelCantidad_PR);
 
 		// TextField cantidad del ingrediente
@@ -1290,15 +1267,8 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_PR.setFont(f1);
 		textFieldCantidad_PR.setColumns(10);
-		textFieldCantidad_PR.setBounds(631, 160, 137, 22);
+		textFieldCantidad_PR.setBounds(592, 153, 100, 22);
 		panelProponer.add(textFieldCantidad_PR);
-
-		// Label gramos 2
-		JLabel labelGramos2_PR = new JLabel("gramos");
-		labelGramos2_PR.setForeground(Color.WHITE);
-		labelGramos2_PR.setFont(f);
-		labelGramos2_PR.setBounds(780, 160, 66, 23);
-		panelProponer.add(labelGramos2_PR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_PR = new JButton("Añadir Ingrediente");
@@ -1373,6 +1343,14 @@ public class Aplicacion extends JFrame {
 		botonCancelarReceta_PR.setBounds(288, 432, 155, 60);
 		panelProponer.add(botonCancelarReceta_PR);
 
+		JComboBox comboBoxUnidadesPrinc_PR = new JComboBox();
+		comboBoxUnidadesPrinc_PR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades",
+				"gramos", "kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_PR.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_PR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_PR.setBounds(701, 47, 134, 22);
+		panelProponer.add(comboBoxUnidadesPrinc_PR);
+
 		// Accion del boton de cancelar receta
 
 		botonCancelarReceta_PR.addMouseListener(new MouseAdapter() {
@@ -1387,6 +1365,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_PR.setSelectedIndex(0);
 				textFieldCantidad_PR.setText("");
 				listaIngredientes_PR.removeAll();
+				comboBoxUnidades_PR.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_PR.setSelectedIndex(0);
 			}
 		});
 
@@ -1406,7 +1386,8 @@ public class Aplicacion extends JFrame {
 		botonAnyadirIngrediente_PR.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_PR.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_PR.getSelectedIndex() != 0) && !textFieldCantidad_PR.getText().equals("")
+						&& comboBoxUnidades_PR.getSelectedIndex() != 0) {
 					if (comboBoxIngPrinc_PR.getSelectedIndex() == comboBoxIngrediente_PR.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -1414,12 +1395,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_PR.getText().equals("")) {
-							listaIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_PR.add(
-									comboBoxIngrediente_PR.getSelectedItem() + " - " + textFieldCantidad_PR.getText());
-						}
+						listaIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem() + " - "
+								+ textFieldCantidad_PR.getText() + " - " + comboBoxUnidades_PR.getSelectedItem());
 						indexIngredientes_PR.add(comboBoxIngrediente_PR.getSelectedItem().toString());
 					}
 				}
@@ -1432,33 +1409,37 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_PR.getText().equals("") && comboBoxNumPersonas_PR.getSelectedIndex() != 0
 						&& !textAreaDescripcion_PR.getText().equals("") && comboBoxIngPrinc_PR.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_PR.getText().equals("") && comboBoxTipo_PR.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_PR.getText().equals("")
+						&& comboBoxUnidadesPrinc_PR.getSelectedIndex() != 0
+						&& comboBoxTipo_PR.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_PR.getText().length() > 4
 							|| textFieldCantidad_PR.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes = new ArrayList<String>();
 						String[] s = listaIngredientes_PR.getItems();
 
 						ingredientes.add(comboBoxIngPrinc_PR.getSelectedItem().toString());
 						pesoIngredientes.add(textFieldCantidadPrinc_PR.getText());
+						unidadIngredientes.add(comboBoxUnidadesPrinc_PR.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(0, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes.add("0");
-							} else {
-								pesoIngredientes.add(cantidad);
-							}
+							pesoIngredientes.add(cantidad);
+							unidadIngredientes.add(unidad);
 						}
 
 						o.addReceta(textFieldNombre_PR.getText(), textAreaDescripcion_PR.getText(),
 								comboBoxTipo_PR.getSelectedItem().toString(),
-								comboBoxNumPersonas_PR.getSelectedItem().toString(), ingredientes, pesoIngredientes);
+								comboBoxNumPersonas_PR.getSelectedItem().toString(), ingredientes, pesoIngredientes,
+								unidadIngredientes);
 
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"La receta propuesta ha sido enviada correctamente.");
@@ -1490,6 +1471,152 @@ public class Aplicacion extends JFrame {
 		pantallaMenu.add(panelDestacados, "panelDestacados");
 		panelDestacados.setLayout(null);
 
+		JSeparator separador_MD = new JSeparator();
+		separador_MD.setBackground(Color.BLACK);
+		separador_MD.setForeground(Color.BLACK);
+		separador_MD.setBounds(0, 252, 868, 11);
+		panelDestacados.add(separador_MD);
+
+		JLabel labelMasRecientes_MD = new JLabel("Recetas más recientes:");
+		labelMasRecientes_MD.setForeground(Color.WHITE);
+		labelMasRecientes_MD.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMasRecientes_MD.setBounds(12, 13, 215, 23);
+		panelDestacados.add(labelMasRecientes_MD);
+
+		JLabel labelMasVotadas_MD = new JLabel("Recetas más votadas:");
+		labelMasVotadas_MD.setForeground(Color.WHITE);
+		labelMasVotadas_MD.setFont(new Font("Calibri", Font.BOLD, 18));
+		labelMasVotadas_MD.setBounds(12, 270, 215, 23);
+		panelDestacados.add(labelMasVotadas_MD);
+
+		JButton botonMR_1 = new JButton("Ver Menú");
+		botonMR_1.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMR_1.setBackground(new Color(173, 255, 47));
+		botonMR_1.setBounds(10, 61, 131, 23);
+		panelDestacados.add(botonMR_1);
+
+		botonMR_1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masRecientes.get(0));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		JButton botonMR_2 = new JButton("Ver Menú");
+		botonMR_2.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMR_2.setBackground(new Color(173, 255, 47));
+		botonMR_2.setBounds(10, 130, 131, 23);
+		panelDestacados.add(botonMR_2);
+
+		botonMR_2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masRecientes.get(1));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		JButton botonMR_3 = new JButton("Ver Menú");
+		botonMR_3.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMR_3.setBackground(new Color(173, 255, 47));
+		botonMR_3.setBounds(10, 197, 131, 23);
+		panelDestacados.add(botonMR_3);
+
+		botonMR_3.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masRecientes.get(2));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		JButton botonMV_1 = new JButton("Ver Menú");
+		botonMV_1.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMV_1.setBackground(new Color(173, 255, 47));
+		botonMV_1.setBounds(10, 330, 131, 23);
+		panelDestacados.add(botonMV_1);
+
+		botonMV_1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masVotadas.get(0));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		JButton botonMV_2 = new JButton("Ver Menú");
+		botonMV_2.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMV_2.setBackground(new Color(173, 255, 47));
+		botonMV_2.setBounds(10, 399, 131, 23);
+		panelDestacados.add(botonMV_2);
+
+		botonMV_2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masVotadas.get(1));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		JButton botonMV_3 = new JButton("Ver Menú");
+		botonMV_3.setFont(new Font("Calibri", Font.BOLD, 18));
+		botonMV_3.setBackground(new Color(173, 255, 47));
+		botonMV_3.setBounds(10, 466, 131, 23);
+		panelDestacados.add(botonMV_3);
+
+		botonMV_3.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				RecetaAbierta a = new RecetaAbierta(masVotadas.get(2));
+				a.setIconImage(new ImageIcon("images/IconoAppRecortado.png").getImage());
+				a.setVisible(true);
+			}
+		});
+
+		// Recetas mas recientes
+		JLabel recientes1_MD = new JLabel((String) null);
+		recientes1_MD.setForeground(new Color(255, 153, 0));
+		recientes1_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		recientes1_MD.setBounds(163, 61, 693, 23);
+		recientes1_MD.setText(masRecientes.get(0).getNombre());
+		panelDestacados.add(recientes1_MD);
+
+		JLabel recientes2_MD = new JLabel((String) null);
+		recientes2_MD.setForeground(new Color(255, 153, 0));
+		recientes2_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		recientes2_MD.setBounds(163, 130, 693, 23);
+		recientes2_MD.setText(masRecientes.get(1).getNombre());
+		panelDestacados.add(recientes2_MD);
+
+		JLabel recientes3_MD = new JLabel((String) null);
+		recientes3_MD.setForeground(new Color(255, 153, 0));
+		recientes3_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		recientes3_MD.setBounds(163, 197, 693, 23);
+		recientes3_MD.setText(masRecientes.get(2).getNombre());
+		panelDestacados.add(recientes3_MD);
+
+		// Recetas mas votadas
+		JLabel votados3_MD = new JLabel((String) null);
+		votados3_MD.setForeground(new Color(255, 153, 0));
+		votados3_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		votados3_MD.setBounds(163, 466, 693, 23);
+		votados3_MD.setText(masVotadas.get(2).getNombre());
+		panelDestacados.add(votados3_MD);
+
+		JLabel votados2_MD = new JLabel((String) null);
+		votados2_MD.setForeground(new Color(255, 153, 0));
+		votados2_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		votados2_MD.setBounds(163, 399, 693, 23);
+		votados2_MD.setText(masVotadas.get(1).getNombre());
+		panelDestacados.add(votados2_MD);
+
+		JLabel votados1_MD = new JLabel((String) null);
+		votados1_MD.setForeground(new Color(255, 153, 0));
+		votados1_MD.setFont(new Font("Calibri", Font.BOLD, 22));
+		votados1_MD.setBounds(163, 330, 693, 23);
+		votados1_MD.setText(masVotadas.get(0).getNombre());
+		panelDestacados.add(votados1_MD);
+
 		// Panel Ayuda
 		JPanel panelAyuda = new JPanel();
 		panelAyuda.setOpaque(false);
@@ -1497,7 +1624,7 @@ public class Aplicacion extends JFrame {
 		panelAyuda.setLayout(null);
 
 		JLabel lblSiNecesitasAyuda = new JLabel(
-				"Si necesitas ayuda no dudes en ponerte en contacto con cualquiera de nuestros t\u00E9cnicos, estar\u00E1n encantados");
+				"Si necesitas ayuda no dudes en ponerte en contacto con cualquiera de nuestros técnicos, estarán encantados");
 		lblSiNecesitasAyuda.setForeground(Color.WHITE);
 		lblSiNecesitasAyuda.setFont(new Font("Calibri", Font.BOLD, 18));
 		lblSiNecesitasAyuda.setBounds(12, 29, 844, 23);
@@ -1585,7 +1712,7 @@ public class Aplicacion extends JFrame {
 		botonWeb.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 50));
 		botonWeb.setForeground(Color.WHITE);
 		botonWeb.setBackground(new Color(255, 153, 0));
-		botonWeb.setBounds(223, 399, 323, 100);
+		botonWeb.setBounds(212, 395, 360, 100);
 		panelAyuda.add(botonWeb);
 
 		// Indicador textual del menu
@@ -1749,6 +1876,9 @@ public class Aplicacion extends JFrame {
 						botonProponer, botonAyuda, botonAdministrador, botonValidar, botonAnyadir, botonModificar);
 				botonDestacados.setBackground(new Color(255, 153, 0));
 				cardMenu.show(pantallaMenu, "panelDestacados");
+				// Cargamos los arrays de recetas
+				masRecientes = o.recetasMasNuevas();
+				masVotadas = o.recetasMasVotadas();
 			}
 		});
 
@@ -1942,7 +2072,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_A = new JComboBox();
 		comboBoxIngrediente_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_A.setFont(f1);
-		comboBoxIngrediente_A.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_A.setBounds(593, 124, 249, 22);
 		panelAnyadir.add(comboBoxIngrediente_A);
 		comboBoxIngrediente_A.setLightWeightPopupEnabled(false);
 
@@ -1962,7 +2092,7 @@ public class Aplicacion extends JFrame {
 
 		// ComboBox del ingrediente Principal
 		final JComboBox comboBoxIngPrinc_A = new JComboBox();
-		comboBoxIngPrinc_A.setBounds(631, 13, 204, 22);
+		comboBoxIngPrinc_A.setBounds(638, 13, 204, 22);
 		comboBoxIngPrinc_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngPrinc_A.setFont(f1);
 		panelAnyadir.add(comboBoxIngPrinc_A);
@@ -2031,15 +2161,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_A = new JLabel("Cantidad:");
 		labelCantidadPrinc_A.setForeground(Color.WHITE);
 		labelCantidadPrinc_A.setFont(f);
-		labelCantidadPrinc_A.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_A.setBounds(496, 47, 91, 23);
 		panelAnyadir.add(labelCantidadPrinc_A);
-
-		// Label gramos
-		JLabel labelGramos_A = new JLabel("gramos");
-		labelGramos_A.setForeground(Color.WHITE);
-		labelGramos_A.setFont(f);
-		labelGramos_A.setBounds(780, 48, 66, 23);
-		panelAnyadir.add(labelGramos_A);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_A = new JTextField();
@@ -2053,7 +2176,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_A.setFont(f1);
-		textFieldCantidadPrinc_A.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_A.setBounds(593, 48, 103, 22);
 		panelAnyadir.add(textFieldCantidadPrinc_A);
 		textFieldCantidadPrinc_A.setColumns(10);
 
@@ -2063,13 +2186,14 @@ public class Aplicacion extends JFrame {
 		textAreaDescripcion_A.setLineWrap(true);
 		textAreaDescripcion_A.setWrapStyleWord(true);
 		textAreaDescripcion_A.setBounds(0, 152, 440, 236);
-		JScrollPane scrollPanel_A = new JScrollPane(textAreaDescripcion_A, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPanel_A = new JScrollPane(textAreaDescripcion_A, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel_A.setFont(f1);
 		scrollPanel_A.setBounds(0, 152, 440, 239);
 		panelAnyadir.add(scrollPanel_A);
 
 		// Boton de enviar la receta propuesta
-		JButton botonEnviarPropuesta_A = new JButton("A\u00D1ADIR RECETA");
+		JButton botonEnviarPropuesta_A = new JButton("AÑADIR RECETA");
 		botonEnviarPropuesta_A.setFont(f2);
 		botonEnviarPropuesta_A.setBackground(new Color(173, 255, 47));
 		botonEnviarPropuesta_A.setBounds(0, 394, 281, 60);
@@ -2085,14 +2209,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_A = new JLabel("Ingrediente:");
 		labelIngrediente_A.setForeground(Color.WHITE);
 		labelIngrediente_A.setFont(f);
-		labelIngrediente_A.setBounds(535, 123, 117, 23);
+		labelIngrediente_A.setBounds(496, 123, 117, 23);
 		panelAnyadir.add(labelIngrediente_A);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_A = new JLabel("Cantidad:");
 		labelCantidad_A.setForeground(Color.WHITE);
 		labelCantidad_A.setFont(f);
-		labelCantidad_A.setBounds(553, 160, 91, 23);
+		labelCantidad_A.setBounds(496, 152, 91, 23);
 		panelAnyadir.add(labelCantidad_A);
 
 		// TextField cantidad del ingrediente
@@ -2107,15 +2231,8 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_A.setFont(f1);
 		textFieldCantidad_A.setColumns(10);
-		textFieldCantidad_A.setBounds(631, 160, 137, 22);
+		textFieldCantidad_A.setBounds(593, 153, 103, 22);
 		panelAnyadir.add(textFieldCantidad_A);
-
-		// Label gramos 2
-		JLabel labelGramos2_A = new JLabel("gramos");
-		labelGramos2_A.setForeground(Color.WHITE);
-		labelGramos2_A.setFont(f);
-		labelGramos2_A.setBounds(780, 160, 66, 23);
-		panelAnyadir.add(labelGramos2_A);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_A = new JButton("Añadir Ingrediente");
@@ -2130,6 +2247,22 @@ public class Aplicacion extends JFrame {
 		botonBorrarIngrediente_A.setBackground(new Color(245, 245, 245));
 		botonBorrarIngrediente_A.setBounds(667, 421, 180, 33);
 		panelAnyadir.add(botonBorrarIngrediente_A);
+
+		JComboBox comboBoxUnidades_A = new JComboBox();
+		comboBoxUnidades_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades", "gramos",
+				"kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_A.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_A.setBounds(708, 153, 134, 22);
+		panelAnyadir.add(comboBoxUnidades_A);
+
+		JComboBox comboBoxUnidadesPrinc_A = new JComboBox();
+		comboBoxUnidadesPrinc_A.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades",
+				"gramos", "kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_A.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_A.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_A.setBounds(708, 48, 134, 22);
+		panelAnyadir.add(comboBoxUnidadesPrinc_A);
 
 		// Lista con los ingredientes aÃ±adidos
 		final List listaIngredientes_A = new List();
@@ -2153,13 +2286,13 @@ public class Aplicacion extends JFrame {
 		JLabel labelAsterisco4_A = new JLabel("*");
 		labelAsterisco4_A.setForeground(Color.RED);
 		labelAsterisco4_A.setFont(f);
-		labelAsterisco4_A.setBounds(839, 15, 19, 16);
+		labelAsterisco4_A.setBounds(849, 15, 19, 16);
 		panelAnyadir.add(labelAsterisco4_A);
 
 		JLabel labelAsterisco5_A = new JLabel("*");
 		labelAsterisco5_A.setForeground(Color.RED);
 		labelAsterisco5_A.setFont(f);
-		labelAsterisco5_A.setBounds(839, 50, 19, 16);
+		labelAsterisco5_A.setBounds(849, 50, 19, 16);
 		panelAnyadir.add(labelAsterisco5_A);
 
 		JLabel labelCampoObligatorio_A = new JLabel("* Campo obligatorio");
@@ -2199,7 +2332,8 @@ public class Aplicacion extends JFrame {
 		botonAnyadirIngrediente_A.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_A.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_A.getSelectedIndex() != 0) && !textFieldCantidad_A.getText().equals("")
+						&& comboBoxUnidades_A.getSelectedIndex() != 0) {
 					if (comboBoxIngPrinc_A.getSelectedIndex() == comboBoxIngrediente_A.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -2207,12 +2341,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_A.getText().equals("")) {
-							listaIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_A.add(
-									comboBoxIngrediente_A.getSelectedItem() + " - " + textFieldCantidad_A.getText());
-						}
+						listaIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem() + " - "
+								+ textFieldCantidad_A.getText() + " - " + comboBoxUnidades_A.getSelectedItem());
 						indexIngredientes_A.add(comboBoxIngrediente_A.getSelectedItem().toString());
 					}
 				}
@@ -2225,32 +2355,35 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_A.getText().equals("") && comboBoxNumPersonas_A.getSelectedIndex() != 0
 						&& !textAreaDescripcion_A.getText().equals("") && comboBoxIngPrinc_A.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_A.getText().equals("") && comboBoxTipo_A.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_A.getText().equals("")
+						&& comboBoxUnidadesPrinc_A.getSelectedIndex() != 0 && comboBoxTipo_A.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_A.getText().length() > 4 || textFieldCantidad_A.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes_A = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes_A = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes_A = new ArrayList<String>();
 						String[] s = listaIngredientes_A.getItems();
 
 						ingredientes_A.add(comboBoxIngPrinc_A.getSelectedItem().toString());
 						pesoIngredientes_A.add(textFieldCantidadPrinc_A.getText());
+						unidadIngredientes_A.add(comboBoxUnidadesPrinc_A.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(0, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes_A.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes_A.add("0");
-							} else {
-								pesoIngredientes_A.add(cantidad);
-							}
+							pesoIngredientes_A.add(cantidad);
+							unidadIngredientes_A.add(unidad);
 						}
 
 						o.addRecetaV(textFieldNombre_A.getText(), textAreaDescripcion_A.getText(),
 								comboBoxTipo_A.getSelectedItem().toString(),
-								comboBoxNumPersonas_A.getSelectedItem().toString(), ingredientes_A, pesoIngredientes_A);
+								comboBoxNumPersonas_A.getSelectedItem().toString(), ingredientes_A, pesoIngredientes_A,
+								unidadIngredientes_A);
 
 						JOptionPane.showMessageDialog(menuPrincipal, "La receta ha sido añadida.");
 						textFieldNombre_A.setText("");
@@ -2296,6 +2429,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_A.setSelectedIndex(0);
 				textFieldCantidad_A.setText("");
 				listaIngredientes_A.removeAll();
+				comboBoxUnidades_A.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_A.setSelectedIndex(0);
 			}
 		});
 
@@ -2406,7 +2541,7 @@ public class Aplicacion extends JFrame {
 		final JComboBox comboBoxIngrediente_MR = new JComboBox();
 		comboBoxIngrediente_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione el ingrediente -" }));
 		comboBoxIngrediente_MR.setFont(new Font("Calibri", Font.BOLD, 15));
-		comboBoxIngrediente_MR.setBounds(631, 124, 204, 22);
+		comboBoxIngrediente_MR.setBounds(592, 124, 243, 22);
 		panelModificarReceta.add(comboBoxIngrediente_MR);
 		comboBoxIngrediente_MR.setLightWeightPopupEnabled(false);
 
@@ -2510,15 +2645,8 @@ public class Aplicacion extends JFrame {
 		JLabel labelCantidadPrinc_MR = new JLabel("Cantidad:");
 		labelCantidadPrinc_MR.setForeground(Color.WHITE);
 		labelCantidadPrinc_MR.setFont(f);
-		labelCantidadPrinc_MR.setBounds(553, 48, 91, 23);
+		labelCantidadPrinc_MR.setBounds(496, 47, 91, 23);
 		panelModificarReceta.add(labelCantidadPrinc_MR);
-
-		// Label gramos
-		JLabel labelGramos_MR = new JLabel("gramos");
-		labelGramos_MR.setForeground(Color.WHITE);
-		labelGramos_MR.setFont(f);
-		labelGramos_MR.setBounds(780, 48, 66, 23);
-		panelModificarReceta.add(labelGramos_MR);
 
 		// Text Field cantidad ingrediente principal
 		textFieldCantidadPrinc_MR = new JTextField();
@@ -2532,7 +2660,7 @@ public class Aplicacion extends JFrame {
 			}
 		});
 		textFieldCantidadPrinc_MR.setFont(f);
-		textFieldCantidadPrinc_MR.setBounds(631, 48, 137, 22);
+		textFieldCantidadPrinc_MR.setBounds(592, 47, 100, 22);
 		panelModificarReceta.add(textFieldCantidadPrinc_MR);
 		textFieldCantidadPrinc_MR.setColumns(10);
 
@@ -2541,9 +2669,10 @@ public class Aplicacion extends JFrame {
 		textAreaDescripcion_MR.setFont(f);
 		textAreaDescripcion_MR.setLineWrap(true);
 		textAreaDescripcion_MR.setWrapStyleWord(true);
-		JScrollPane scrollPanel_MR = new JScrollPane(textAreaDescripcion_MR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollPanel_MR = new JScrollPane(textAreaDescripcion_MR, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel_MR.setFont(f1);
-		scrollPanel_MR.setBounds(0, 152, 440, 269);
+		scrollPanel_MR.setBounds(0, 152, 440, 229);
 		panelModificarReceta.add(scrollPanel_MR);
 
 		// LLenado del comboBox
@@ -2556,14 +2685,14 @@ public class Aplicacion extends JFrame {
 		JLabel labelIngrediente_MR = new JLabel("Ingrediente:");
 		labelIngrediente_MR.setForeground(Color.WHITE);
 		labelIngrediente_MR.setFont(f);
-		labelIngrediente_MR.setBounds(535, 123, 117, 23);
+		labelIngrediente_MR.setBounds(496, 123, 117, 23);
 		panelModificarReceta.add(labelIngrediente_MR);
 
 		// Label cantidad del ingrediente
 		JLabel labelCantidad_MR = new JLabel("Cantidad:");
 		labelCantidad_MR.setForeground(Color.WHITE);
 		labelCantidad_MR.setFont(f);
-		labelCantidad_MR.setBounds(553, 160, 91, 23);
+		labelCantidad_MR.setBounds(496, 155, 91, 23);
 		panelModificarReceta.add(labelCantidad_MR);
 
 		// TextField cantidad del ingrediente
@@ -2578,15 +2707,24 @@ public class Aplicacion extends JFrame {
 		});
 		textFieldCantidad_MR.setFont(f);
 		textFieldCantidad_MR.setColumns(10);
-		textFieldCantidad_MR.setBounds(631, 160, 137, 22);
+		textFieldCantidad_MR.setBounds(592, 159, 100, 22);
 		panelModificarReceta.add(textFieldCantidad_MR);
 
-		// Label gramos 2
-		JLabel labelGramos2_MR = new JLabel("gramos");
-		labelGramos2_MR.setForeground(Color.WHITE);
-		labelGramos2_MR.setFont(f);
-		labelGramos2_MR.setBounds(780, 160, 66, 23);
-		panelModificarReceta.add(labelGramos2_MR);
+		JComboBox comboBoxUnidadesPrinc_MR = new JComboBox();
+		comboBoxUnidadesPrinc_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades",
+				"gramos", "kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidadesPrinc_MR.setLightWeightPopupEnabled(false);
+		comboBoxUnidadesPrinc_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidadesPrinc_MR.setBounds(701, 47, 134, 22);
+		panelModificarReceta.add(comboBoxUnidadesPrinc_MR);
+
+		JComboBox comboBoxUnidades_MR = new JComboBox();
+		comboBoxUnidades_MR.setModel(new DefaultComboBoxModel(new String[] { "- Seleccione  -", "unidades", "gramos",
+				"kilos", "litros", "centilitros", "cucharadas", "pizcas", "vaso" }));
+		comboBoxUnidades_MR.setLightWeightPopupEnabled(false);
+		comboBoxUnidades_MR.setFont(new Font("Calibri", Font.BOLD, 15));
+		comboBoxUnidades_MR.setBounds(701, 159, 134, 22);
+		panelModificarReceta.add(comboBoxUnidades_MR);
 
 		// Boton añadir ingrediente
 		JButton botonAnyadirIngrediente_MR = new JButton("Añadir Ingrediente");
@@ -2666,11 +2804,12 @@ public class Aplicacion extends JFrame {
 			}
 		});
 
-		// Accion del boton de aÃ±adir ingrediente
+		// Accion del boton de añadir ingrediente
 		botonAnyadirIngrediente_MR.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent arg0) {
-				if ((comboBoxIngrediente_MR.getSelectedIndex() != 0)) {
+				if ((comboBoxIngrediente_MR.getSelectedIndex() != 0 && !textFieldCantidad_PR.equals("")
+						&& comboBoxUnidades_MR.getSelectedIndex() != 0)) {
 					if (comboBoxIngPrinc_MR.getSelectedIndex() == comboBoxIngrediente_MR.getSelectedIndex()) {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente principal no puede volver a aparecer en la lista de ingredientes.");
@@ -2678,12 +2817,8 @@ public class Aplicacion extends JFrame {
 						JOptionPane.showMessageDialog(menuPrincipal,
 								"El ingrediente ya esta en la lista de ingredientes.");
 					} else {
-						if (textFieldCantidad_MR.getText().equals("")) {
-							listaIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem() + " - " + "_");
-						} else {
-							listaIngredientes_MR.add(
-									comboBoxIngrediente_MR.getSelectedItem() + " - " + textFieldCantidad_MR.getText());
-						}
+						listaIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem() + " - "
+								+ textFieldCantidad_MR.getText() + " - " + comboBoxUnidades_MR.getSelectedItem());
 						indexIngredientes_MR.add(comboBoxIngrediente_MR.getSelectedItem().toString());
 					}
 				}
@@ -2703,35 +2838,37 @@ public class Aplicacion extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (!textFieldNombre_MR.getText().equals("") && comboBoxNumPersonas_MR.getSelectedIndex() != 0
 						&& !textAreaDescripcion_MR.getText().equals("") && comboBoxIngPrinc_MR.getSelectedIndex() != 0
-						&& !textFieldCantidadPrinc_MR.getText().equals("") && comboBoxTipo_MR.getSelectedIndex() != 0) {
+						&& !textFieldCantidadPrinc_MR.getText().equals("")
+						&& comboBoxUnidadesPrinc_MR.getSelectedIndex() != 0
+						&& comboBoxTipo_MR.getSelectedIndex() != 0) {
 					if (textFieldCantidadPrinc_MR.getText().length() > 4
 							|| textFieldCantidad_MR.getText().length() > 4) {
 						JOptionPane.showMessageDialog(menuPrincipal, "Las cantidades no pueden superar las 4 cifras.");
 					} else {
 						ArrayList<String> ingredientes = new ArrayList<String>();
 						ArrayList<String> pesoIngredientes = new ArrayList<String>();
+						ArrayList<String> unidadIngredientes = new ArrayList<String>();
 						String[] s = listaIngredientes_MR.getItems();
 
 						ingredientes.add(comboBoxIngPrinc_MR.getSelectedItem().toString());
 						pesoIngredientes.add(textFieldCantidadPrinc_MR.getText());
+						unidadIngredientes.add(comboBoxUnidadesPrinc_MR.getSelectedItem().toString());
 
 						for (int i = 0; i < s.length; i++) {
 							String elemento = s[i];
 							String ingrediente = elemento.substring(0, elemento.indexOf('-') - 1);
-							String cantidad = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String resto = elemento.substring(elemento.indexOf('-') + 1, elemento.length());
+							String cantidad = resto.substring(resto.indexOf('-') + 1, resto.indexOf('-') - 1);
+							String unidad = resto.substring(resto.indexOf('-') + 1, resto.length());
 							ingredientes.add(ingrediente);
-							if (cantidad.equals(" _")) {
-								pesoIngredientes.add("0");
-							} else {
-								pesoIngredientes.add(cantidad);
-							}
-
+							pesoIngredientes.add(cantidad);
+							unidadIngredientes.add(unidad);
 						}
 
 						o.modificarReceta(textFieldNombre_MR.getText(), textAreaDescripcion_MR.getText(),
 								comboBoxTipo_MR.getSelectedItem().toString(),
 								comboBoxNumPersonas_MR.getSelectedItem().toString(), ingredientes, pesoIngredientes,
-								recetaSeleccionada_MR.getId());
+								unidadIngredientes, recetaSeleccionada_MR.getId());
 						indexIngredientes_MR.clear();
 
 						// Recargamos las recetas buscadas para modificar
@@ -2790,6 +2927,8 @@ public class Aplicacion extends JFrame {
 				comboBoxTipo_MR.setSelectedIndex(0);
 				textFieldCantidad_MR.setText("");
 				listaIngredientes_MR.removeAll();
+				comboBoxUnidades_MR.setSelectedIndex(0);
+				comboBoxUnidadesPrinc_MR.setSelectedIndex(0);
 				cardAdmin.show(panelAdminCard, "panelModificar");
 				recetaSeleccionada_MR = null;
 			}
@@ -3142,6 +3281,5 @@ public class Aplicacion extends JFrame {
 		/**
 		 * FINAL DE LA PANTALLA DE IDENTIFICACION DE ADMINISTRADOR
 		 **/
-
 	}
 }
