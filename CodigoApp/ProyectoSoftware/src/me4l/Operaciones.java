@@ -124,7 +124,7 @@ public class Operaciones {
 	public boolean addPuntuacion (String idReceta, String ip, String puntos) {
 		
 		if (puntuacionDAO.existePuntuacion(idReceta, ip)) {
-			System.err.println("Error: Ya existe una puntuaci�n para esa receta e IP.");
+			System.err.println("Error: Ya existe una puntuación para esa receta e IP.");
 			return false;
 		} else {
 			if (recetaDAO.existeReceta(idReceta)) {

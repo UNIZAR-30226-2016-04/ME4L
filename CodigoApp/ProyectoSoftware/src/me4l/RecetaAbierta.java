@@ -189,14 +189,14 @@ public class RecetaAbierta extends JFrame {
 		lCantidadP.setForeground(Color.WHITE);
 		lCantidadP.setFont(new Font("Calibri", Font.BOLD, 22));
 		lCantidadP.setForeground(new Color(255, 153, 0));
-		lCantidadP.setBounds(201, 223, 67, 23);
+		lCantidadP.setBounds(209, 223, 67, 23);
 		lCantidadP.setText(receta.getPesoIngredientes().get(0));
 		panelReceta.add(lCantidadP);
 
 		JLabel lblGramos = new JLabel("");
 		lblGramos.setForeground(Color.WHITE);
 		lblGramos.setFont(new Font("Calibri", Font.BOLD, 22));
-		lblGramos.setBounds(270, 223, 109, 23);
+		lblGramos.setBounds(275, 223, 109, 23);
 		panelReceta.add(lblGramos);
 		lblGramos.setText(receta.getUnidad().get(0));
 
@@ -348,6 +348,13 @@ public class RecetaAbierta extends JFrame {
 		lPuntuacion.setFont(new Font("Calibri", Font.BOLD, 22));
 		lPuntuacion.setBounds(682, 26, 51, 23);
 		contentPane.add(lPuntuacion);
+		String voto = o.mediaPuntuacion(receta.getId());
+		if( voto.equals("-1")){
+			lPuntuacion.setText("0.0");
+		}else{
+			lPuntuacion.setText(voto);
+		}
+		
 
 		// Indicador textual de RECETA
 		final JLabel labelMenu = new JLabel("RECETA");
